@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `disease`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `disease` (
-  `disease_id` int(11) NOT NULL,
+  `disease_id` int(11) NOT NULL AUTO_INCREMENT,
   `disease_name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`disease_id`)
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-16 11:23:09
+-- Dump completed on 2016-09-16 21:46:45
