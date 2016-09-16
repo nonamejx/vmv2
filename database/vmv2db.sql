@@ -109,7 +109,7 @@ CREATE TABLE `vaccination_record` (
   `dose` int(11) NOT NULL,
   `injection_date` date NOT NULL,
   `next_dose_date` date NOT NULL,
-  PRIMARY KEY (`user_id`,`vaccine_id`),
+  PRIMARY KEY (`user_id`,`vaccine_id`,`dose`),
   KEY `fk_vaccination_record_1_idx` (`vaccine_id`),
   CONSTRAINT `fk_vaccination_record_1` FOREIGN KEY (`vaccine_id`) REFERENCES `vaccine` (`vaccine_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_vaccination_record_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-16  3:45:44
+-- Dump completed on 2016-09-16 11:23:09
