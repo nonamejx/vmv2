@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2016 at 09:33 AM
+-- Generation Time: Sep 17, 2016 at 09:54 AM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -24,127 +24,127 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteDisease` (IN `p_disease_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteDisease` (IN `p_disease_id` INT(11))  BEGIN
 	DELETE FROM `disease` WHERE `disease_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteNews` (IN `p_news_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteNews` (IN `p_news_id` INT(11))  BEGIN
 	DELETE FROM `news` WHERE `news_id`=p_news_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `p_user_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteUser` (IN `p_user_id` INT(11))  BEGIN
 	DELETE FROM `user` WHERE `user_id`=p_user_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteVaccinationRecord` (IN `p_user_id` INT(11), IN `p_vaccine_id` INT(11), IN `p_dose` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccinationRecord` (IN `p_user_id` INT(11), IN `p_vaccine_id` INT(11), IN `p_dose` INT(11))  BEGIN
 	DELETE FROM `vaccination_record` WHERE `user_id`=p_user_id and`vaccine_id`=p_vaccine_id and `dose`=p_dose;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteVaccine` (IN `p_vaccine_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccine` (IN `p_vaccine_id` INT(11))  BEGIN
 	DELETE FROM `vaccine` WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteVaccineDisease` (IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDisease` (IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
 	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllDisease` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDisease` ()  BEGIN
 SELECT * FROM disease;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllNews` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllNews` ()  BEGIN
 	SELECT * FROM news;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllUser` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllUser` ()  BEGIN
 SELECT * FROM user;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllVaccinationRecord` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccinationRecord` ()  BEGIN
 SELECT * FROM vaccination_record;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllVaccine` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccine` ()  BEGIN
 	SELECT * FROM vaccine;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllVaccineDisease` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccineDisease` ()  BEGIN
 SELECT * FROM vaccine_disease;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getDiseaseById` (IN `p_disease_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getDiseaseById` (IN `p_disease_id` INT)  BEGIN
 SELECT * FROM disease WHERE `user_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getNewsById` (IN `p_new_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getNewsById` (IN `p_new_id` INT(11))  BEGIN
 SELECT * FROM news WHERE `news_id`=p_new_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserById` (IN `p_user_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserById` (IN `p_user_id` INT)  BEGIN
 SELECT * FROM user WHERE `user_id`=p_user_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getVaccinationRecordByUser` (IN `p_user_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordByUser` (IN `p_user_id` INT)  BEGIN
 SELECT * FROM vaccination_record WHERE `user_id`=p_user_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getVaccinationRecordByVaccine` (IN `p_vaccine_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordByVaccine` (IN `p_vaccine_id` INT)  BEGIN
 SELECT * FROM vaccination_record WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getVaccineById` (IN `p_vaccine_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineById` (IN `p_vaccine_id` INT(11))  BEGIN
 SELECT * FROM vaccine WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getVaccineDiseaseById` (IN `p_vaccine_id` INT, IN `p_disease_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseById` (IN `p_vaccine_id` INT, IN `p_disease_id` INT)  BEGIN
 SELECT * FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT)  BEGIN
 INSERT INTO disease(`disease_name`, `description`) values (disease_name, description);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertNew` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertNew` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME)  BEGIN
 INSERT INTO news(`title`, `content`, `image`, `created_date`) values (title, content, image, created_date);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertUser` (IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertUser` (IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
 INSERT INTO user(`full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES(full_name, gender, birthday, phone_number, address, username, password, role, avatar);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertVaccinationRecord` (IN `user_id` INT(11), IN `vaccine_id` INT(11), IN `dose` INT(11), IN `injection_date` DATE, IN `next_dose_date` DATE)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccinationRecord` (IN `user_id` INT(11), IN `vaccine_id` INT(11), IN `dose` INT(11), IN `injection_date` DATE, IN `next_dose_date` DATE)  BEGIN
 INSERT INTO vaccination_record(`user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date`) VALUES(user_id, vaccine_id, dose, injection_date, next_dose_date);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertVaccine` (IN `vaccine_name` VARCHAR(255), IN `manufacturer` VARCHAR(255), IN `price` DOUBLE, IN `number_of_doses` INT(11), IN `side_effects` TEXT, IN `indication` TEXT, IN `contraindication` TEXT, IN `dosage_and_usage` TEXT, IN `image` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccine` (IN `vaccine_name` VARCHAR(255), IN `manufacturer` VARCHAR(255), IN `price` DOUBLE, IN `number_of_doses` INT(11), IN `side_effects` TEXT, IN `indication` TEXT, IN `contraindication` TEXT, IN `dosage_and_usage` TEXT, IN `image` TEXT)  BEGIN
 INSERT INTO vaccine(`vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES(vaccine_name, manufacturer, price, number_of_doses, side_effects, indication, contraindication, dosage_and_usage, image);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertVaccineDisease` (IN `vaccine_id` INT(11), IN `disease_id` INT(11), IN `note` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccineDisease` (IN `vaccine_id` INT(11), IN `disease_id` INT(11), IN `note` TEXT)  BEGIN
 INSERT INTO vaccine_disease(`vaccine_id`, `disease_id`, `note`) VALUES(vaccine_id, disease_id, note);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT, IN `p_disease_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT, IN `p_disease_id` INT(11))  BEGIN
 UPDATE `disease` SET `disease_name`=disease_name,`description`=description WHERE `disease_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateNews` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME, IN `p_news_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateNews` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME, IN `p_news_id` INT(11))  BEGIN
 UPDATE `news` SET `title`=title,`content`=content,`image`=image,`created_date`=created_date WHERE `news_id`=p_news_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `p_user_id` INT(11), IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateUser` (IN `p_user_id` INT(11), IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
 UPDATE `user` SET `full_name`=full_name,`gender`=gender,`birthday`=birthday,`phone_number`=phone_number,`address`=address,`username`=username,`password`=password,`role`=role,`avatar`=avatar WHERE `user_id`=p_user_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateVaccinationRecord` (IN `injection_date` DATE, IN `next_dose_date` DATE, IN `p_user_id` INT(11), IN `p_vaccine_id` INT(11), IN `p_dose` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateVaccinationRecord` (IN `injection_date` DATE, IN `next_dose_date` DATE, IN `p_user_id` INT(11), IN `p_vaccine_id` INT(11), IN `p_dose` INT(11))  BEGIN
 UPDATE `vaccination_record` SET `injection_date`=injection_date,`next_dose_date`=next_dose_date where `user_id`=p_user_id and`vaccine_id`=p_vaccine_id and `dose`=p_dose;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateVaccine` (IN `vaccine_name` VARCHAR(255), IN `manufacturer` VARCHAR(255), IN `price` DOUBLE, IN `number_of_doses` INT(11), IN `side_effects` TEXT, IN `indication` TEXT, IN `contraindication` TEXT, IN `dosage_and_usage` TEXT, IN `image` TEXT, IN `p_vaccine_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateVaccine` (IN `vaccine_name` VARCHAR(255), IN `manufacturer` VARCHAR(255), IN `price` DOUBLE, IN `number_of_doses` INT(11), IN `side_effects` TEXT, IN `indication` TEXT, IN `contraindication` TEXT, IN `dosage_and_usage` TEXT, IN `image` TEXT, IN `p_vaccine_id` INT(11))  BEGIN
 UPDATE `vaccine` SET `vaccine_name`=vaccine_name,`manufacturer`=manufacturer,`price`=price,`number_of_doses`=number_of_doses,`side_effects`=side_effects,`indication`=indication,`contraindication`=contraindication,`dosage_and_usage`=dosage_and_usage,`image`=image where `vaccine_id`=p_vaccine_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateVaccineDisease` (IN `note` TEXT, IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateVaccineDisease` (IN `note` TEXT, IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
 UPDATE `vaccine_disease` SET `note`=note where `vaccine_id`=p_vaccine_id and `disease_id` = p_disease_id;
 END$$
 
