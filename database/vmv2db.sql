@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2016 at 09:07 AM
+-- Generation Time: Sep 17, 2016 at 09:33 AM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -168,7 +168,8 @@ CREATE TABLE `disease` (
 
 INSERT INTO `disease` (`disease_id`, `disease_name`, `description`) VALUES
 (1, 'benh1', 'abc'),
-(2, 'benh2', 'abc');
+(2, 'benh2', 'abc'),
+(3, 'zsdf', 'asdfasdf');
 
 -- --------------------------------------------------------
 
@@ -183,6 +184,13 @@ CREATE TABLE `news` (
   `image` text,
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`news_id`, `title`, `content`, `image`, `created_date`) VALUES
+(1, 'asdf', 'asdf', 'asdf', '2016-09-14 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -329,12 +337,12 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --
