@@ -16,7 +16,6 @@ public class User {
 	
 	public User(int userId, String fullName, int gender, Date birthday, String phoneNumber, String address,
 			String username, String password, int role, String avatar) {
-		super();
 		this.userId = userId;
 		this.fullName = fullName;
 		this.gender = gender;
@@ -31,7 +30,6 @@ public class User {
 
 	public User(String fullName, int gender, Date birthday, String phoneNumber, String address, String username,
 			String password, int role, String avatar) {
-		super();
 		this.fullName = fullName;
 		this.gender = gender;
 		this.birthday = birthday;

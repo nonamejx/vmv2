@@ -8,8 +8,8 @@ import model.dao.VaccineDiseaseDAO;
 public class VaccineDiseaseBO {
 	VaccineDiseaseDAO dao = new VaccineDiseaseDAO();
 	
-	public ArrayList<VaccineDisease> getAllVaccineDisease() {
-		return dao.getAllVaccineDisease();
+	public ArrayList<VaccineDisease> getAllVaccineDiseases() {
+		return dao.getAllVaccineDiseases();
 	}
 	
 	public VaccineDisease getVaccineDiseaseById(int vaccineId, int diseaseId) {

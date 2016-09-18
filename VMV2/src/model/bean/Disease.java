@@ -6,14 +6,12 @@ public class Disease {
 	private String description;
 	
 	public Disease(int diseaseId, String diseaseName, String description) {
-		super();
 		this.diseaseId = diseaseId;
 		this.diseaseName = diseaseName;
 		this.description = description;
 	}
 
 	public Disease(String diseaseName, String description) {
-		super();
 		this.diseaseName = diseaseName;
 		this.description = description;
 	}

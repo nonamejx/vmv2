@@ -8,7 +8,7 @@ import model.dao.NewsDAO;
 public class NewsBO {
 	NewsDAO dao = new NewsDAO();
 	
-	public ArrayList<News> getAllNews() {
+	public ArrayList<News> getAllNewses() {
 		return dao.getAllNews();
 	}
 	

@@ -17,12 +17,12 @@ public class VaccineDAO {
 	private ArrayList<Vaccine> vaccines= null;
 	private Vaccine vaccine = null;
 	
-	public ArrayList<Vaccine> getAllVaccine() {
+	public ArrayList<Vaccine> getAllVaccines() {
 		vaccines = new ArrayList<>();
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getAllVaccine()}";
+			String query = "{CALL p_getAllVaccines()}";
 			cstmt = con.prepareCall(query);
 			rs = cstmt.executeQuery();
 			

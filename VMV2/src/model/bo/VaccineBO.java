@@ -8,8 +8,8 @@ import model.dao.VaccineDAO;
 public class VaccineBO {
 	VaccineDAO dao = new VaccineDAO();
 	
-	public ArrayList<Vaccine> getAllVaccine() {
-		return dao.getAllVaccine();
+	public ArrayList<Vaccine> getAllVaccines() {
+		return dao.getAllVaccines();
 	}
 	
 	public Vaccine getVaccineById(int vaccineId) {

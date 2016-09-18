@@ -13,11 +13,11 @@ public class NewsDAO {
 	private CallableStatement cstmt = null;
 	private ResultSet rs = null;
 	
-	private ArrayList<News> newses= null;
+	private ArrayList<News> newsList= null;
 	private News news = null;
 	
 	public ArrayList<News> getAllNews() {
-		newses = new ArrayList<>();
+		newsList = new ArrayList<>();
 		
 		try {
 			con = SqlConnection.getConnection();
@@ -27,7 +27,7 @@ public class NewsDAO {
 			
 			while (rs.next()) {
 				News news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5));
-				newses.add(news);
+				newsList.add(news);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class NewsDAO {
 			SqlConnection.closeResultSet(rs);
 		}
 		
-		return newses;
+		return newsList;
 	}
 	
 	public News getNewsById(int newsId) {	

@@ -15,12 +15,12 @@ public class VaccinationRecordDAO {
 	private ArrayList<VaccinationRecord> vaccinationRecords= null;
 	private VaccinationRecord vaccinationRecord = null;
 	
-	public ArrayList<VaccinationRecord> getAllVaccinationRecord() {
+	public ArrayList<VaccinationRecord> getAllVaccinationRecords() {
 		vaccinationRecords = new ArrayList<>();
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getAllVaccineRecord()}";
+			String query = "{CALL p_getAllVaccineRecords()}";
 			cstmt = con.prepareCall(query);
 			rs = cstmt.executeQuery();
 			
@@ -45,7 +45,7 @@ public class VaccinationRecordDAO {
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getVaccinationRecordByUser(?)}";
+			String query = "{CALL p_getVaccinationRecordsByUser(?)}";
 			cstmt = con.prepareCall(query);
 			cstmt.setInt(1, userId);
 			rs = cstmt.executeQuery();
@@ -71,7 +71,7 @@ public class VaccinationRecordDAO {
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getVaccinationRecordByVaccine(?)}";
+			String query = "{CALL p_getVaccinationRecordsByVaccine(?)}";
 			cstmt = con.prepareCall(query);
 			cstmt.setInt(1, vaccineId);
 			rs = cstmt.executeQuery();

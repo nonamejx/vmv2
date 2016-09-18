@@ -8,8 +8,8 @@ import model.dao.VaccinationRecordDAO;
 public class VaccinationRecordBO {
 	VaccinationRecordDAO dao = new VaccinationRecordDAO();
 	
-	public ArrayList<VaccinationRecord> getAllVaccinationRecord() {
-		return dao.getAllVaccinationRecord();
+	public ArrayList<VaccinationRecord> getAllVaccinationRecords() {
+		return dao.getAllVaccinationRecords();
 	}
 	
 	public ArrayList<VaccinationRecord> getVaccinationRecordsByUser(int userId) {
@@ -20,7 +20,7 @@ public class VaccinationRecordBO {
 		return dao.getVaccinationRecordsByVaccine(vaccineId);
 	}
 	
-	public VaccinationRecord getVaccinationRecords(int userId, int vaccineId, int dose) {
+	public VaccinationRecord getVaccinationRecord(int userId, int vaccineId, int dose) {
 		return dao.getVaccinationRecord(userId, vaccineId, dose);
 	}
 	

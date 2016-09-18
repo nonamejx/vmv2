@@ -14,7 +14,6 @@ public class Vaccine {
 	
 	public Vaccine(int vaccineId, String vaccineName, String manufacturer, double price, int numberOfDoses,
 			String sideEffects, String indication, String contraindication, String dosageAndUsage, String image) {
-		super();
 		this.vaccineId = vaccineId;
 		this.vaccineName = vaccineName;
 		this.manufacturer = manufacturer;
@@ -29,7 +28,6 @@ public class Vaccine {
 
 	public Vaccine(String vaccineName, String manufacturer, double price, int numberOfDoses, String sideEffects,
 			String indication, String contraindication, String dosageAndUsage, String image) {
-		super();
 		this.vaccineName = vaccineName;
 		this.manufacturer = manufacturer;
 		this.price = price;

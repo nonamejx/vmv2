@@ -10,7 +10,6 @@ public class News {
 	private Timestamp createdDate;
 	
 	public News(int newsId, String title, String content, String image, Timestamp createdDate) {
-		super();
 		this.newsId = newsId;
 		this.title = title;
 		this.content = content;
@@ -19,7 +18,6 @@ public class News {
 	}
 
 	public News(String title, String content, String image, Timestamp createdDate) {
-		super();
 		this.title = title;
 		this.content = content;
 		this.image = image;

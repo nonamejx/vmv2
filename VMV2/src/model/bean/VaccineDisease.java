@@ -6,7 +6,6 @@ public class VaccineDisease {
 	private String note;
 	
 	public VaccineDisease(int vaccineId, int diseaseId, String note) {
-		super();
 		this.vaccineId = vaccineId;
 		this.diseaseId = diseaseId;
 		this.note = note;

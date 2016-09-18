@@ -16,12 +16,12 @@ public class DiseaseDAO {
 	private ArrayList<Disease> diseases= null;
 	private Disease disease = null;
 	
-	public ArrayList<Disease> getAllDisease() {
+	public ArrayList<Disease> getAllDiseases() {
 		diseases = new ArrayList<>();
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getAllDisease()}";
+			String query = "{CALL p_getAllDiseases()}";
 			cstmt = con.prepareCall(query);
 			rs = cstmt.executeQuery();
 			
@@ -44,7 +44,7 @@ public class DiseaseDAO {
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getdiseaseById(?)}";
+			String query = "{CALL p_getDiseaseById(?)}";
 			cstmt = con.prepareCall(query);
 			cstmt.setInt(1, diseaseId);
 			rs = cstmt.executeQuery();

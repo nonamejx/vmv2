@@ -10,7 +10,6 @@ public class VaccinationRecord {
 	private Date nextDoseDate;
 	
 	public VaccinationRecord(int userId, int vaccineId, int dose, Date injectionDate, Date nextDoseDate) {
-		super();
 		this.userId = userId;
 		this.vaccineId = vaccineId;
 		this.dose = dose;

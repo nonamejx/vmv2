@@ -16,12 +16,12 @@ public class UserDAO {
 	private ArrayList<User> users= null;
 	private User user = null;
 	
-	public ArrayList<User> getAllUser() {
+	public ArrayList<User> getAllUsers() {
 		users = new ArrayList<>();
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getAllUser()}";
+			String query = "{CALL p_getAllUsers()}";
 			cstmt = con.prepareCall(query);
 			rs = cstmt.executeQuery();
 			
@@ -142,10 +142,10 @@ public class UserDAO {
 		return result;
 	}
 
-	public User getUserLogin(String username, String password) {
+	public User getUserByUsernamePassword(String username, String password) {
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getUserLogin(?,?)}";
+			String query = "{CALL p_getUserByUsernamePassword(?,?)}";
 			cstmt = con.prepareCall(query);
 			cstmt.setString(1, username);
 			cstmt.setString(2, password);

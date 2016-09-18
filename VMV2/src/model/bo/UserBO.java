@@ -8,16 +8,16 @@ import model.dao.UserDAO;
 public class UserBO {
 	UserDAO dao = new UserDAO();
 	
-	public ArrayList<User> getAllUser() {
-		return dao.getAllUser();
+	public ArrayList<User> getAllUsers() {
+		return dao.getAllUsers();
 	}
 	
 	public User getUserById(int userId) {
 		return dao.getUserById(userId);
 	}
 	
-	public User getUserLogin(String username, String password) {
-		return dao.getUserLogin(username, password);
+	public User getUserByUsernamePassword(String username, String password) {
+		return dao.getUserByUsernamePassword(username, password);
 	}
 	
 	public int insertUser(User user) {
