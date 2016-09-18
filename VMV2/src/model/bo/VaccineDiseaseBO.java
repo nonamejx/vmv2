@@ -1,0 +1,30 @@
+package model.bo;
+
+import java.util.ArrayList;
+
+import model.bean.VaccineDisease;
+import model.dao.VaccineDiseaseDAO;
+
+public class VaccineDiseaseBO {
+	VaccineDiseaseDAO dao = new VaccineDiseaseDAO();
+	
+	public ArrayList<VaccineDisease> getAllVaccineDisease() {
+		return dao.getAllVaccineDisease();
+	}
+	
+	public VaccineDisease getVaccineDiseaseById(int vaccineId, int diseaseId) {
+		return dao.getVaccineDiseaseById(vaccineId, diseaseId);
+	}
+	
+	public int insertVaccineDisease(VaccineDisease vaccineDisease) {
+		return dao.insertVaccineDisease(vaccineDisease);
+	}
+	
+	public int updateVaccineDisease(VaccineDisease vaccineDisease) {
+		return dao.updateVaccineDisease(vaccineDisease);
+	}
+	
+	public int deleteVaccineDisease(int vaccineId, int diseaseId) {
+		return dao.deleteVaccineDisease(vaccineId, diseaseId);
+	}
+}
