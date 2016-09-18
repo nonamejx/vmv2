@@ -1,12 +1,12 @@
-*.class
-
 .metadata
 bin/
+build/
 tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
+*.class
 local.properties
 .settings/
 .loadpath
