@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2016 at 09:54 AM
+-- Generation Time: Sep 18, 2016 at 02:59 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -49,62 +49,70 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDisease` (IN `p_vacc
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDisease` ()  BEGIN
-SELECT * FROM disease;
+SELECT `disease_id`, `disease_name`, `description` FROM disease;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllNews` ()  BEGIN
-	SELECT * FROM news;
+	SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllUser` ()  BEGIN
-SELECT * FROM user;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllUsers` ()  BEGIN
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccinationRecord` ()  BEGIN
-SELECT * FROM vaccination_record;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccinationRecords` ()  BEGIN
+SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccine` ()  BEGIN
-	SELECT * FROM vaccine;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccineDiseases` ()  BEGIN
+SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccineDisease` ()  BEGIN
-SELECT * FROM vaccine_disease;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccines` ()  BEGIN
+	SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getDiseaseById` (IN `p_disease_id` INT)  BEGIN
-SELECT * FROM disease WHERE `user_id`=p_disease_id;
+SELECT `disease_id`, `disease_name`, `description` FROM disease WHERE `user_id`=p_disease_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getNewsById` (IN `p_new_id` INT(11))  BEGIN
-SELECT * FROM news WHERE `news_id`=p_new_id;
+SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news WHERE `news_id`=p_new_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserById` (IN `p_user_id` INT)  BEGIN
-SELECT * FROM user WHERE `user_id`=p_user_id;
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `user_id`=p_user_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordByUser` (IN `p_user_id` INT)  BEGIN
-SELECT * FROM vaccination_record WHERE `user_id`=p_user_id;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserByUsernamePassword` (IN `p_username` VARCHAR(255), IN `p_password` VARCHAR(255))  BEGIN
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username and `password`=p_password;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordByVaccine` (IN `p_vaccine_id` INT)  BEGIN
-SELECT * FROM vaccination_record WHERE `vaccine_id`=p_vaccine_id;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecord` (IN `p_user_id` INT, IN `p_vaccine_id` INT, IN `p_dose` INT)  BEGIN
+SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `user_id`=p_user_id and `vaccine_id`=p_vaccine_id and `dose`=p_dose;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordsByUser` (IN `p_user_id` INT)  BEGIN
+SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `user_id`=p_user_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordsByVaccine` (IN `p_vaccine_id` INT)  BEGIN
+SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineById` (IN `p_vaccine_id` INT(11))  BEGIN
-SELECT * FROM vaccine WHERE `vaccine_id`=p_vaccine_id;
+SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseById` (IN `p_vaccine_id` INT, IN `p_disease_id` INT)  BEGIN
-SELECT * FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
+SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT)  BEGIN
 INSERT INTO disease(`disease_name`, `description`) values (disease_name, description);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertNew` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertNews` (IN `title` TEXT, IN `content` TEXT, IN `image` TEXT, IN `created_date` DATETIME)  BEGIN
 INSERT INTO news(`title`, `content`, `image`, `created_date`) values (title, content, image, created_date);
 END$$
 
@@ -190,7 +198,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`news_id`, `title`, `content`, `image`, `created_date`) VALUES
-(1, 'asdf', 'asdf', 'asdf', '2016-09-14 00:00:00');
+(1, 'asdf', 'asdf', 'asdf', '2016-09-14 00:00:00'),
+(2, 'kkk', 'kkk', 'asdf', '2016-09-17 22:13:40');
 
 -- --------------------------------------------------------
 
@@ -342,7 +351,7 @@ ALTER TABLE `disease`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user`
 --
