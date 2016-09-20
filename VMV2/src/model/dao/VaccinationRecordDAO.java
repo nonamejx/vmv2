@@ -20,7 +20,7 @@ public class VaccinationRecordDAO {
 		
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_getAllVaccineRecords()}";
+			String query = "{CALL p_getAllVaccinationRecords()}";
 			cstmt = con.prepareCall(query);
 			rs = cstmt.executeQuery();
 			
@@ -97,7 +97,9 @@ public class VaccinationRecordDAO {
 			con = SqlConnection.getConnection();
 			String query = "{CALL p_getVaccinationRecord(?,?,?)}";
 			cstmt = con.prepareCall(query);
-			cstmt.setInt(1, vaccineId);
+			cstmt.setInt(1, userId);
+			cstmt.setInt(2, vaccineId);
+			cstmt.setInt(3, dose);
 			rs = cstmt.executeQuery();
 			
 			if (rs.next()) {

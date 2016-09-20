@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 18, 2016 at 02:59 PM
+-- Generation Time: Sep 20, 2016 at 10:48 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -48,7 +48,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDisease` (IN `p_vacc
 	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDisease` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDiseases` ()  BEGIN
 SELECT `disease_id`, `disease_name`, `description` FROM disease;
 END$$
 
@@ -73,7 +73,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccines` ()  BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getDiseaseById` (IN `p_disease_id` INT)  BEGIN
-SELECT `disease_id`, `disease_name`, `description` FROM disease WHERE `user_id`=p_disease_id;
+SELECT `disease_id`, `disease_name`, `description` FROM disease WHERE `disease_id`=p_disease_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getNewsById` (IN `p_new_id` INT(11))  BEGIN
@@ -116,8 +116,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertNews` (IN `title` TEXT, IN 
 INSERT INTO news(`title`, `content`, `image`, `created_date`) values (title, content, image, created_date);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertUser` (IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
-INSERT INTO user(`full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES(full_name, gender, birthday, phone_number, address, username, password, role, avatar);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertUser` (IN `full_name` VARCHAR(255), IN `gender` INT(11), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `p_password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
+INSERT INTO user(`full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES(full_name, gender, birthday, phone_number, address, username, p_password, role, avatar);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccinationRecord` (IN `user_id` INT(11), IN `vaccine_id` INT(11), IN `dose` INT(11), IN `injection_date` DATE, IN `next_dose_date` DATE)  BEGIN
@@ -140,8 +140,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateNews` (IN `title` TEXT, IN 
 UPDATE `news` SET `title`=title,`content`=content,`image`=image,`created_date`=created_date WHERE `news_id`=p_news_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateUser` (IN `p_user_id` INT(11), IN `full_name` VARCHAR(255), IN `gender` VARCHAR(255), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
-UPDATE `user` SET `full_name`=full_name,`gender`=gender,`birthday`=birthday,`phone_number`=phone_number,`address`=address,`username`=username,`password`=password,`role`=role,`avatar`=avatar WHERE `user_id`=p_user_id;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateUser` (IN `p_user_id` INT(11), IN `full_name` VARCHAR(255), IN `gender` INT(11), IN `birthday` DATE, IN `phone_number` VARCHAR(20), IN `address` VARCHAR(255), IN `username` VARCHAR(255), IN `p_password` VARCHAR(255), IN `role` INT, IN `avatar` TEXT)  BEGIN
+UPDATE `user` SET `full_name`=full_name,`gender`=gender,`birthday`=birthday,`phone_number`=phone_number,`address`=address,`username`=username,`password`=p_password,`role`=role,`avatar`=avatar WHERE `user_id`=p_user_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateVaccinationRecord` (IN `injection_date` DATE, IN `next_dose_date` DATE, IN `p_user_id` INT(11), IN `p_vaccine_id` INT(11), IN `p_dose` INT(11))  BEGIN
@@ -226,7 +226,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
 (1, 'kiet', 1, '1994-09-21', '01234', 'aaa', 'bbbbbbb', '123456', 1, 'asdfasdfasdf'),
-(2, 'hai', 1, '1994-05-12', '02313', 'asdf', 'asdf', '1234223', 1, 'asdf');
+(2, 'hai', 3, '1994-05-12', '02313', 'asdf', 'asdf', 'aaaa', 1, 'asdf');
 
 -- --------------------------------------------------------
 
@@ -273,7 +273,7 @@ CREATE TABLE `vaccine` (
 --
 
 INSERT INTO `vaccine` (`vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES
-(1, 'vc1', 'aaaa', 12, 1, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf'),
+(1, 'vc1', 'aaaa', 20, 1, 'asdf', 'asdf', 'asdf', 'wtf', 'asdf'),
 (2, 'vc2', 'bbbbb', 2, 2, 'dsf', 'sdfg', 'sdfg', 'sdfg', 'sdfg'),
 (3, 'asdf', 'asdf', 2, 2, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf');
 
@@ -294,7 +294,7 @@ CREATE TABLE `vaccine_disease` (
 --
 
 INSERT INTO `vaccine_disease` (`vaccine_id`, `disease_id`, `note`) VALUES
-(1, 2, 'aaa');
+(1, 2, 'papapap');
 
 --
 -- Indexes for dumped tables
@@ -356,7 +356,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --

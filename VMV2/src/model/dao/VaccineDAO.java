@@ -99,7 +99,7 @@ public class VaccineDAO {
 		return result;
 	}
 	
-	public int updateVaccine(Vaccine Vaccine) {
+	public int updateVaccine(Vaccine vaccine) {
 		int result = 0;
 		try {
 			con = SqlConnection.getConnection();
