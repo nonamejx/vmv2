@@ -47,10 +47,9 @@ public class VaccineDiseaseDAO {
 			con = SqlConnection.getConnection();
 			String query = "{CALL p_getVaccineDiseaseById(?, ?)}";
 			cstmt = con.prepareCall(query);
-			
-			rs = cstmt.executeQuery();
 			cstmt.setInt(1, vaccineId);
 			cstmt.setInt(2, diseaseId);
+			rs = cstmt.executeQuery();
 			
 			if (rs.next()) {
 				vaccineDisease = new VaccineDisease(rs.getInt(1), rs.getInt(2), rs.getString(3));
@@ -95,9 +94,10 @@ public class VaccineDiseaseDAO {
 			con = SqlConnection.getConnection();
 			String query = "{CALL p_updateVaccineDisease(?, ?, ?)}";
 			cstmt = con.prepareCall(query);
-			cstmt.setInt(1, vaccineDisease.getVaccineId());
-			cstmt.setInt(2, vaccineDisease.getDiseaseId());
-			cstmt.setString(3, vaccineDisease.getNote());
+			cstmt.setString(1, vaccineDisease.getNote());
+			cstmt.setInt(2, vaccineDisease.getVaccineId());
+			cstmt.setInt(3, vaccineDisease.getDiseaseId());
+			
 			result = cstmt.executeUpdate();
 			
 		} catch (SQLException e) {
