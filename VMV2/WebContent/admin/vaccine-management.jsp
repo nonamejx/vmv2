@@ -391,8 +391,7 @@
 
 		<!-- variable -->
 		<script>
-        	var contextPath = "<%=request.getContextPath()%>
-			";
+        	var contextPath = "<%=request.getContextPath()%>";
 		</script>
 
 		<script
