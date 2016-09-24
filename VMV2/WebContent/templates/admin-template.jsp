@@ -22,7 +22,7 @@
 	<link href="<%=request.getContextPath() %>/resources/production/css/custom.css" rel="stylesheet">
 	<link href="<%=request.getContextPath() %>/resources/production/css/icheck/flat/green.css" rel="stylesheet">
 	
-	<link href="<%=request.getContextPath() %>/admin/css/custom.css" rel="stylesheet">
+	<link href="<%=request.getContextPath() %>/resources/css/custom.css" rel="stylesheet">
 	
 	<script src="<%=request.getContextPath() %>/resources/production/js/jquery.min.js"></script>
 	
@@ -82,8 +82,8 @@
 								<li class="">
 									<a href=""><i class="fa fa-heartbeat"></i> Bệnh</a>
 								</li>
-								<li class="">
-									<a href=""><i class="fa fa-newspaper-o"></i> Tin tức</a>
+								<li class="news-management-menu-item">
+									<a href="<%=request.getContextPath() %>/admin/news-management.jsp"><i class="fa fa-newspaper-o"></i> Tin tức</a>
 								</li>
 							</ul>
 						</div>

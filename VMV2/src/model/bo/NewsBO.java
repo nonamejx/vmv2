@@ -8,8 +8,12 @@ import model.dao.NewsDAO;
 public class NewsBO {
 	NewsDAO dao = new NewsDAO();
 	
-	public ArrayList<News> getAllNewses() {
+	public ArrayList<News> getAllNews() {
 		return dao.getAllNews();
+	}
+	
+	public ArrayList<News> getNewsLimit(int start, int limit) {
+		return dao.getNewsLimit(start, limit);
 	}
 	
 	public News getNewsById(int newsId) {
@@ -26,5 +30,9 @@ public class NewsBO {
 	
 	public int deleteNews(int newsId) {
 		return dao.deleteNews(newsId);
+	}
+	
+	public int countNews() {
+		return dao.countNews();
 	}
 }

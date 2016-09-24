@@ -52,7 +52,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Chào,</span>
-							<h2>Văn Nam</h2>
+							<h2>Khách</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -72,14 +72,11 @@
 								<li class="vaccine-item">
 									<a href="<%=request.getContextPath() %>/user/vaccine.jsp"><i class="fa fa-eraser"></i> Vắc xin</a>
 								</li>
-								<li class="vaccination-history-item">
-									<a href="<%=request.getContextPath() %>/user/vaccination-history.jsp"><i class="fa fa-list" aria-hidden="true"></i> Lịch sử tiêm chủng</a>
+								<li class="login-item">
+									<a href="<%=request.getContextPath() %>/user/login.jsp"><i class="fa fa-lock"></i> Đăng nhập</a>
 								</li>
-								<li class="profile-item">
-									<a href="<%=request.getContextPath() %>/user/profile.jsp"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</a>
-								</li>
-								<li class="">
-									<a href="<%=request.getContextPath() %>/user/profile.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
+								<li class="register-item">
+									<a href="<%=request.getContextPath() %>/user/register.jsp"><i class="fa fa-user-plus"></i> Đăng ký</a>
 								</li>
 							</ul>
 						</div>

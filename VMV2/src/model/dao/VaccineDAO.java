@@ -147,5 +147,57 @@ public class VaccineDAO {
 		
 		return result;
 	}
+
+	public ArrayList<Vaccine> getVaccinesLimit(int start, int limit) {
+		vaccines = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getVaccinesLimit(?, ?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1, start);
+			cstmt.setInt(2, limit);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				Vaccine vaccine = new Vaccine(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getDouble(4), rs.getInt(5), rs.getString(6), 
+						rs.getString(7), rs.getString(8), rs.getString(9), 
+						rs.getString(10));
+				
+				vaccines.add(vaccine);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return vaccines;
+	}
+	
+	public int countVaccines() {
+		int result = 0;
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_countVaccines()}";
+			cstmt = con.prepareCall(query);
+			rs = cstmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		return result;
+	}
 	
 }

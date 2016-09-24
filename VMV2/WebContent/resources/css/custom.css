@@ -1,0 +1,88 @@
+a {
+	cursor: pointer;
+}
+label.error {
+	color: #ea7f7f;
+    font-weight: normal;
+}
+.loading-bar {
+    background: url("/VMV2/resources/images/loading.gif") transparent no-repeat center left;
+    background-size: contain;
+    margin: 0 auto;
+    display: none;
+    height: 45px;
+    padding-left: 53px;
+    width: 100%;
+    background-color: #e2f1d9;
+    padding-top: 13px;
+    margin-bottom: 10px;
+}
+#form-add-vaccine, #form-update-vaccine, #form-update-user {
+	max-height: 450px;
+	overflow: auto;
+}
+.image-view {
+	width: 200px;
+	display: block;
+	margin: 10px auto 20px;
+}
+.image-view img {
+	width: 100%;
+	height: auto;
+}
+.image-view form-control {
+	width: 100%;
+}
+.content-page {
+	background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.part-image {
+	width: 120px;
+	height: 120px;
+	background-color: #eee;
+	float: left;
+	margin-right: 10px;
+}
+.part-detail {
+}
+.part {
+	margin-bottom: 30px;
+}
+.head-info p {
+	font-size: 16px;
+}
+.pagging {
+	text-align: center;
+}
+.pagging ul {
+	list-style: none;
+}
+.pagging ul li {
+	display: inline-block;
+}
+.pagging ul li a {
+	padding: 10px;
+	background-color: #eee;
+	text-decoration: none;
+	cursor: pointer;
+}
+.pagging .active {
+	background-color: #2a3f54;
+	color: #fff;
+	pointer-events: none;
+   	cursor: default;
+}
+.pagging .not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
+
+
+
+
+
+
+
