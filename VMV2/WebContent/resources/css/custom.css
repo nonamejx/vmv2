@@ -44,11 +44,12 @@ label.error {
 	background-color: #eee;
 	float: left;
 	margin-right: 10px;
+	margin-bottom: 20px;
 }
 .part-detail {
 }
 .part {
-	margin-bottom: 30px;
+	
 }
 .head-info p {
 	font-size: 16px;
@@ -77,6 +78,27 @@ label.error {
 .pagging .not-active {
    pointer-events: none;
    cursor: default;
+}
+.msg {
+	line-height: 30px;
+    border: 1px solid ;
+    border-radius: 4px;
+    padding: 0 5px;
+    display: none;
+}
+.msg-success {
+	background-color: #edf7db;
+	border-color: #c0caba;
+}
+.msg-fail {
+	background-color: #f7dbdb;
+    border-color: #e0b8b8;
+}
+.ms-choice {
+	border-color: transparent !important;
+}
+.ms-parent {
+	padding: 0;
 }
 
 

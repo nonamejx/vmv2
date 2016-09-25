@@ -52,7 +52,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Chào,</span>
-							<h2>VacxinTeam</h2>
+							<h2>admin</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -66,12 +66,11 @@
 						<div class="menu_section">
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i> Trang chủ <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="#">Dashboard</a></li>
-									</ul></li>
 								<li class="">
-									<a href=""><i class="fa fa-eyedropper"></i> Tiêm phòng</a>
+									<a href=""><i class="fa fa-home"></i> Trang chủ</a>
+								</li>
+								<li class="vaccination-record-management-menu-item">
+									<a href="<%=request.getContextPath() %>/admin/vaccination-record-management.jsp"><i class="fa fa-eyedropper"></i> Tiêm phòng</a>
 								</li>
 								<li class="user-management-menu-item">
 									<a href="<%=request.getContextPath() %>/admin/user-management.jsp"><i class="fa fa-male"></i> Khách tiêm</a>
@@ -79,8 +78,8 @@
 								<li class="vaccine-management-menu-item">
 									<a href="<%=request.getContextPath() %>/admin/vaccine-management.jsp"><i class="fa fa-eraser"></i> Vắc xin</a>
 								</li>
-								<li class="">
-									<a href=""><i class="fa fa-heartbeat"></i> Bệnh</a>
+								<li class="disease-management-menu-item">
+									<a href="<%=request.getContextPath() %>/admin/disease-management.jsp"><i class="fa fa-heartbeat"></i> Bệnh</a>
 								</li>
 								<li class="news-management-menu-item">
 									<a href="<%=request.getContextPath() %>/admin/news-management.jsp"><i class="fa fa-newspaper-o"></i> Tin tức</a>
@@ -92,7 +91,7 @@
 							<ul class="nav side-menu">
 								<li>
 									<a>
-										<i class="fa fa-bug"></i> Cá nhân 
+										<i class="fa fa-user" aria-hidden="true"></i> Cá nhân 
 										<span class="fa fa-chevron-down"></span>
 									</a>
 									<ul class="nav child_menu" style="display: none">

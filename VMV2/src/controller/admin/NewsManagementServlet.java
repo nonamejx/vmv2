@@ -1,30 +1,26 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import model.bean.News;
-import model.bo.NewsBO;
 
 /**
- * Servlet implementation class ListNewsServlet
+ * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/ListNewsServlet")
-public class ListNewsServlet extends HttpServlet {
+@WebServlet("/NewsManagementServlet")
+public class NewsManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListNewsServlet() {
+    public NewsManagementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,14 +40,10 @@ public class ListNewsServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		NewsBO newsBO = new NewsBO();
-		ArrayList<News> news = newsBO.getAllNews();
+		// kiem tra dang nhap
+		RequestDispatcher rd = request.getRequestDispatcher("admin/news-management.jsp");
+		rd.forward(request, response);
 		
-		String json = new Gson().toJson(news);
-		
-		response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
 	}
 
 }

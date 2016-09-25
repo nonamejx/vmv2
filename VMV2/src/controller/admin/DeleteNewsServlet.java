@@ -1,30 +1,27 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
-import model.bean.News;
 import model.bo.NewsBO;
 
 /**
- * Servlet implementation class ListNewsServlet
+ * Servlet implementation class DeleteNewsServlet
  */
-@WebServlet("/ListNewsServlet")
-public class ListNewsServlet extends HttpServlet {
+@WebServlet("/DeleteNewsServlet")
+public class DeleteNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListNewsServlet() {
+    public DeleteNewsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +37,24 @@ public class ListNewsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/plain; charset=utf-8");
-		response.setCharacterEncoding("UTF-8");
-		
 		NewsBO newsBO = new NewsBO();
-		ArrayList<News> news = newsBO.getAllNews();
+		String newsIdStr = request.getParameter("newsId");
+		int newsId = 0;
+		String status = "fail";
 		
-		String json = new Gson().toJson(news);
+		if (newsIdStr != null) {
+			newsId = Integer.parseInt(newsIdStr);
+		}
+		
+		if (newsBO.deleteNews(newsId) != 0)
+			status = "success";
+		
+		JsonObject jsonObj = new JsonObject();
+		jsonObj.addProperty("status", status);
 		
 		response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+	    response.getWriter().write(jsonObj.toString());
 	}
 
 }

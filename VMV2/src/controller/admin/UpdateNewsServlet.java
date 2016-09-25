@@ -32,9 +32,9 @@ import utils.Validate;
 /**
  * Servlet implementation class CreateNewsServlet
  */
-@WebServlet("/CreateNewsServlet")
+@WebServlet("/UpdateNewsServlet")
 @MultipartConfig
-public class CreateNewsServlet extends HttpServlet {
+public class UpdateNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private static final String UPLOAD_DIRECTORY = "upload";
@@ -44,7 +44,7 @@ public class CreateNewsServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateNewsServlet() {
+    public UpdateNewsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -65,9 +65,9 @@ public class CreateNewsServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		NewsBO newsBO = new NewsBO();
-		String title = null, content = null, image = null;
+		String newsId = null, title = null, content = null, image = null;
 		String status = "fail";
-
+		
 		// checks if the request actually contains upload file
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
@@ -85,14 +85,15 @@ public class CreateNewsServlet extends HttpServlet {
         upload.setFileSizeMax(MAX_FILE_SIZE);
         upload.setSizeMax(MAX_REQUEST_SIZE);
          
+        
         String uploadPath = getServletContext().getRealPath("")
             + File.separator + UPLOAD_DIRECTORY;
-
+        
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        //end configures upload settings
+        // end configures upload settings
         
         try {
             List formItems = upload.parseRequest(request);
@@ -100,22 +101,24 @@ public class CreateNewsServlet extends HttpServlet {
              
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();
-                System.out.println(item.toString());
                 if (!item.isFormField()) {
-                        String fileName = item.getName();    
+                        String fileName = item.getName();   
                         String root = getServletContext().getRealPath("/");
                         File path = new File(root + "/uploads");
                         if (!path.exists()) {
                             path.mkdirs();
                         }
-                        
                         if (!fileName.equals("")) {
                         	File uploadedFile = new File(path + "/" + fileName);
                         	item.write(uploadedFile);
                         	image = fileName;
                         }
+                        
                 } else {
                 	switch (item.getFieldName()) {
+	                	case "newsId":
+	                		newsId = item.getString("UTF-8");
+							break;
 						case "title":
 							title = item.getString("UTF-8");
 							break;
@@ -133,17 +136,24 @@ public class CreateNewsServlet extends HttpServlet {
         
         // Validate
         boolean hasError = false;
+        if (Validate.isEmpty(newsId)) {
+    		hasError = true;
+    	}
+        
     	if (!Validate.checkString(title, 1, 100)) {
     		hasError = true;
     	}
     	
 		if (!hasError) {
-			News news = new News(title, content, image, DateUtils.convertToTimestamp(new Date()));
-			System.out.println(news.toString());
-			newsBO.insertNews(news);
+			News news = newsBO.getNewsById(Integer.parseInt(newsId));
+			news.setTitle(title);
+			news.setContent(content);
+			if (image != null)
+				news.setImage(image);
+			newsBO.updateNews(news);
 			status = "success";
 		}
-
+		
 		// send data
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);

@@ -41,7 +41,12 @@
 					%>
 						<div class="col-sm-6">
 							<div class="part">
-								<div class="part-image "></div>
+								<% if (news.getImage() != null) {%>
+								<div class="part-image" style="background: url('<%=request.getContextPath() %>/uploads/<%=news.getImage() %>') 
+								no-repeat no-repeat center center; background-size: cover;"></div>
+								<%} else {%>
+								<div class="part-image"></div>
+								<%} %>
 								<div class="part-detail">
 									<p><b><%=news.getTitle() %></b></p>
 									<p><%=StringUtils.shorten(news.getContent(), 200) + " ..." %></p>
@@ -100,8 +105,6 @@
         	var contextPath = "<%=request.getContextPath() %>";
         	$(".home-item").addClass("current-page");
         </script>
-        
-        <script src="<%=request.getContextPath() %>/user/js/home.js"></script>
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>

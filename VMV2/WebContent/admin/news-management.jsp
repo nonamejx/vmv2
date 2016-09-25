@@ -24,7 +24,7 @@
 			<div class="title_right"></div>		
 		</div>
 		<div class="clearfix"></div>
-		
+		<%-- <img alt="" src="<%=request.getContextPath() %>/uploads/image.jpg"> --%>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
@@ -32,7 +32,8 @@
 						<a class="btn btn-success btn-sm" href="" data-toggle="modal" data-target=".add-news-modal"><i class="fa fa-plus"></i> Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-						
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>
 					<div class="x_content">
 							<table id="datatable" class="table table-striped table-bordered">
 								<thead>
@@ -52,7 +53,7 @@
 				<!-- modals -->
 				<div class="x_content">
 	      
-		        	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+		        	<div class="modal fade bs-example-modal-sm delete-news-modal" tabindex="-1" role="dialog" aria-hidden="true">
 		            	<div class="modal-dialog modal-sm">
 		                	<div class="modal-content">
 		
@@ -64,6 +65,7 @@
 		                      	<div class="modal-body">
 		                      		<div class="loading-bar"> Đang xử lý...</div>
 		                        	<h4>Bạn có chắc muốn xóa thông tin này?</h4>
+		                        	<input type="text" hidden="true" name="newsId">
 		                      	</div>
 		                      	<div class="modal-header">
 			                      	<div style="float:right">
@@ -82,27 +84,25 @@
 			                    <div class="modal-header">
 			                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
 			                        </button>
-			                        <h4 class="modal-title">Xem nội dung tin tức</h4>
+			                        <h4 class="modal-title">Thêm tin tức</h4>
 			                    </div>
 			                    <div class="modal-body">
 			                        <div class="x_content">
 			                        	<div class="loading-bar"> Đang xử lý...</div>
-										<form id="form-add-news" class="form-horizontal form-label-left" method="post">
-								
+										<form id="form-add-news" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Tiêu đề <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="title" placeholder=""
-														 type="text">
+														name="title" placeholder="" type="text">
 												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="birthday"> Nội dung</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="content" type="text" class="form-control col-md-7 col-xs-12" 
+													<textarea rows="5" name="content" class="form-control col-md-7 col-xs-12" 
 													></textarea>
 												</div>
 											</div>
@@ -110,7 +110,7 @@
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="textarea">Hình ảnh </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input id="ten" class="form-control col-md-7 col-xs-12"
+													<input class="form-control col-md-7 col-xs-12"
 														data-validate-length-range="6" name="image" type="file">
 												</div>
 											</div>
@@ -135,33 +135,32 @@
 			                    <div class="modal-header">
 			                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
 			                        </button>
-			                        <h4 class="modal-title">Thêm tin tức</h4>
+			                        <h4 class="modal-title">Xem nội dung tin tức</h4>
 			                    </div>
 			                    <div class="modal-body">
 			                        <div class="x_content">
 			                        	<div class="loading-bar"> Đang xử lý...</div>
-										<form id="form-update-news" class="form-horizontal form-label-left" method="post">
+										<form id="form-update-news" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+											<input type="text" hidden="true" name="newsId">
 											<div class="image-view">
 												<img alt=""
-													src="<%=request.getContextPath()%>/resources/images/vaccine-default.jpg">
-												<input class="form-control" data-validate-length-range="6"
-													name="image" type="file">
+													src="<%=request.getContextPath()%>/resources/images/image-null.jpg">
+												<input class="form-control" data-validate-length-range="6" name="image" type="file">
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Tiêu đề <span class="required">*</span></label>
+													for="">Tiêu đề <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="title" placeholder=""
-														 type="text" value="Dịch sốt xuất huyết đang lây lan nhanh chóng">
+														name="title" placeholder="" type="text" value="anc">
 												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="birthday"> Nội dung</label>
+													for=""> Nội dung</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="content" type="text" class="form-control col-md-7 col-xs-12" 
-													>Dịch sốt xuất huyết đang lây lan nhanh chóng</textarea>
+													<textarea rows="5" name="content" class="form-control col-md-7 col-xs-12" 
+													></textarea>
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -201,6 +200,9 @@
         <script src="<%=request.getContextPath() %>/resources/production/js/datatables/dataTables.responsive.min.js"></script>
         <script src="<%=request.getContextPath() %>/resources/production/js/datatables/responsive.bootstrap.min.js"></script>
         <script src="<%=request.getContextPath() %>/resources/production/js/datatables/dataTables.scroller.min.js"></script>
+        
+        <!-- form jquery -->
+        <script src="<%=request.getContextPath() %>/resources/production/js/jquery.form.js"></script> 
         
         <!-- datepicker -->
 		<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/moment.min.js"></script>

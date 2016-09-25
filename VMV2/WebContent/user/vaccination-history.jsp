@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
-					<h4><i class="fa fa-newspaper-o"></i> Lịch sử tiêm chủng</h4>
+					<h4><i class="fa fa-list"></i> Lịch sử tiêm chủng</h4>
 					<br>
 					<div class="x_content">
 							<table id="datatable" class="table table-striped table-bordered">

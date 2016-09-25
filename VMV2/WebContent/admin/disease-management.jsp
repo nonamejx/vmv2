@@ -35,7 +35,7 @@
 
 		<div class="page-title" style="margin-bottom: 50px">
 			<div class="title_left">
-				<h3>Quản lý Vắc xin</h3>
+				<h3>Quản lý bệnh</h3>
 			</div>
 			<div class="title_right"></div>
 		</div>
@@ -46,7 +46,7 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<a class="btn btn-success btn-sm" href="" data-toggle="modal"
-							data-target=".add-vaccine-modal"><i class="fa fa-plus"></i>
+							data-target=".add-disease-modal"><i class="fa fa-plus"></i>
 							Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
@@ -58,18 +58,27 @@
 								<thead>
 									<tr>
 										<th>#Mã</th>
-										<th>Tên</th>
-										<th>Chỉ định</th>
+										<th>Tên bệnh</th>
+										<th>Mô tả</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td>Axit clohydric</td>
-										<td>Phòng bệnh ung thư da</td>
+										<td>Đậu mùa</td>
+										<td>Mô tả bệnh</td>
 										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-vaccine-modal">Xem</a> <a
+											data-target=".update-disease-modal">Xem</a> <a
+											class="btn btn-danger btn-xs" data-toggle="modal"
+											data-target=".bs-example-modal-sm">Xóa</a></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Sốt xuất huyết</td>
+										<td>Mô tả bệnh</td>
+										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
+											data-target=".update-disease-modal">Xem</a> <a
 											class="btn btn-danger btn-xs" data-toggle="modal"
 											data-target=".bs-example-modal-sm">Xóa</a></td>
 									</tr>
@@ -101,7 +110,7 @@
 								<div class="modal-header">
 									<div style="float: right">
 										<button type="button"
-											class="btn btn-sm btn-danger btn-delete-user">Xóa</button>
+											class="btn btn-sm btn-danger btn-delete-disease">Xóa</button>
 										<button type="button" class="btn btn-sm btn-default"
 											data-dismiss="modal">Đóng</button>
 									</div>
@@ -111,7 +120,7 @@
 						</div>
 					</div>
 
-					<div class="modal fade add-vaccine-modal" tabindex="-1"
+					<div class="modal fade add-disease-modal" tabindex="-1"
 						role="dialog" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -120,102 +129,28 @@
 										aria-label="Close">
 										<span aria-hidden="true">×</span>
 									</button>
-									<h4 class="modal-title">Thêm vắc xin</h4>
+									<h4 class="modal-title">Thêm bệnh</h4>
 								</div>
 								<div class="modal-body">
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-add-vaccine"
-											class="form-horizontal form-label-left" method="post">
-
+										<form id="form-add-disease" class="form-horizontal form-label-left" method="post">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Tên vacxin<span class="required">*</span></label>
+													for="name">Tên bệnh<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="vaccineName"
+														data-validate-length-range="6" name="diseaseName"
 														placeholder="Tên đầy đủ, ví dụ: Pentaxin" type="text">
 												</div>
 											</div>
 											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Nhà
-													sản xuất</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="manufacturer"
-														placeholder="Tên nhà sản xuất, ví dụ: Parce" type="text">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Giá<span
-													class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="price" type="text"
-														placeholder="Giá vắc xin (VND), ví dụ: 50000">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Số
-													lần tiêm<span class="required">*</span>
-												</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="numberOfDoses"
-														type="number">
-												</div>
-											</div>
-											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chỉ định </label>
+													for="textarea">Mô tả </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="indication"
+													<textarea rows="5" name="description"
 														class="form-control col-md-7 col-xs-12"></textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chống Chỉ định </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="contraindication"
-														class="form-control col-md-7 col-xs-12"></textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Tác dụng phụ </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="sideEffects"
-														class="form-control col-md-7 col-xs-12"></textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Phòng bệnh </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select name="disease" multiple="multiple" class="form-control">
-											            <option value="1">January</option>
-											            <option value="2">February</option>
-											            <option value="3">March</option>
-											            <option value="4">April</option>
-											            <option value="5">May</option>
-											            <option value="6">June</option>
-											            <option value="7">July</option>
-											            <option value="8">August</option>
-											            <option value="9">September</option>
-											            <option value="10">October</option>
-											            <option value="11">November</option>
-											            <option value="12">December</option>
-											        </select>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Hình ảnh </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input id="ten" class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="image" type="file">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -234,7 +169,7 @@
 						</div>
 					</div>
 
-					<div class="modal fade update-vaccine-modal" tabindex="-1"
+					<div class="modal fade update-disease-modal" tabindex="-1"
 						role="dialog" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -243,99 +178,28 @@
 										aria-label="Close">
 										<span aria-hidden="true">×</span>
 									</button>
-									<h4 class="modal-title">Xem thông tin vắc xin</h4>
+									<h4 class="modal-title">Xem thông tin bệnh</h4>
 								</div>
 								<div class="modal-body">
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-update-vaccine"
-											class="form-horizontal form-label-left" method="post">
-											<div class="image-view">
-												<img alt=""
-													src="<%=request.getContextPath()%>/resources/images/vaccine-default.jpg">
-												<input class="form-control" data-validate-length-range="6"
-													name="image" type="file">
-											</div>
+										<form id="form-update-disease" class="form-horizontal form-label-left" method="post">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Tên vacxin<span class="required">*</span></label>
+													for="name">Tên bệnh<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="vaccineName"
-														placeholder="Tên đầy đủ, ví dụ: Pentaxin" type="text" value="Axit clohydric">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Nhà
-													sản xuất</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="manufacturer"
-														placeholder="Tên nhà sản xuất, ví dụ: Parce" type="text" value="Parec">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Giá<span
-													class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="price" type="text"
-														placeholder="Giá vắc xin (VND), ví dụ: 50000" value="50000">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">Số
-													lần tiêm<span class="required">*</span>
-												</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="numberOfDoses"
-														type="number" value="3">
+														data-validate-length-range="6" name="diseaseName"
+														placeholder="Tên đầy đủ, ví dụ: Pentaxin" type="text" value="Đậu mùa">
 												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chỉ định </label>
+													for="textarea">Mô tả </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="indication"
-														class="form-control col-md-7 col-xs-12">Chỉ định</textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chống Chỉ định </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="contraindication"
-														class="form-control col-md-7 col-xs-12">Chống chỉ định</textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Tác dụng phụ </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="5" name="sideEffects"
-														class="form-control col-md-7 col-xs-12">Tác dụng phụ</textarea>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Phòng bệnh </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select name="disease" multiple="multiple" class="form-control">
-											            <option value="1">January</option>
-											            <option value="2">February</option>
-											            <option value="3">March</option>
-											            <option value="4">April</option>
-											            <option value="5">May</option>
-											            <option value="6">June</option>
-											            <option value="7">July</option>
-											            <option value="8">August</option>
-											            <option value="9">September</option>
-											            <option value="10">October</option>
-											            <option value="11">November</option>
-											            <option value="12">December</option>
-											        </select>
+													<textarea rows="5" name="description"
+														class="form-control col-md-7 col-xs-12">Mô tả</textarea>
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -392,23 +256,6 @@
 		<script
 			src="<%=request.getContextPath()%>/resources/production/js/datatables/dataTables.scroller.min.js"></script>
 
-		<!-- multiple-select -->
-		<script
-			src="<%=request.getContextPath()%>/resources/production/js/multiple-select/multiple-select.js"></script>
-		<script>
-			//$("select[name='disease']").multipleSelect("getSelects"));
-		 	$("select[name='disease']").multipleSelect({
-		 		selectAll: false,
-		 		countSelected: "# bệnh % đã chọn"
-		 	});
-		</script>
-			
-		<!-- datepicker -->
-		<script
-			src="<%=request.getContextPath()%>/resources/production/js/datepicker/moment.min.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/production/js/datepicker/daterangepicker.js"></script>
-		<!-- pace -->
 		<script>
         var handleDataTableButtons = function() {
             "use strict";
@@ -442,14 +289,14 @@
             }
           }();
         </script>
-
+        
 		<!-- variable -->
 		<script>
         	var contextPath = "<%=request.getContextPath()%>";
 		</script>
 
 		<script
-			src="<%=request.getContextPath()%>/admin/js/vaccine-management.js"></script>
+			src="<%=request.getContextPath()%>/admin/js/disease-management.js"></script>
 
 		<!-- prepare form validation -->
 		<script

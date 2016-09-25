@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
-					<h4><i class="fa fa-newspaper-o"></i> Vắc xin</h4>
+					<h4><i class="fa fa-eraser"></i> Vắc xin</h4>
 					<br>
 					<form id="search-vaccine" action="">
 						<input class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">

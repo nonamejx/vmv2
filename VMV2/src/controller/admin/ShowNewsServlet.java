@@ -1,8 +1,6 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +13,16 @@ import model.bean.News;
 import model.bo.NewsBO;
 
 /**
- * Servlet implementation class ListNewsServlet
+ * Servlet implementation class ShowNewsServet
  */
-@WebServlet("/ListNewsServlet")
-public class ListNewsServlet extends HttpServlet {
+@WebServlet("/ShowNewsServlet")
+public class ShowNewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListNewsServlet() {
+    public ShowNewsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +38,22 @@ public class ListNewsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/plain; charset=utf-8");
-		response.setCharacterEncoding("UTF-8");
-		
 		NewsBO newsBO = new NewsBO();
-		ArrayList<News> news = newsBO.getAllNews();
+		String newsIdStr = request.getParameter("newsId");
+		int newsId = 0;
+		
+		if (newsIdStr != null) {
+			newsId = Integer.parseInt(newsIdStr);
+		}
+		
+		News news = newsBO.getNewsById(newsId);
 		
 		String json = new Gson().toJson(news);
 		
 		response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
+		
 	}
 
 }
