@@ -20,6 +20,7 @@
 		
 		
 		<%
+		@SuppressWarnings("unchecked")
 		ArrayList<News> newsList = (ArrayList<News>) request.getAttribute("newsList");
 		%>
 		
