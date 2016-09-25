@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2016 at 10:48 PM
+-- Generation Time: Sep 25, 2016 at 02:44 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -24,6 +24,14 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_countNews` ()  BEGIN
+	SELECT count(*) FROM news;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_countVaccines` ()  BEGIN
+	SELECT count(*) FROM vaccine;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteDisease` (IN `p_disease_id` INT(11))  BEGIN
 	DELETE FROM `disease` WHERE `disease_id`=p_disease_id;
 END$$
@@ -53,7 +61,7 @@ SELECT `disease_id`, `disease_name`, `description` FROM disease;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllNews` ()  BEGIN
-	SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news;
+	SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news order by `created_date` desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllUsers` ()  BEGIN
@@ -78,6 +86,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getNewsById` (IN `p_new_id` INT(11))  BEGIN
 SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news WHERE `news_id`=p_new_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getNewsLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
+	SELECT `news_id`, `title`, `content`, `image`, `created_date` FROM news order by `created_date` desc limit p_start, p_limit;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserById` (IN `p_user_id` INT)  BEGIN
@@ -106,6 +118,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseById` (IN `p_vaccine_id` INT, IN `p_disease_id` INT)  BEGIN
 SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinesLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
+	SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine limit p_start, p_limit;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT)  BEGIN
@@ -170,15 +186,6 @@ CREATE TABLE `disease` (
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Disease''s information table';
 
---
--- Dumping data for table `disease`
---
-
-INSERT INTO `disease` (`disease_id`, `disease_name`, `description`) VALUES
-(1, 'benh1', 'abc'),
-(2, 'benh2', 'abc'),
-(3, 'zsdf', 'asdfasdf');
-
 -- --------------------------------------------------------
 
 --
@@ -192,14 +199,6 @@ CREATE TABLE `news` (
   `image` text,
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `news`
---
-
-INSERT INTO `news` (`news_id`, `title`, `content`, `image`, `created_date`) VALUES
-(1, 'asdf', 'asdf', 'asdf', '2016-09-14 00:00:00'),
-(2, 'kkk', 'kkk', 'asdf', '2016-09-17 22:13:40');
 
 -- --------------------------------------------------------
 
@@ -220,14 +219,6 @@ CREATE TABLE `user` (
   `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User''s information table';
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
-(1, 'kiet', 1, '1994-09-21', '01234', 'aaa', 'bbbbbbb', '123456', 1, 'asdfasdfasdf'),
-(2, 'hai', 3, '1994-05-12', '02313', 'asdf', 'asdf', 'aaaa', 1, 'asdf');
-
 -- --------------------------------------------------------
 
 --
@@ -241,13 +232,6 @@ CREATE TABLE `vaccination_record` (
   `injection_date` date NOT NULL,
   `next_dose_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vacinnaction-record''s information';
-
---
--- Dumping data for table `vaccination_record`
---
-
-INSERT INTO `vaccination_record` (`user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date`) VALUES
-(1, 1, 1, '2015-09-21', '2015-10-09');
 
 -- --------------------------------------------------------
 
@@ -268,15 +252,6 @@ CREATE TABLE `vaccine` (
   `image` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vaccine''s information table';
 
---
--- Dumping data for table `vaccine`
---
-
-INSERT INTO `vaccine` (`vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES
-(1, 'vc1', 'aaaa', 20, 1, 'asdf', 'asdf', 'asdf', 'wtf', 'asdf'),
-(2, 'vc2', 'bbbbb', 2, 2, 'dsf', 'sdfg', 'sdfg', 'sdfg', 'sdfg'),
-(3, 'asdf', 'asdf', 2, 2, 'asdf', 'asdf', 'asdf', 'asdf', 'asdf');
-
 -- --------------------------------------------------------
 
 --
@@ -288,13 +263,6 @@ CREATE TABLE `vaccine_disease` (
   `disease_id` int(11) NOT NULL,
   `note` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `vaccine_disease`
---
-
-INSERT INTO `vaccine_disease` (`vaccine_id`, `disease_id`, `note`) VALUES
-(1, 2, 'papapap');
 
 --
 -- Indexes for dumped tables
@@ -346,22 +314,22 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- Constraints for dumped tables
 --
