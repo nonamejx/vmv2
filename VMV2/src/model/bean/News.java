@@ -24,6 +24,10 @@ public class News {
 		this.createdDate = createdDate;
 	}
 
+	public News() {
+
+	}
+
 	public int getNewsId() {
 		return newsId;
 	}

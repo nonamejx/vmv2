@@ -12,6 +12,10 @@ public class VaccineBO {
 		return dao.getAllVaccines();
 	}
 	
+	public ArrayList<Vaccine> getVaccinesLimit(int start, int limit) {
+		return dao.getVaccinesLimit(start, limit);
+	}
+	
 	public Vaccine getVaccineById(int vaccineId) {
 		return dao.getVaccineById(vaccineId);
 	}
@@ -26,5 +30,9 @@ public class VaccineBO {
 	
 	public int deleteVaccine(int vaccineId) {
 		return dao.deleteVaccine(vaccineId);
+	}
+	
+	public int countVaccines() {
+		return dao.countVaccines();
 	}
 }
