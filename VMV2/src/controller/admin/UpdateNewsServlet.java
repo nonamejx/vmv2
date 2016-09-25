@@ -2,11 +2,8 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -26,7 +22,6 @@ import com.google.gson.JsonObject;
 
 import model.bean.News;
 import model.bo.NewsBO;
-import utils.DateUtils;
 import utils.Validate;
 
 /**
@@ -96,8 +91,8 @@ public class UpdateNewsServlet extends HttpServlet {
         // end configures upload settings
         
         try {
-            List formItems = upload.parseRequest(request);
-            Iterator iter = formItems.iterator();
+            List<FileItem> formItems = upload.parseRequest(request);
+            Iterator<FileItem> iter = formItems.iterator();
              
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();

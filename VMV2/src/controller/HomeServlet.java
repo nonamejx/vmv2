@@ -50,7 +50,7 @@ public class HomeServlet extends HttpServlet {
 		ArrayList<News> newsList = null;
 		
 		int page = 1;
-		int recordsPerPage = 4;
+		int recordsPerPage = 8;
 		if (request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
 
