@@ -40,8 +40,9 @@
 						<h4><%=news.getTitle() %></h4>
 						<p><i>Ngày đăng: <%=DateUtils.formatDatetime(news.getCreatedDate()) %></i><p>
 						<div class="news-detail-content">
-							<%if (news.getImage() != null) %>
-							<img alt="" src="<%=request.getContextPath()%>/resources/images/<%=news.getImage()%>">
+							<%if (news.getImage() != null) {%>
+							<img alt="" src="<%=request.getContextPath()%>/uploads/<%=news.getImage()%>">
+							<% }%>
 							<p style="margin-top: 10px"><%=news.getContent() %></p>
 						</div>
 						<%} %>
