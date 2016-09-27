@@ -181,6 +181,13 @@
 														name="image" type="file">
 						                      	</div>
 					                    	</div>
+					                    	<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="name">Admin <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px">
+												</div>
+											</div>
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
@@ -269,6 +276,13 @@
 														name="password" type="text">
 												</div>
 											</div>
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="name">Admin <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px">
+												</div>
+											</div>
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
@@ -307,9 +321,7 @@
         <script src="<%=request.getContextPath() %>/resources/production/js/datatables/responsive.bootstrap.min.js"></script>
         <script src="<%=request.getContextPath() %>/resources/production/js/datatables/dataTables.scroller.min.js"></script>
         
-        <!-- datepicker -->
-		<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/moment.min.js"></script>
-       <script src="<%=request.getContextPath() %>/resources/production/js/datepicker/daterangepicker.js"></script>
+        0
         <!-- pace --> 
         <script>
         var handleDataTableButtons = function() {
@@ -344,6 +356,10 @@
             }
           }();
         </script>
+        
+        <!-- datepicker -->
+		<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/moment.min.js"></script>
+       	<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/daterangepicker.js"></script>
         
         <!-- variable -->
         <script>
