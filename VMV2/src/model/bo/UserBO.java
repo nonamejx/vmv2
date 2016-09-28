@@ -31,4 +31,8 @@ public class UserBO {
 	public int deleteUser(int UserId) {
 		return dao.deleteUser(UserId);
 	}
+	
+	public User getUserByUsername(String username) {
+		return dao.getUserByUsername(username);
+	}
 }
