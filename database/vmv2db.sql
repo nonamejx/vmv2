@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2016 at 02:44 PM
+-- Generation Time: Sep 28, 2016 at 10:00 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -94,6 +94,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserById` (IN `p_user_id` INT)  BEGIN
 SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `user_id`=p_user_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserByUsername` (IN `p_username` VARCHAR(255))  BEGIN
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserByUsernamePassword` (IN `p_username` VARCHAR(255), IN `p_password` VARCHAR(255))  BEGIN
@@ -314,22 +318,22 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
