@@ -43,7 +43,6 @@ public class DeleteDiseasesServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		DiseaseBO diseaseBO = new DiseaseBO();
 		String diseaseIdStr = request.getParameter("diseaseId");
-		System.out.println("Vô đây chưa "+diseaseIdStr);
 		int diseaseId = 0;
 		String status = "fail";
 		
