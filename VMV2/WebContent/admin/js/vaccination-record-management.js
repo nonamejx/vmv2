@@ -1,27 +1,9 @@
-var vaccinationrecordDatatable;
+
 $(document).ready(function() {
 	setMenuItemActive();
 	TableManageButtons.init();
-	vaccinationrecordDatatable=$('#datatable').dataTable({
-		ajax: {
-    		"type"   : "POST",
-    		"url": contextPath + "/ListVaccinationRecordServlet",
-    		"dataSrc": ""
-    	},
-    	"columns": [
-    	              { "data": "newsId" },
-    	              { "data": "title" },
-    	              { "data": "createdDate" },
-    	              null
-    	            ],
-        "columnDefs": [ {
-            "targets": -1,
-            "data": "newsId",
-            "render": function ( data, type, full, meta ) {
-                return '<a class="btn btn-primary btn-xs btn-update-news" value="'+ data +'" data-toggle="modal" data-target=".update-news-modal">Xem</a><a class="btn btn-danger btn-xs btn-delete-news" value="'+ data +'" data-toggle="modal" data-target=".bs-example-modal-sm">Xóa</a>';
-              }
-        } ],
-        "order": [[ 2, "desc" ]],
+	$('#datatable').dataTable({
+		
     	responsive : true,
 		language : {
 			"sProcessing" : "Đang xử lý...",
