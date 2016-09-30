@@ -99,7 +99,7 @@ $(document).ready(function() {
     
     $(".btn-delete-user").click(function() {
     	$(".loading-bar").slideDown(100);
-    	deleteNews($(".delete-disease-modal input[name='newsId']").val());
+    	deleteNews($(".delete-news-modal input[name='newsId']").val());
     });
     
     $("#form-update-news .image-view input[name='image']").change(function(){

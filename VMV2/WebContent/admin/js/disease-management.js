@@ -57,7 +57,7 @@ $(document).ready(function() {
 		},
 		submitHandler: function(form) {
 			$(".loading-bar").slideDown(100);
-			addDiseases();
+			
     	}		
 	});
     
@@ -88,6 +88,7 @@ $(document).ready(function() {
     	var diseaseId = $(this).attr("value");
     	$(".delete-disease-modal input[name='diseaseId']").val(diseaseId);
     });
+    
     $(".btn-delete-disease").click(function() {
     	$(".loading-bar").slideDown(100);
     	deleteDiseases($(".delete-disease-modal input[name='diseaseId']").val());
@@ -95,28 +96,7 @@ $(document).ready(function() {
     //==========================    
     
     //code here...
-    function addDiseases() {
-    	var formData = new FormData($("#form-add-disease")[0]);
-    	$.ajax({
-    		url: contextPath + "/CreateDiseasesServlet",
-        	type: "POST",
-    	    data: formData,
-    	    async : false,
-            cache : false,
-            contentType : false,
-            processData : false,
-        	dataType: 'json'
-    	}).done(function(data) {
-    		if (data["status"] == "success") {
-    			$(".modal").modal("hide");
-    			showMsg($(".msg-success"));
-    			deseasesDatatable.ajax.reload();
-    		} else {
-    			showMsg($(".msg-fail"));
-    		}
-    	}).fail(function(err) {
-    	});
-    }
+    
     
     function deleteDiseases(diseaseId) {
     	$.ajax({
@@ -137,6 +117,9 @@ $(document).ready(function() {
     	}).fail(function(err) {
     	});
     }
+    
+    
+    
     
     function showMsg(msgElem) {
     	$(".msg").hide();

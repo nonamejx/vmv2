@@ -167,7 +167,8 @@
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-update-disease" class="form-horizontal form-label-left" method="post">
+										<form id="form-update-disease" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+											<input type="text" hidden="true" name="diseaseId">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Tên bệnh<span class="required">*</span></label>
