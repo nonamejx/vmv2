@@ -50,7 +50,8 @@
 							Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>
 					<div class="x_content">
 						<!-- Put your code here -->
 						<form method="post">

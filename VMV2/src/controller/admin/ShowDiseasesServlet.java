@@ -27,14 +27,12 @@ public class ShowDiseasesServlet extends HttpServlet {
      */
     public ShowDiseasesServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -42,7 +40,6 @@ public class ShowDiseasesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		DiseaseBO diseaseBO = new DiseaseBO();
 		String diseasesIdStr = request.getParameter("diseasesId");
 		int diseaseId = -1;
