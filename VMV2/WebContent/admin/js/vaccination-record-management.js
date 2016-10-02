@@ -1,7 +1,9 @@
+
 $(document).ready(function() {
 	setMenuItemActive();
 	TableManageButtons.init();
-    $('#datatable').dataTable({
+	$('#datatable').dataTable({
+		
     	responsive : true,
 		language : {
 			"sProcessing" : "Đang xử lý...",
