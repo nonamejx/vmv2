@@ -12,7 +12,6 @@ import model.bean.Disease;
 
 import model.bo.DiseaseBO;
 
-
 import com.google.gson.Gson;
 
 /**
@@ -21,40 +20,44 @@ import com.google.gson.Gson;
 @WebServlet("/ShowDiseasesServlet")
 public class ShowDiseasesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShowDiseasesServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ShowDiseasesServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		DiseaseBO diseaseBO = new DiseaseBO();
 		String diseasesIdStr = request.getParameter("diseasesId");
 		int diseaseId = -1;
-		
+
 		if (diseasesIdStr != null) {
 			diseaseId = Integer.parseInt(diseasesIdStr);
 		}
-		
+
 		Disease disease = diseaseBO.getDiseaseById(diseaseId);
-		
+
 		String json = new Gson().toJson(disease);
-		
+
 		response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
 	}
 
 }
