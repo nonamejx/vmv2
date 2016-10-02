@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bo.DiseaseBO;
-import model.bo.NewsBO;
+
 
 import com.google.gson.JsonObject;
 

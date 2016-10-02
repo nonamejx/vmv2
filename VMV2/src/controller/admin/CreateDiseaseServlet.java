@@ -1,7 +1,7 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.Date;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Disease;
-import model.bean.News;
+
 import model.bo.DiseaseBO;
-import model.bo.NewsBO;
+
 
 import com.google.gson.JsonObject;
 
-import utils.DateUtils;
+
 import utils.Validate;
 
 /**

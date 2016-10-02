@@ -12,7 +12,7 @@ import com.google.gson.JsonObject;
 
 import utils.Validate;
 import model.bean.Disease;
-import model.bean.News;
+
 import model.bo.DiseaseBO;
 
 /**

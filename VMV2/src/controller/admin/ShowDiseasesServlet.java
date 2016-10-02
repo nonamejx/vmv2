@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Disease;
-import model.bean.News;
+
 import model.bo.DiseaseBO;
-import model.bo.NewsBO;
+
 
 import com.google.gson.Gson;
 
