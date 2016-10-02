@@ -52,6 +52,7 @@ public class VaccinationRecordHolder {
 	public void setNextDoseDate(Date nextDoseDate) {
 		this.nextDoseDate = nextDoseDate;
 	}
+	
 	public VaccinationRecordHolder(int userId, int vaccineId, String userName,
 			String vaccineName, int dose, Date injectionDate, Date nextDoseDate) {
 		super();

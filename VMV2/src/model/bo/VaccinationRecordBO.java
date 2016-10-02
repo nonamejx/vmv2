@@ -3,6 +3,7 @@ package model.bo;
 import java.util.ArrayList;
 
 import model.bean.VaccinationRecord;
+import model.bean.VaccinationRecordHolder;
 import model.dao.VaccinationRecordDAO;
 
 public class VaccinationRecordBO {
@@ -10,6 +11,10 @@ public class VaccinationRecordBO {
 	
 	public ArrayList<VaccinationRecord> getAllVaccinationRecords() {
 		return dao.getAllVaccinationRecords();
+	}
+	
+	public ArrayList<VaccinationRecordHolder> getAllVaccinationRecordsHolder() {
+		return dao.getAllVaccinationRecordsHolder();
 	}
 	
 	public ArrayList<VaccinationRecord> getVaccinationRecordsByUser(int userId) {

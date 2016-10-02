@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import model.bean.VaccinationRecord;
+import model.bean.VaccinationRecordHolder;
 
 public class VaccinationRecordDAO {
 	private Connection con = null;
@@ -14,6 +16,9 @@ public class VaccinationRecordDAO {
 	
 	private ArrayList<VaccinationRecord> vaccinationRecords= null;
 	private VaccinationRecord vaccinationRecord = null;
+	
+	private ArrayList<VaccinationRecordHolder> vaccinationRecordsHolder = null;
+	private VaccinationRecordHolder vaccinationRecordHolder = null;
 	
 	public ArrayList<VaccinationRecord> getAllVaccinationRecords() {
 		vaccinationRecords = new ArrayList<>();
@@ -185,6 +190,31 @@ public class VaccinationRecordDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<VaccinationRecordHolder> getAllVaccinationRecordsHolder() {
+		vaccinationRecordsHolder = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getAllVaccinationRecordHolder()}";
+			cstmt = con.prepareCall(query);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				VaccinationRecordHolder vaccinationRecordHolder = new VaccinationRecordHolder(rs.getInt(2), 
+						rs.getInt(1), rs.getString(6), rs.getString(7),rs.getInt(3),rs.getDate(4), rs.getDate(5));
+				vaccinationRecordsHolder.add(vaccinationRecordHolder);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return vaccinationRecordsHolder;
 	}
 
 }
