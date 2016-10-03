@@ -29,8 +29,8 @@
 			href="<%=request.getContextPath()%>/resources/production/css/datepicker/daterangepicker.css"
 			rel="stylesheet" type="text/css" />
 		<link
-		href="<%=request.getContextPath()%>/resources/production/css/multiple-select/multiple-select.css"
-		rel="stylesheet" type="text/css" />
+			href="<%=request.getContextPath()%>/resources/production/css/multiple-select/multiple-select.css"
+			rel="stylesheet" type="text/css" />
 		<!-- /Custom styling plus plugins -->
 
 		<div class="page-title" style="margin-bottom: 50px">
@@ -46,11 +46,12 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<a class="btn btn-success btn-sm" href="" data-toggle="modal"
-							data-target=".add-vaccination-record-modal"><i class="fa fa-plus"></i>
-							Thêm mới</a>
+							data-target=".add-vaccination-record-modal"><i
+							class="fa fa-plus"></i> Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>
 					<div class="x_content">
 						<!-- Put your code here -->
 						<form method="post">
@@ -66,28 +67,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Nguyễn A</td>
-										<td>Axit clohydric</td>
-										<td>1</td>
-										<td>20/10/2016</td>
-										<td>20/11/2016</td>
-										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-vaccination-record-modal">Xem</a> <a
-											class="btn btn-danger btn-xs" data-toggle="modal"
-											data-target=".bs-example-modal-sm">Xóa</a></td>
-									</tr>
-									<tr>
-										<td>Nguyễn A</td>
-										<td>Axit clohydric</td>
-										<td>1</td>
-										<td>20/10/2016</td>
-										<td>20/11/2016</td>
-										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-vaccination-record-modal">Xem</a> <a
-											class="btn btn-danger btn-xs" data-toggle="modal"
-											data-target=".bs-example-modal-sm">Xóa</a></td>
-									</tr>
 								</tbody>
 							</table>
 						</form>
@@ -97,8 +76,9 @@
 				<!-- modals -->
 				<div class="x_content">
 
-					<div class="modal fade bs-example-modal-sm" tabindex="-1"
-						role="dialog" aria-hidden="true">
+					<div
+						class="modal fade bs-example-modal-sm delete-vaccination-record-modal"
+						tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
 
@@ -112,6 +92,7 @@
 								<div class="modal-body">
 									<div class="loading-bar">Đang xử lý...</div>
 									<h4>Bạn có chắc muốn xóa thông tin này?</h4>
+									<input type="text" hidden="true" name="vaccinationRecordId">
 								</div>
 								<div class="modal-header">
 									<div style="float: right">
@@ -141,14 +122,15 @@
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-add-vaccination-record" class="form-horizontal form-label-left" method="post">
+										<form id="form-add-vaccination-record"
+											class="form-horizontal form-label-left" method="post">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Khách tiêm<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="user"
-														placeholder="" type="text">
+														data-validate-length-range="6" name="user" placeholder=""
+														type="text">
 												</div>
 											</div>
 											<div class="item form-group">
@@ -165,16 +147,17 @@
 													for="name">Mũi<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="dose"
-														placeholder="" type="number">
+														data-validate-length-range="6" name="dose" placeholder=""
+														type="number">
 												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="birthday"> Ngày tiêm kế<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="nextDoseDate" type="text" class="form-control col-md-7 col-xs-12" 
-													value="10/10/1994" readonly="readonly">
+													<input name="nextDoseDate" type="text"
+														class="form-control col-md-7 col-xs-12" value="10/10/1994"
+														readonly="readonly">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -193,8 +176,8 @@
 						</div>
 					</div>
 
-					<div class="modal fade update-vaccination-record-modal" tabindex="-1"
-						role="dialog" aria-hidden="true">
+					<div class="modal fade update-vaccination-record-modal"
+						tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -208,14 +191,15 @@
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-update-vaccination-record" class="form-horizontal form-label-left" method="post">
+										<form id="form-update-vaccination-record"
+											class="form-horizontal form-label-left" method="post">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Khách tiêm<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="user"
-														placeholder="" type="text" value="Nguyễn A">
+														data-validate-length-range="6" name="user" placeholder=""
+														type="text" value="Nguyễn A">
 												</div>
 											</div>
 											<div class="item form-group">
@@ -232,16 +216,17 @@
 													for="name">Mũi<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="dose"
-														placeholder="" type="number" value="1">
+														data-validate-length-range="6" name="dose" placeholder=""
+														type="number" value="1">
 												</div>
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="birthday"> Ngày tiêm kế<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="nextDoseDate" type="text" class="form-control col-md-7 col-xs-12" 
-													value="10/10/1994" readonly="readonly">
+													<input name="nextDoseDate" type="text"
+														class="form-control col-md-7 col-xs-12" value="10/10/1994"
+														readonly="readonly">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -331,11 +316,13 @@
             }
           }();
         </script>
-        
-        <!-- datepicker -->
-		<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/moment.min.js"></script>
-       <script src="<%=request.getContextPath() %>/resources/production/js/datepicker/daterangepicker.js"></script>
-        
+
+		<!-- datepicker -->
+		<script
+			src="<%=request.getContextPath()%>/resources/production/js/datepicker/moment.min.js"></script>
+		<script
+			src="<%=request.getContextPath()%>/resources/production/js/datepicker/daterangepicker.js"></script>
+
 		<!-- variable -->
 		<script>
         	var contextPath = "<%=request.getContextPath()%>";
