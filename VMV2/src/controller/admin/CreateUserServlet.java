@@ -159,7 +159,7 @@ public class CreateUserServlet extends HttpServlet {
 		
 		// Validate
 		boolean hasError = false;
-		if (userBO.getUserByUsername(username) == null) {
+		if (userBO.getUserByUsername(username) != null) {
 			hasError = true;
 		}
 		if (!hasError) {
