@@ -50,7 +50,8 @@
 							Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>
 					<div class="x_content">
 						<!-- Put your code here -->
 						<form method="post">
@@ -64,24 +65,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Đậu mùa</td>
-										<td>Mô tả bệnh</td>
-										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-disease-modal">Xem</a> <a
-											class="btn btn-danger btn-xs" data-toggle="modal"
-											data-target=".bs-example-modal-sm">Xóa</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Sốt xuất huyết</td>
-										<td>Mô tả bệnh</td>
-										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-disease-modal">Xem</a> <a
-											class="btn btn-danger btn-xs" data-toggle="modal"
-											data-target=".bs-example-modal-sm">Xóa</a></td>
-									</tr>
 								</tbody>
 							</table>
 						</form>
@@ -91,7 +74,7 @@
 				<!-- modals -->
 				<div class="x_content">
 
-					<div class="modal fade bs-example-modal-sm" tabindex="-1"
+					<div class="modal fade bs-example-modal-sm delete-disease-modal" tabindex="-1"
 						role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
@@ -106,6 +89,7 @@
 								<div class="modal-body">
 									<div class="loading-bar">Đang xử lý...</div>
 									<h4>Bạn có chắc muốn xóa thông tin này?</h4>
+									<input type="text" hidden="true" name="diseaseId">
 								</div>
 								<div class="modal-header">
 									<div style="float: right">
@@ -184,7 +168,8 @@
 									<div class="x_content">
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
-										<form id="form-update-disease" class="form-horizontal form-label-left" method="post">
+										<form id="form-update-disease" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+											<input type="text" hidden="true" name="diseaseId">
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Tên bệnh<span class="required">*</span></label>
