@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/controller/LoginServlet.java=UTF-8
+=======
+encoding//src/controller/admin/DeleteDiseasesServlet.java=UTF-8
+>>>>>>> master
