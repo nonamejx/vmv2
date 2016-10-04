@@ -158,7 +158,7 @@
 													for="name">Mật khẩu <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="password" type="text">
+														name="password" type="password">
 												</div>
 											</div>
 											<div class="item form-group">
@@ -264,7 +264,7 @@
 													for="name">Mật khẩu <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="password" type="text">
+														name="password" type="password">
 												</div>
 											</div>
 											<div class="item form-group">
