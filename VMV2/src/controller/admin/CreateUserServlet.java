@@ -3,7 +3,6 @@ package controller.admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,16 +17,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.jasper.tagplugins.jstl.core.Out;
 
 import com.google.gson.JsonObject;
 
-import model.bean.News;
 import model.bean.User;
-import model.bo.NewsBO;
 import model.bo.UserBO;
 import utils.DateUtils;
-import utils.Validate;
 
 /**
  * Servlet implementation class CreateNewsServlet
@@ -67,7 +62,6 @@ public class CreateUserServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
 				password = null, role = "1", avatar = null;
@@ -80,7 +74,7 @@ public class CreateUserServlet extends HttpServlet {
 			writer.flush();
 			return;
 		}
-		
+
 		// configures upload settings
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(THRESHOLD_SIZE);
@@ -156,7 +150,7 @@ public class CreateUserServlet extends HttpServlet {
 		} catch (Exception ex) {
 			avatar = null;
 		}
-		
+
 		// Validate
 		boolean hasError = false;
 		if (userBO.getUserByUsername(username) != null) {
@@ -168,7 +162,7 @@ public class CreateUserServlet extends HttpServlet {
 			userBO.insertUser(user);
 			status = "success";
 		}
-		
+
 		// send data
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);

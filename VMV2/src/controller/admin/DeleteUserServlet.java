@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import model.bo.NewsBO;
 import model.bo.UserBO;
 
 /**

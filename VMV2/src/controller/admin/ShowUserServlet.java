@@ -1,7 +1,6 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import model.bean.News;
 import model.bean.User;
-import model.bo.NewsBO;
 import model.bo.UserBO;
-import utils.DateUtils;
 
 /**
  * Servlet implementation class ShowNewsServet
@@ -46,7 +42,6 @@ public class ShowUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		UserBO userBO = new UserBO();
 		String userIdStr = request.getParameter("userId");
 		int userId = 0;

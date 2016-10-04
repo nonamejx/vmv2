@@ -21,12 +21,9 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.JsonObject;
 
-import model.bean.News;
 import model.bean.User;
-import model.bo.NewsBO;
 import model.bo.UserBO;
 import utils.DateUtils;
-import utils.Validate;
 
 /**
  * Servlet implementation class CreateNewsServlet
@@ -169,9 +166,9 @@ public class UpdateUserServlet extends HttpServlet {
 		}
 		// Validate
 		boolean hasError = false;
-		if(userBO.getUserByUsername(username)!=null){
-			hasError=true;
-		}
+		/*
+		 * if (userBO.getUserByUsername(username) != null) { hasError = true; }
+		 */
 		if (!hasError) {
 			User user = new User(Integer.parseInt(userId), fullName, Integer.parseInt(gender),
 					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password,
