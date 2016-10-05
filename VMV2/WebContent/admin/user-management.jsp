@@ -32,7 +32,8 @@
 						<a class="btn btn-success btn-sm" href="" data-toggle="modal" data-target=".add-user-modal"><i class="fa fa-plus"></i> Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-						
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>		
 					<div class="x_content">
 							<table id="datatable" class="table table-striped table-bordered">
 								<thead>
@@ -40,6 +41,7 @@
 									<th>#Mã</th>
 									<th>Họ tên</th>
 									<th>Ngày sinh</th>
+									<th>Username</th>
 									<th></th>
 								</tr>
 								</thead>
@@ -47,30 +49,14 @@
 									<tr>
 										<td>1</td>
 										<td>Huynh Minh Kiet</td>
-										<td>20/09/1994</td>
+										<td></td>
+										<td></td>
 										<td>
 											<a class="btn btn-primary btn-xs" data-toggle="modal" data-target=".update-user-modal">Xem</a>
 											<a class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm">Xóa</a>
 										</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>Nguyen A</td>
-										<td>20/09/1994</td>
-										<td>
-											<a class="btn btn-primary btn-xs" data-toggle="modal" data-target=".update-user-modal">Xem</a>
-											<a class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm">Xóa</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Huynh C</td>
-										<td>20/09/1994</td>
-										<td>
-											<a class="btn btn-primary btn-xs" data-toggle="modal" data-target=".update-user-modal">Xem</a>
-											<a class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm">Xóa</a>
-										</td>
-									</tr>
+									
 								</tbody>
 							</table>
 					</div>
@@ -88,9 +74,10 @@
 		                        	</button>
 		                        	<h4 class="modal-title" id="myModalLabel2">Thông báo</h4>
 		                      	</div>
-		                      	<div class="modal-body">
+		                      	<div class="modal-body modal-delete-user">
 		                      		<div class="loading-bar"> Đang xử lý...</div>
 		                        	<h4>Bạn có chắc muốn xóa thông tin này?</h4>
+		                        	<input type="text" hidden="true" name="userId">
 		                      	</div>
 		                      	<div class="modal-header">
 			                      	<div style="float:right">
@@ -114,7 +101,7 @@
 			                    <div class="modal-body">
 			                        <div class="x_content">
 			                        	<div class="loading-bar"> Đang xử lý...</div>
-										<form id="form-add-user" class="form-horizontal form-label-left" method="post">
+										<form id="form-add-user" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
 								
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -161,8 +148,9 @@
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Tên đăng nhập <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
+													<input id="unAdd" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 														name="username" type="text">
+													<p class="failUserAdd" style="display:none;color:red">Username đã có người sử dụng</p>		
 												</div>
 											</div>
 											<div class="item form-group">
@@ -170,7 +158,7 @@
 													for="name">Mật khẩu <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="password" type="text">
+														name="password" type="password">
 												</div>
 											</div>
 											<div class="item form-group">
@@ -185,13 +173,13 @@
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Admin <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px">
+													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px" checked>
 												</div>
 											</div>
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
-													<button type="submit" class="btn btn-success">Thêm</button>
+													<button id="addUser" type="submit" class="btn btn-success">Thêm</button>
 													<a class="btn btn-default btn-cancel">Hủy</a>
 												</div>
 											</div>
@@ -218,6 +206,8 @@
 											<div class="image-view">
 												<img alt="" src="<%=request.getContextPath() %>/resources/images/avatar-default.jpg">
 						                        <input class="form-control" data-validate-length-range="6" name="image" type="file">
+						                        <input type="text" hidden="true" name="nameImage">
+						                        <input type="text" hidden="true" name="userId">
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -233,15 +223,15 @@
 													for="birthday"> Ngày sinh<span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input name="dateOfBirth" type="text" class="form-control col-md-7 col-xs-12" 
-													value="10/10/1994" readonly="readonly">
+													value="" readonly="readonly">
 												</div>
 											</div>
 											<div class="item form-group">
 						                      	<label class="control-label col-md-3 col-sm-3 col-xs-12">Giới tính</label>
 						                      	<div class="col-md-6 col-sm-6 col-xs-12">
 						                        	<select class="form-control" name="gender">
-						                          		<option value="1">Nam</option>
-						                          		<option value="2">Nữ</option>
+						                          		<option value="1" >Nam</option>
+						                          		<option value="2" >Nữ</option>
 								                        <option value="3">Khác</option>
 						                        	</select>
 						                      	</div>
@@ -264,8 +254,9 @@
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Tên đăng nhập <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
+													<input id="unUpdate" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 														name="username" type="text">
+													<p class="failUserUpdate" style="display:none;color:red">Username đã có người sử dụng</p>		
 												</div>
 											</div>
 											<div class="item form-group">
@@ -273,7 +264,7 @@
 													for="name">Mật khẩu <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-														name="password" type="text">
+														name="password" type="password">
 												</div>
 											</div>
 											<div class="item form-group">
@@ -286,7 +277,7 @@
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
-													<button type="submit" class="btn btn-success">Cập nhật</button>
+													<button id="updateUser" type="submit" class="btn btn-success">Cập nhật</button>
 													<a class="btn btn-default btn-cancel">Hủy</a>
 												</div>
 											</div>
