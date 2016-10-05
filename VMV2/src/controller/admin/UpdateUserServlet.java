@@ -166,9 +166,10 @@ public class UpdateUserServlet extends HttpServlet {
 		}
 		// Validate
 		boolean hasError = false;
-		/*
-		 * if (userBO.getUserByUsername(username) != null) { hasError = true; }
-		 */
+		User us = userBO.getUserByUsername(username);
+		if (us != null && us.getUserId() != Integer.parseInt(userId)) {
+			hasError = true;
+		}
 		if (!hasError) {
 			User user = new User(Integer.parseInt(userId), fullName, Integer.parseInt(gender),
 					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password,

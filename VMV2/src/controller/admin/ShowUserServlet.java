@@ -50,7 +50,6 @@ public class ShowUserServlet extends HttpServlet {
 		}
 		User user = userBO.getUserById(userId);
 		String json = new Gson().toJson(user);
-		System.out.println(json);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
