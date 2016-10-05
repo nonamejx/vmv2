@@ -47,7 +47,7 @@ public class DeleteUserServlet extends HttpServlet {
 		if (userIdStr != null) {
 			userId = Integer.parseInt(userIdStr);
 		}
-		if (userBO.deleteUser(userId) != 0)
+		if (userBO.deleteUser(userId) > 0)
 			status = "success";
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);
