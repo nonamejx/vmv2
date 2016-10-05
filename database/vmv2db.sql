@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2016 at 09:08 PM
+-- Generation Time: Oct 05, 2016 at 09:46 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -134,6 +134,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseById` (IN `p_vaccine_id` INT, IN `p_disease_id` INT)  BEGIN
 SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseByVaccineId` (IN `p_vaccine_id` INT)  BEGIN
+SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinesLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
