@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 28, 2016 at 10:00 PM
+-- Generation Time: Oct 04, 2016 at 01:15 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -97,11 +97,11 @@ SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserByUsername` (IN `p_username` VARCHAR(255))  BEGIN
-SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username;
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username COLLATE utf8_unicode_ci;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getUserByUsernamePassword` (IN `p_username` VARCHAR(255), IN `p_password` VARCHAR(255))  BEGIN
-SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username and `password`=p_password;
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user WHERE `username`=p_username COLLATE utf8_unicode_ci and `password`=p_password COLLATE utf8_unicode_ci;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecord` (IN `p_user_id` INT, IN `p_vaccine_id` INT, IN `p_dose` INT)  BEGIN
@@ -223,6 +223,13 @@ CREATE TABLE `user` (
   `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User''s information table';
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
+(1, 'kiet', 1, '1994-09-09', '01212', 'adfsadf', 'abcabc', '123456', 1, 'sdfsf');
+
 -- --------------------------------------------------------
 
 --
@@ -328,7 +335,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --

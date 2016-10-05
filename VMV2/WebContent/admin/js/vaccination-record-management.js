@@ -1,3 +1,4 @@
+
 var vaccinationrecordDatatable;
 $(document).ready(function() {
 	setMenuItemActive();
@@ -34,7 +35,7 @@ $(document).ready(function() {
 		} ],
 		"order" : [ [ 2, "desc" ] ],
 		responsive : true,
-		language : {
+		language : { 
 			"sProcessing" : "Đang xử lý...",
 			"sLengthMenu" : "Xem _MENU_ mục",
 			"sZeroRecords" : "Không tìm thấy dòng nào phù hợp",
