@@ -16,6 +16,10 @@ public class DiseaseBO {
 		return dao.getDiseaseById(diseaseId);
 	}
 	
+	public ArrayList<Disease> getDiseasesByVaccineId(int vaccineId) {
+		return dao.getDiseasesByVaccineId(vaccineId);
+	}
+	
 	public int insertDisease(Disease disease) {
 		return dao.insertDisease(disease);
 	}
