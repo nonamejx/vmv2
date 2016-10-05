@@ -8,21 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bo.DiseaseBO;
+import model.bo.VaccinationRecordBO;
 
 import com.google.gson.JsonObject;
 
 /**
- * Servlet implementation class DeleteDiseaseServlet
+ * Servlet implementation class DeleteVaccinationRecordServlet
  */
-@WebServlet("/DeleteDiseasesServlet")
-public class DeleteDiseasesServlet extends HttpServlet {
+@WebServlet("/DeleteVaccinationRecordServlet")
+public class DeleteVaccinationRecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteDiseasesServlet() {
+	public DeleteVaccinationRecordServlet() {
 		super();
 	}
 
@@ -39,18 +39,19 @@ public class DeleteDiseasesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		DiseaseBO diseaseBO = new DiseaseBO();
-		String diseaseIdStr = request.getParameter("diseaseId");
-		int diseaseId = -1;
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		VaccinationRecordBO vaccinationRecordBO = new VaccinationRecordBO();
+		String vaccinationRecordIdStr = request
+				.getParameter("vaccinationRecordId");
 		String status = "fail";
 
-		if (diseaseIdStr != null) {
-			diseaseId = Integer.parseInt(diseaseIdStr);
-		}
+		// tach id vaccination record
+		String[] vaccinationRecordId = vaccinationRecordIdStr.split(";");
+		int userId = Integer.parseInt(vaccinationRecordId[0]);
+		int vaccineId = Integer.parseInt(vaccinationRecordId[1]);
+		int dose = Integer.parseInt(vaccinationRecordId[2]);
 
-		if (diseaseBO.deleteDisease(diseaseId) > 0)
+		if (vaccinationRecordBO.deleteVaccinationRecord(userId, vaccineId, dose) > 0)
 			status = "success";
 
 		JsonObject jsonObj = new JsonObject();
