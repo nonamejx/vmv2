@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2016 at 09:46 PM
+-- Generation Time: Oct 05, 2016 at 10:02 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -54,14 +54,6 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDisease` (IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
 	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDiseaseByDisease` (IN `p_disease_id` INT(11))  BEGIN
-	DELETE FROM `vaccine_disease` WHERE `disease_id`=p_disease_id;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDiseaseByVaccine` (IN `p_vaccine_id` INT(11))  BEGIN
-	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDiseases` ()  BEGIN
@@ -335,7 +327,7 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `news`
 --
@@ -345,12 +337,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

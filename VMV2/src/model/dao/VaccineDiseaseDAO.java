@@ -157,44 +157,4 @@ public class VaccineDiseaseDAO {
 		
 		return result;
 	}
-	
-	public int deleteVaccineDiseaseByVaccine(int vaccineId) {
-		int result = 0;
-		try {
-			con = SqlConnection.getConnection();
-			String query = "{CALL p_deleteVaccineDiseaseByVaccine(?)}";
-			cstmt = con.prepareCall(query);
-			cstmt.setInt(1, vaccineId);
-			result = cstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			SqlConnection.closeConnection(this.con);
-			SqlConnection.closePrepareStatement(cstmt);
-			SqlConnection.closeResultSet(rs);
-		}
-		
-		return result;
-	}
-	
-	public int deleteVaccineDiseaseByDisease(int diseaseId) {
-		int result = 0;
-		try {
-			con = SqlConnection.getConnection();
-			String query = "{CALL p_deleteVaccineDiseaseByDisease(?)}";
-			cstmt = con.prepareCall(query);
-			cstmt.setInt(1, diseaseId);
-			result = cstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			SqlConnection.closeConnection(this.con);
-			SqlConnection.closePrepareStatement(cstmt);
-			SqlConnection.closeResultSet(rs);
-		}
-		
-		return result;
-	}
 }
