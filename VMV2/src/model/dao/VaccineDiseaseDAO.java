@@ -41,6 +41,32 @@ public class VaccineDiseaseDAO {
 		return vaccineDiseases;
 	}
 	
+	public ArrayList<VaccineDisease> getVaccineDiseasesByVaccineId(int vaccineId) {
+		vaccineDiseases = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getVaccineDiseaseByVaccineId(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1,vaccineId);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				VaccineDisease vaccineDisease = new VaccineDisease(rs.getInt(1), 
+						rs.getInt(2), rs.getString(3));
+				vaccineDiseases.add(vaccineDisease);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return vaccineDiseases;
+	}
+	
 	public VaccineDisease getVaccineDiseaseById(int vaccineId, int diseaseId) {
 		
 		try {

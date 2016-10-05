@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2016 at 01:15 PM
+-- Generation Time: Oct 05, 2016 at 10:02 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -68,6 +68,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllUsers` ()  BEGIN
 SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccinationRecordHolder` ()  BEGIN
+	SELECT vaccine.vaccine_id,user.user_id,vaccination_record.dose,vaccination_record.injection_date,vaccination_record.next_dose_date,user.full_name,vaccine.vaccine_name FROM vaccination_record INNER JOIN user ON vaccination_record.user_id = user.user_id INNER JOIN vaccine ON vaccination_record.vaccine_id = vaccine.vaccine_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccinationRecords` ()  BEGIN
 SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record;
 END$$
@@ -124,6 +128,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseById` (IN `p_vac
 SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseByVaccineId` (IN `p_vaccine_id` INT)  BEGIN
+SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinesLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
 	SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine limit p_start, p_limit;
 END$$
@@ -146,6 +154,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccine` (IN `vaccine_name` VARCHAR(255), IN `manufacturer` VARCHAR(255), IN `price` DOUBLE, IN `number_of_doses` INT(11), IN `side_effects` TEXT, IN `indication` TEXT, IN `contraindication` TEXT, IN `dosage_and_usage` TEXT, IN `image` TEXT)  BEGIN
 INSERT INTO vaccine(`vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES(vaccine_name, manufacturer, price, number_of_doses, side_effects, indication, contraindication, dosage_and_usage, image);
+SELECT LAST_INSERT_ID() as VACCINE_ID;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccineDisease` (IN `vaccine_id` INT(11), IN `disease_id` INT(11), IN `note` TEXT)  BEGIN
@@ -222,13 +231,6 @@ CREATE TABLE `user` (
   `role` int(11) NOT NULL,
   `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User''s information table';
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
-(1, 'kiet', 1, '1994-09-09', '01212', 'adfsadf', 'abcabc', '123456', 1, 'sdfsf');
 
 -- --------------------------------------------------------
 
@@ -325,7 +327,7 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `news`
 --
@@ -340,7 +342,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

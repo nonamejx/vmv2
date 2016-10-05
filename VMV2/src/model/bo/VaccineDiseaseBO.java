@@ -27,4 +27,8 @@ public class VaccineDiseaseBO {
 	public int deleteVaccineDisease(int vaccineId, int diseaseId) {
 		return dao.deleteVaccineDisease(vaccineId, diseaseId);
 	}
+	
+	public ArrayList<VaccineDisease> getVaccineDiseasesByVaccineId(int vaccineId) {
+		return dao.getVaccineDiseasesByVaccineId(vaccineId);
+	}
 }
