@@ -125,4 +125,29 @@ public class DiseaseDAO {
 		
 		return result;
 	}
+
+	public ArrayList<Disease> getDiseasesByVaccineId(int vaccineId) {
+		diseases = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getDiseaseByVaccineId(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1, vaccineId);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				Disease disease = new Disease(rs.getInt(1), rs.getString(2), rs.getString(3));
+				diseases.add(disease);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return diseases;
+	}
 }
