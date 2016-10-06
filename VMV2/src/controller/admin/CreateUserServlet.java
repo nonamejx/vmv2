@@ -64,7 +64,8 @@ public class CreateUserServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
-				password = null, role = "1", avatar = null;
+				password = null, avatar = null, rl = null;
+		boolean role = true;
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -137,9 +138,11 @@ public class CreateUserServlet extends HttpServlet {
 						password = item.getString("UTF-8");
 						break;
 					case "isAdmin":
-						role = item.getString("UTF-8");
-						if ("on".equals(role)) {
-							role = "0";
+						rl = item.getString("UTF-8");
+						if ("on".equals(rl)) {
+							role = true;
+						} else if ("1".equals(rl)) {
+							role = false;
 						}
 						break;
 					default:
@@ -157,8 +160,8 @@ public class CreateUserServlet extends HttpServlet {
 			hasError = true;
 		}
 		if (!hasError) {
-			User user = new User(0, fullName, Integer.parseInt(gender), DateUtils.convertToSDate(birthday), phoneNumber,
-					address, username, password, Integer.parseInt(role), avatar);
+			User user = new User(fullName, Integer.parseInt(gender), DateUtils.convertToSDate(birthday), phoneNumber,
+					address, username, password, role, avatar);
 			userBO.insertUser(user);
 			status = "success";
 		}

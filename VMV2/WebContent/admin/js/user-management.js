@@ -152,6 +152,9 @@ $(document).ready(function() {
     $("#form-update-user").on("keyup", "#unUpdate",function(){
     	validateUserName($("#form-update-user input[name='userId']").val());
     });
+    $("#form-update-user").on("change", "#unUpdate",function(){
+    	validateUserName($("#form-update-user input[name='userId']").val());
+    });
     $("#form-update-user .image-view input[name='image']").change(function(){
     	readURL(this);
 	}); 
@@ -240,7 +243,7 @@ function showUser(user) {
 	$("#form-update-user input[name='username']").val(user["username"]);
 	$("#form-update-user input[name='password']").val(user["password"]);
 	var role=user["role"];
-	if(role==0){
+	if(role==true){
 		$("#form-update-user input[name='isAdmin']").attr('checked','checked');
 	}else{
 		$("#form-update-user input[name='isAdmin']").removeAttr('checked');
@@ -281,9 +284,9 @@ function showMsg(msgElem) {
 	$(".msg").hide();
 	msgElem.fadeIn(1000);
 }
-function validateUserName(userName){
+function validateUserName(userId){
 	listUserName=$("#datatable tr td:nth-child(4)");
-	if(userName==null){
+	if(userId==null){
 		var userCreate=$("#unAdd").val();
 		for(var i=1;i<=listUserName.length;i++){
 			if($("#datatable tr:nth-child("+i+") td:nth-child(4)").text() == userCreate){
@@ -298,7 +301,8 @@ function validateUserName(userName){
 		var userCreate=$("#unUpdate").val();
 		for(var i=1;i<=listUserName.length;i++){
 			var valUserName=$("#datatable tr:nth-child("+i+") td:nth-child(4)").text();
-			if( valUserName== userCreate&&valUserName!=userName){
+			var valUserId=$("#datatable tr:nth-child("+i+") td:nth-child(1)").text();
+			if( valUserName== userCreate&&valUserId!=userId){
 				$(".failUserUpdate").fadeIn();
 				$("#updateUser").attr("disabled","disabled");
 				return;
