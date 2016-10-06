@@ -145,8 +145,8 @@ public class UpdateNewsServlet extends HttpServlet {
 			news.setContent(content);
 			if (image != null)
 				news.setImage(image);
-			newsBO.updateNews(news);
-			status = "success";
+			if (newsBO.updateNews(news) > 0)
+				status = "success";
 		}
 		
 		// send data

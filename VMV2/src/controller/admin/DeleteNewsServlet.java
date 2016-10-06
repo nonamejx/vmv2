@@ -46,7 +46,7 @@ public class DeleteNewsServlet extends HttpServlet {
 			newsId = Integer.parseInt(newsIdStr);
 		}
 		
-		if (newsBO.deleteNews(newsId) != 0)
+		if (newsBO.deleteNews(newsId) > 0)
 			status = "success";
 		
 		JsonObject jsonObj = new JsonObject();
