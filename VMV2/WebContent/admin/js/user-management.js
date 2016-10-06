@@ -243,7 +243,7 @@ function showUser(user) {
 	$("#form-update-user input[name='username']").val(user["username"]);
 	$("#form-update-user input[name='password']").val(user["password"]);
 	var role=user["role"];
-	if(role==true){
+	if(role){
 		$("#form-update-user input[name='isAdmin']").attr('checked','checked');
 	}else{
 		$("#form-update-user input[name='isAdmin']").removeAttr('checked');
