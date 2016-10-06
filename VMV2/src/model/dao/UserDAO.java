@@ -27,7 +27,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				User user = new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), 
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9), rs.getString(10));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -52,7 +52,7 @@ public class UserDAO {
 			
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), 
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9), rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class UserDAO {
 			cstmt.setString(5, user.getAddress());
 			cstmt.setString(6, user.getUsername());
 			cstmt.setString(7, user.getPassword());
-			cstmt.setInt(8, user.getRole());
+			cstmt.setBoolean(8, user.getRole());
 			cstmt.setString(9, user.getAvatar());
 			result = cstmt.executeUpdate();
 			
@@ -107,7 +107,7 @@ public class UserDAO {
 			cstmt.setString(6, user.getAddress());
 			cstmt.setString(7, user.getUsername());
 			cstmt.setString(8, user.getPassword());
-			cstmt.setInt(9, user.getRole());
+			cstmt.setBoolean(9, user.getRole());
 			cstmt.setString(10, user.getAvatar());
 			result = cstmt.executeUpdate();
 			
@@ -153,7 +153,7 @@ public class UserDAO {
 			
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), 
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9), rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -176,7 +176,7 @@ public class UserDAO {
 			
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), 
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9), rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

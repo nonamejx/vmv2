@@ -11,11 +11,11 @@ public class User {
 	private String address;
 	private String username;
 	private String password;
-	private int role;
+	private boolean role;
 	private String avatar;
 	
 	public User(int userId, String fullName, int gender, Date birthday, String phoneNumber, String address,
-			String username, String password, int role, String avatar) {
+			String username, String password, boolean role, String avatar) {
 		this.userId = userId;
 		this.fullName = fullName;
 		this.gender = gender;
@@ -29,7 +29,7 @@ public class User {
 	}
 
 	public User(String fullName, int gender, Date birthday, String phoneNumber, String address, String username,
-			String password, int role, String avatar) {
+			String password, boolean role, String avatar) {
 		this.fullName = fullName;
 		this.gender = gender;
 		this.birthday = birthday;
@@ -105,11 +105,11 @@ public class User {
 		this.password = password;
 	}
 
-	public int getRole() {
+	public boolean getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(boolean role) {
 		this.role = role;
 	}
 
