@@ -1,3 +1,4 @@
+<%@page import="model.bean.Disease"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -32,7 +33,9 @@
 		href="<%=request.getContextPath()%>/resources/production/css/multiple-select/multiple-select.css"
 		rel="stylesheet" type="text/css" />
 		<!-- /Custom styling plus plugins -->
-
+		<%
+			ArrayList<Disease> listDiseases=(ArrayList<Disease>)request.getAttribute("listDisease");
+		%>
 		<div class="page-title" style="margin-bottom: 50px">
 			<div class="title_left">
 				<h3>Quản lý Vắc xin</h3>
@@ -45,12 +48,13 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<a class="btn btn-success btn-sm" href="" data-toggle="modal"
+						<a class="btn btn-success btn-sm add-vaccine" href="" data-toggle="modal"
 							data-target=".add-vaccine-modal"><i class="fa fa-plus"></i>
 							Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>	
 					<div class="x_content">
 						<!-- Put your code here -->
 						<form method="post">
@@ -94,14 +98,15 @@
 									</button>
 									<h4 class="modal-title" id="myModalLabel2">Thông báo</h4>
 								</div>
-								<div class="modal-body">
+								<div class="modal-body modal-delete-vaccine">
 									<div class="loading-bar">Đang xử lý...</div>
 									<h4>Bạn có chắc muốn xóa thông tin này?</h4>
+									<input type="text" hidden="true" name="vaccineId">
 								</div>
 								<div class="modal-header">
 									<div style="float: right">
 										<button type="button"
-											class="btn btn-sm btn-danger btn-delete-user">Xóa</button>
+											class="btn btn-sm btn-danger btn-delete-vaccine">Xóa</button>
 										<button type="button" class="btn btn-sm btn-default"
 											data-dismiss="modal">Đóng</button>
 									</div>
@@ -192,21 +197,26 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="textarea">Liều lượng và cách sử dụng</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<textarea rows="5" name="dosageAndUsage"
+														class="form-control col-md-7 col-xs-12"></textarea>
+												</div>
+											</div>
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="textarea">Phòng bệnh </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select name="disease" multiple="multiple" class="form-control">
-											            <option value="1">January</option>
-											            <option value="2">February</option>
-											            <option value="3">March</option>
-											            <option value="4">April</option>
-											            <option value="5">May</option>
-											            <option value="6">June</option>
-											            <option value="7">July</option>
-											            <option value="8">August</option>
-											            <option value="9">September</option>
-											            <option value="10">October</option>
-											            <option value="11">November</option>
-											            <option value="12">December</option>
+													<select id="select-disease" name="disease" multiple="multiple" class="form-control">
+											            <%
+											            	if(listDiseases!=null){
+											            		for(Disease disease:listDiseases){
+											            %>
+											           				 <option value="<%=disease.getDiseaseId()%>"><%=disease.getDiseaseName() %></option>
+											            <%
+											            		}
+											            	}
+											            %>
 											        </select>
 												</div>
 											</div>
@@ -221,7 +231,7 @@
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
-													<button type="submit" class="btn btn-success">Thêm</button>
+													<button type="submit" class="btn btn-success ">Thêm</button>
 													<a class="btn btn-default btn-cancel">Hủy</a>
 												</div>
 											</div>
@@ -320,21 +330,26 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="textarea">Liều lượng và cách sử dụng</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<textarea rows="5" name="dosageAndUsage"
+														class="form-control col-md-7 col-xs-12">Liều lượng và cách sử dụng</textarea>
+												</div>
+											</div>
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="textarea">Phòng bệnh </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<select name="disease" multiple="multiple" class="form-control">
-											            <option value="1">January</option>
-											            <option value="2">February</option>
-											            <option value="3">March</option>
-											            <option value="4">April</option>
-											            <option value="5">May</option>
-											            <option value="6">June</option>
-											            <option value="7">July</option>
-											            <option value="8">August</option>
-											            <option value="9">September</option>
-											            <option value="10">October</option>
-											            <option value="11">November</option>
-											            <option value="12">December</option>
+											             <%
+											            	if(listDiseases!=null){
+											            		for(Disease disease:listDiseases){
+											            %>
+											           				 <option value="<%=disease.getDiseaseId()%>"><%=disease.getDiseaseName() %></option>
+											            <%
+											            		}
+											            	}
+											            %>
 											        </select>
 												</div>
 											</div>
