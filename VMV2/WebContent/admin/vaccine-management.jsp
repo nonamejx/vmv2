@@ -34,6 +34,7 @@
 		rel="stylesheet" type="text/css" />
 		<!-- /Custom styling plus plugins -->
 		<%
+			@SuppressWarnings("unchecked")
 			ArrayList<Disease> listDiseases=(ArrayList<Disease>)request.getAttribute("listDisease");
 		%>
 		<div class="page-title" style="margin-bottom: 50px">
@@ -266,6 +267,8 @@
 													src="<%=request.getContextPath()%>/resources/images/vaccine-default.jpg">
 												<input class="form-control" data-validate-length-range="6"
 													name="image" type="file">
+												 <input type="text" hidden="true" name="nameImage">
+						                         <input type="text" hidden="true" name="vaccineId">	
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -339,13 +342,13 @@
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="textarea">Phòng bệnh </label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select name="disease" multiple="multiple" class="form-control">
+												<div  class="col-md-6 col-sm-6 col-xs-12">
+													<select id="diseaseSelect"  name="disease" multiple="multiple" class="form-control">
 											             <%
 											            	if(listDiseases!=null){
 											            		for(Disease disease:listDiseases){
 											            %>
-											           				 <option value="<%=disease.getDiseaseId()%>"><%=disease.getDiseaseName() %></option>
+											           				 <option value="<%=disease.getDiseaseId()%>" ><%=disease.getDiseaseName() %></option>
 											            <%
 											            		}
 											            	}
@@ -411,7 +414,7 @@
 		<script
 			src="<%=request.getContextPath()%>/resources/production/js/multiple-select/multiple-select.js"></script>
 		<script>
-			//$("select[name='disease']").multipleSelect("getSelects"));
+			//$("select[name='disease']").multipleSelect("setSelects", "b1,b2,"));
 		 	$("select[name='disease']").multipleSelect({
 		 		selectAll: false,
 		 		countSelected: "# bệnh % đã chọn"

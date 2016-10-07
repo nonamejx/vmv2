@@ -86,7 +86,11 @@ public class VaccineDAO {
 			cstmt.setString(7, vaccine.getContraindication());
 			cstmt.setString(8, vaccine.getDosageAndUsage());
 			cstmt.setString(9, vaccine.getImage());
-			result = cstmt.executeUpdate();
+
+			rs = cstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("VACCINE_ID");
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
