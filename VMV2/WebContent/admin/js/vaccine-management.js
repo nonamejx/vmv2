@@ -62,7 +62,7 @@ $(document).ready(function() {
 		submitHandler: function(form) {
 			$(".loading-bar").slideDown(100);
 			addVaccine();
-			
+			$("#form-add-vaccine")[0].reset();
 		}		
 	});
     
