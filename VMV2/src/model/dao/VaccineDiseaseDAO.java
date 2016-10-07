@@ -157,4 +157,24 @@ public class VaccineDiseaseDAO {
 		
 		return result;
 	}
+	
+	public int deleteVaccineDiseaseByVaccineId(int vaccineId) {
+		int result = 0;
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_deleteVaccinediseaseByVaccineId(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1, vaccineId);
+			result = cstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return result;
+	}
 }
