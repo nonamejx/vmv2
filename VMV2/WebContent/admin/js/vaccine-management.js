@@ -187,8 +187,10 @@ function showVaccine(vaccine) {
 	}else{
 		image = contextPath + "/resources/images/image-null.jpg";
 	}	
+	
 	$("#form-update-vaccine .image-view img").attr("src", image);
 	$("#form-update-vaccine input[name='vaccineId']").val(vaccine["vaccineId"]);
+	$("#form-update-vaccine input[name='nameImage']").val(vaccine["image"]);
 	$("#form-update-vaccine input[name='vaccineName']").val(vaccine["vaccineName"]);
 	$("#form-update-vaccine input[name='manufacturer']").val(vaccine["manufacturer"]);
 	$("#form-update-vaccine input[name='price']").val(vaccine["price"]);

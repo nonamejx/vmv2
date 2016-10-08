@@ -146,15 +146,15 @@ public class UpdateVaccineServlet extends HttpServlet {
 					case "contraindication":
 						contraindication = item.getString("UTF-8");
 						break;
-					case "disease":
-						disease = item.getString("UTF-8");
-						listDiseases.add(disease);
-						break;
 					case "dosageAndUsage":
 						dosageAndUsage = item.getString("UTF-8");
 						break;
 					case "nameImage":
 						oldImage = item.getString("UTF-8");
+						break;
+					case "disease":
+						disease = item.getString("UTF-8");
+						listDiseases.add(disease);
 						break;
 
 					default:
