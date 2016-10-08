@@ -42,7 +42,6 @@ public class DeleteVaccineServlet extends HttpServlet {
 			throws ServletException, IOException {
 		VaccineBO vaccineBO = new VaccineBO();
 		String vaccineIdStr = request.getParameter("vaccineId");
-		System.out.println(vaccineIdStr);
 		int vaccineId = 0;
 		String status = "fail";
 		if (vaccineIdStr != null) {
