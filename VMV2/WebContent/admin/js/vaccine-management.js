@@ -241,12 +241,3 @@ function showMsg(msgElem) {
 	$(".msg").hide();
 	msgElem.fadeIn(1000);
 }
-function setSelectDisease(vaccine){}
-	
-
-
-
-
-
-
-
