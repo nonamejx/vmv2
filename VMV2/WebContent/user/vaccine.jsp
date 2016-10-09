@@ -31,56 +31,7 @@
 						<input id="search" class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
 					</form><br>
 					<div class="row list-vaccines">
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div> 
+						
 					</div>
 					<br>
 					<div class="pagging">

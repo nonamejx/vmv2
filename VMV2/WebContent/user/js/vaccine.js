@@ -99,13 +99,11 @@ function searchVaccine(){
         for (i = 0; i <dataDisplay.length; i++) {
             if(dataDisplay[i]["vaccineName"].toUpperCase().indexOf(keySearch) > -1){
                 arSearch.push(dataDisplay[i]);
-            } /*else  if(arData[i].fullname.toUpperCase().indexOf(keySearch) > -1){
-                        arSearch.push(arData[i]);
-            } else  if(arData[i].points.toUpperCase().indexOf(keySearch) > -1){
-                        arSearch.push(arData[i]);
-            } else  if(arData[i].notes.toUpperCase().indexOf(keySearch) > -1){
-                        arSearch.push(arData[i]);
-            }*/ 
+            } else  if(dataDisplay[i]["indication"].toUpperCase().indexOf(keySearch) > -1){
+                        arSearch.push(dataDisplay[i]);
+            } else  if(dataDisplay[i]["contraindication"].toUpperCase().indexOf(keySearch) > -1){
+                        arSearch.push(dataDisplay[i]);
+            } 
         }
         dataDisplay=arSearch;
     }   

@@ -42,13 +42,14 @@ public class LogoutServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
-		javax.servlet.http.HttpSession session=request.getSession();
-		User userLogin=(User)session.getAttribute("userLogin");
-		if(userLogin!=null){
+		javax.servlet.http.HttpSession session = request.getSession();
+		User userLogin = (User) session.getAttribute("userLogin");
+		if (userLogin != null) {
 			session.removeAttribute("userLogin");
-			response.sendRedirect(request.getContextPath()+"/LoginServlet");
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 		}
 	}
 
-	
 }

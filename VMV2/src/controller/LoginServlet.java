@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 				if ("on".equals(rememberMe)) {
 					setRememberMe(userLogin.getUserId(), response);
 				} else {
-					deleteRememberMe(request,response);
+					deleteRememberMe(request, response);
 				}
 				javax.servlet.http.HttpSession session = request.getSession();
 				session.setAttribute("userLogin", userLogin);
@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 		return rs;
 	}
 
-	public int deleteRememberMe(HttpServletRequest request,HttpServletResponse response) {
+	public int deleteRememberMe(HttpServletRequest request, HttpServletResponse response) {
 		int rs = 0;
 		Cookie cookie = null;
 		Cookie[] cookies = null;
