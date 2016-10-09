@@ -80,11 +80,11 @@
 									<a><i>Chi tiết >></i></a>
 								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
-					<hr>
+					<br>
 					<div class="pagging">
-						<ul>
+						<ul class="pagination">
 							<li><a class="not-active">Trước</a></li>
 							<li><a class="active">1</a></li>
 							<li><a>2</a></li>
@@ -108,7 +108,7 @@
         	$(".vaccine-item").addClass("current-page");
         </script>
         
-        <script src="<%=request.getContextPath() %>/user/js/home.js"></script>
+        <script src="<%=request.getContextPath() %>/user/js/vaccine.js"></script>
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>
