@@ -27,8 +27,8 @@
 					<h4><i class="fa fa-eraser"></i> Vắc xin</h4>
 					<br>
 					<form id="search-vaccine" action="">
-						<input class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
-						<button type="submit" class="btn btn-success">Tiềm kiếm</button>
+						<label>Tìm kiếm : </label>
+						<input id="search" class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
 					</form><br>
 					<div class="row list-vaccines">
 						<div class="col-sm-6">

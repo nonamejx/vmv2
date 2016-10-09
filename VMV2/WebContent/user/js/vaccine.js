@@ -1,5 +1,5 @@
 var currentPage=1;
-var listVaccine;
+var listVaccine,dataDisplay;
 var lenV;
 var quantum=4;
 var numberPage;
@@ -11,6 +11,12 @@ $(document).ready(function() {
         var page=$(this).text();
         displayVaccine(page) ;
         setCurrent();
+    });
+  //search
+    $("#search").keyup(function(){
+        searchVaccine();
+        createPage();
+        displayByindex(1); 
     });
     $(".part-detail").on( "click", "a", function(){
     });
@@ -25,6 +31,7 @@ function getAllVaccine() {
     	dataType: 'json'
 	}).done(function(data) {
 		listVaccine=data;
+		dataDisplay=data;
 		lenV=listVaccine.length;
 		createPage();
 		displayByindex(1);
@@ -63,20 +70,48 @@ function displayByindex(index){
     var offset=(currentPage-1)*quantum;
     var sum=offset+quantum;
     for(i=offset;i<(sum>lenV?lenV:sum);i++){
-    var	image = contextPath + "/uploads/" +listVaccine[i]["image"];
+    	if (dataDisplay[i]["image"] != null && dataDisplay[i]["image"].trim() != ""){
+    		image = contextPath + "/uploads/" + dataDisplay[i]["image"];
+    	}else{
+    		image = contextPath + "/resources/images/image-null.jpg";
+    	}	
         code ="<div class='col-sm-6'>"+
         			"<div class='part'>"+
         				"<div class='part-image'>"+
         					"<img class='part-image' alt='' src='"+image+"'>"+
         				"</div>"+
 							"<div class='part-detail'>"+
-        						"<p style='font-size: 16px'><b>"+listVaccine[i]["vaccineName"]+"</b></p>"+
-								"<p>"+listVaccine[i]["indication"]+"</p>"+
-								"<a href='vaccine-detail.jsp?idV="+listVaccine[i]["vaccineId"]+"'><i>Chi tiết >></i></a>"+
+        						"<p style='font-size: 16px'><b>"+dataDisplay[i]["vaccineName"]+"</b></p>"+
+								"<p>"+dataDisplay[i]["indication"]+"</p>"+
+								"<a href='vaccine-detail.jsp?idV="+dataDisplay[i]["vaccineId"]+"'><i>Chi tiết >></i></a>"+
 							"</div></div></div>"  ;
         $(".list-vaccines").append(code);
     }
 };
+
+function searchVaccine(){
+	dataDisplay=listVaccine;
+    var input, keySearch,i;
+    var arSearch=[];
+    input = document.getElementById('search');
+    keySearch = input.value.toUpperCase();
+    if(keySearch!=""){
+        for (i = 0; i <dataDisplay.length; i++) {
+            if(dataDisplay[i]["vaccineName"].toUpperCase().indexOf(keySearch) > -1){
+                arSearch.push(dataDisplay[i]);
+            } /*else  if(arData[i].fullname.toUpperCase().indexOf(keySearch) > -1){
+                        arSearch.push(arData[i]);
+            } else  if(arData[i].points.toUpperCase().indexOf(keySearch) > -1){
+                        arSearch.push(arData[i]);
+            } else  if(arData[i].notes.toUpperCase().indexOf(keySearch) > -1){
+                        arSearch.push(arData[i]);
+            }*/ 
+        }
+        dataDisplay=arSearch;
+    }   
+    lenV=dataDisplay.length;
+}
+
 function createPage(){
     currentPage=1;
     $(".pagination").empty(); 
