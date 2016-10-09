@@ -1,3 +1,4 @@
+<%@page import="model.bean.User"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -23,15 +24,25 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
+				
 				<div class="content-page">
+					<%
+					User userRemember=(User)request.getAttribute("userRemember");
+					String msg=request.getParameter("msg");
+					if(msg!=null){ 
+					%>
+						<p style="display:inline-block" class="msg msg-fail col-md-12 col-sm-12 col-xs-12 ">Tên đăng nhập hoặc mật khẩu chưa đúng</p>
+					<% 	
+						}
+					%>		
 					<div class="x_content">
-						<form id="form-login" class="form-horizontal form-label-left" method="post" style="padding-top: 70px;padding-bottom: 100px;">
+						<form id="form-login" action="<%=request.getContextPath()%>/LoginServlet" class="form-horizontal form-label-left" method="post" style="padding-top: 70px;padding-bottom: 100px;">
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">Tên đăng nhập <span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-										name="username" type="text">
+										name="username" type="text" value=<%if(userRemember!=null){ out.print(userRemember.getUsername()) ;} %>>
 								</div>
 							</div>
 							<div class="item form-group">
@@ -39,12 +50,23 @@
 									for="name">Mật khẩu <span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-										name="password" type="password">
+										name="password" type="password" value=<%if(userRemember!=null){ out.print(userRemember.getPassword());} %>>
+								</div>
+								
+							</div>
+							<div class="item form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="name">Remember me<span class="required"></span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+										<input name="rememberMe" type="checkbox" style="width: 16px; height: 30px" <%if(userRemember!=null){ out.print("checked");} %>>
 								</div>
 							</div>
+							  <div class="checkbox">
+                               
+                            </div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button type="submit" class="btn btn-success">Đăng nhập</button>
+									<button name="login" type="submit" class="btn btn-success">Đăng nhập</button>
 								</div>
 							</div>
 						</form>
