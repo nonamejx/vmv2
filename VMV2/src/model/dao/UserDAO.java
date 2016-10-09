@@ -189,4 +189,30 @@ public class UserDAO {
 		return user;
 	}
 	
+	public ArrayList<User> searchUser(String keyword) {
+		users = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_searchUser(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setString(1, keyword);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				User user = new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), 
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9), rs.getString(10));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return users;
+	}
+	
 }

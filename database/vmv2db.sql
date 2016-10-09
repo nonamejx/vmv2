@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 07, 2016 at 05:52 PM
+-- Generation Time: Oct 09, 2016 at 09:35 AM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -167,6 +167,14 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccineDisease` (IN `vaccine_id` INT(11), IN `disease_id` INT(11), IN `note` TEXT)  BEGIN
 INSERT INTO vaccine_disease(`vaccine_id`, `disease_id`, `note`) VALUES(vaccine_id, disease_id, note);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_searchUser` (IN `keyword` VARCHAR(255))  BEGIN
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user Where `full_name` LIKE CONCAT('%', keyword COLLATE utf8_unicode_ci, '%');
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_searchVaccine` (IN `keyword` VARCHAR(255))  BEGIN
+SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine Where `vaccine_name` LIKE CONCAT('%', keyword COLLATE utf8_unicode_ci, '%');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT, IN `p_disease_id` INT(11))  BEGIN
@@ -341,12 +349,12 @@ ALTER TABLE `disease`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
