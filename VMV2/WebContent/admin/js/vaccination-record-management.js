@@ -1,5 +1,6 @@
 
 var vaccinationrecordDatatable;
+var listFullNameOfUser;
 $(document).ready(function() {
 	setMenuItemActive();
 	TableManageButtons.init();
@@ -74,6 +75,7 @@ $(document).ready(function() {
 		},
 		submitHandler : function(form) {
 			$(".loading-bar").slideDown(100);
+			addVaccinationRecord();
 		}
 	});
 
@@ -119,6 +121,39 @@ $(document).ready(function() {
 		$(".loading-bar").slideDown(100);
 		deleteVaccinationRecord($(".delete-vaccination-record-modal input[name='vaccinationRecordId']").val());
 	});
+	$('#text-user').focus(function(){
+		$.ajax({
+			type: "POST",
+			url: contextPath+"/GetListUserServlet",
+			data:{
+				fullname:$(this).val(),
+			},
+			success: function(data){
+				listFullNameOfUser = data
+			}
+			});
+	});
+	$(function() {
+		$("#text-user").autocomplete({
+			source: listFullNameOfUser,
+			focus: function(event, ui) {
+				// prevent autocomplete from updating the textbox
+				event.preventDefault();
+				// manually update the textbox
+				$(this).val(ui.item.fullName);
+				console.log(ui.item.fullName);
+			},
+			select: function(event, ui) {
+				// prevent autocomplete from updating the textbox
+				event.preventDefault();
+				// manually update the textbox and hidden field
+				$(this).val(ui.item.label);
+				$("#text-user-id").val(ui.item.userId);
+			}
+			
+		});
+	});
+	
 	// ==========================
 
 	// code here..
@@ -135,6 +170,23 @@ $(document).ready(function() {
 				$(".modal").modal("hide");
 				showMsg($(".msg-success"));
 				vaccinationrecordDatatable.api().ajax.reload();
+			} else {
+				showMsg($(".msg-fail"));
+			}
+		}).fail(function(err) {
+		});
+	}
+	function addVaccinationRecord() {
+		$.ajax({
+			url: contextPath + "/CreateVaccinationRecordServlet",
+	    	type: "POST",
+	    	data: $("#form-add-vaccination-record").serialize(),
+	    	dataType: 'json'
+		}).done(function(data) {
+			if (data["status"] == "success") {
+				$(".modal").modal("hide");
+				showMsg($(".msg-success"));
+				vaccinationrecordDatatable.ajax.reload();
 			} else {
 				showMsg($(".msg-fail"));
 			}

@@ -25,7 +25,7 @@
 	<link href="<%=request.getContextPath() %>/resources/css/custom.css" rel="stylesheet">
 	
 	<script src="<%=request.getContextPath() %>/resources/production/js/jquery.min.js"></script>
-	
+	<link href="<%=request.getContextPath() %>/resources/production/css/autocomplete/jquery-ui.css" rel="stylesheet"></script>
 	
 </head>
 <body class="nav-md">
@@ -176,6 +176,7 @@
 		</div>
 		</div>
 		
+	  
 	  <script src="<%=request.getContextPath() %>/resources/production/js/bootstrap.min.js"></script>
 
 	  <!-- bootstrap progress js -->
@@ -189,7 +190,11 @@
 	  <!-- pace -->
 	  <script src="<%=request.getContextPath() %>/resources/production/js/pace/pace.min.js"></script>
 	  
+	  <!-- autocomplete -->
+	  <script src="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.js"></script>
+	  
 	  <!-- javascript source -->
 	  <tiles:insertAttribute name="javascript-source"></tiles:insertAttribute>
+	  
 </body>
 </html>
