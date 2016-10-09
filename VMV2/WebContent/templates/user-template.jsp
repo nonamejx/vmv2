@@ -1,3 +1,4 @@
+<%@page import="model.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -52,7 +53,16 @@
 						</div>
 						<div class="profile_info">
 							<span>Chào,</span>
-							<h2>Văn Nam</h2>
+							<% 
+								HttpSession sess = request.getSession();
+								User userLogin=(User)sess.getAttribute("userLogin");
+								if(userLogin!=null){
+							%>
+								<h2><%=userLogin.getFullName()%></h2>
+								<input type="text" hidden="true" name="userId" value="<%=userLogin.getUserId()%>">
+							<%
+								}
+							%>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -79,7 +89,7 @@
 									<a href="<%=request.getContextPath() %>/user/profile.jsp"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</a>
 								</li>
 								<li class="">
-									<a href="<%=request.getContextPath() %>/user/profile.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
+									<a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
 								</li>
 							</ul>
 						</div>
@@ -97,7 +107,7 @@
 						<a data-toggle="tooltip" data-placement="top" title="Cài đặt">
 							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						</a> 
-						<a data-toggle="tooltip" data-placement="top" title="Đăng xuất">
+						<a href="<%=request.getContextPath()%>/LogoutServlet" data-toggle="tooltip" data-placement="top" title="Đăng xuất">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>
