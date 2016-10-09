@@ -35,4 +35,8 @@ public class UserBO {
 	public User getUserByUsername(String username) {
 		return dao.getUserByUsername(username);
 	}
+	
+	public ArrayList<User> searchUser(String keyword) {
+		return dao.searchUser(keyword);
+	}
 }
