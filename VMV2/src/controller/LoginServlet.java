@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.User;
 import model.bo.UserBO;
+import utils.MyUtils;
 
 /**
  * Servlet implementation class LoginServlet
@@ -46,77 +46,61 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String submit = request.getParameter("login");
 		UserBO userBO = new UserBO();
+		String keywordSession = "userLogin";
+		String keywordCookie = "idUserLogin";
 		if (submit != null) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String rememberMe = request.getParameter("rememberMe");
-
+			System.out.println(username+" "+password+" "+rememberMe);
 			User userLogin = userBO.getUserByUsernamePassword(username, password);
-
 			if (userLogin != null) {
 				if ("on".equals(rememberMe)) {
-					setRememberMe(userLogin.getUserId(), response);
-				} else {
-					deleteRememberMe(request, response);
+					// Tạo cookie
+					String idStr = MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
+					if (!"".equals(idStr)){
+						if(!idStr.equals(String.valueOf(userLogin.getUserId()))){
+							if (MyUtils.getInstance(request, response).deleteCookieRemember(keywordCookie)> 0) {
+								MyUtils.getInstance(request, response).setValueCookieRemember(userLogin.getUserId(),
+										keywordCookie);
+							}
+						}
+					}else{
+						MyUtils.getInstance(request, response).setValueCookieRemember(userLogin.getUserId(),
+								keywordCookie);
+					} 
+					
+				} else if(rememberMe==null) {
+					String idStr=MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
+					if(idStr!=null){
+						if(idStr.equals(String.valueOf(userLogin.getUserId()))){
+							// Xóa cookie
+							if (MyUtils.getInstance(request, response).deleteCookieRemember(keywordCookie) <= 0) {
+								response.sendRedirect("user/login.jsp");
+							}
+						}
+					}
 				}
-				javax.servlet.http.HttpSession session = request.getSession();
-				session.setAttribute("userLogin", userLogin);
-				if (userLogin.getRole()) {
-					response.sendRedirect("user/home.jsp");
-				}
+				// Tạo session
+				MyUtils.getInstance(request, response).setSessionLogin(userLogin, keywordSession);
+				response.sendRedirect("user/home.jsp");
 			} else {
 				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
-			int id = readCookies(request);
-			if (id > 0) {
-				User userRemember = userBO.getUserById(id);
-				request.setAttribute("userRemember", userRemember);
+			// Lấy cookie remember
+			String idStr = MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
+			if (!"".equals(idStr)) {
+				try {
+					User userRemember = userBO.getUserById(Integer.parseInt(idStr));
+					request.setAttribute("userRemember", userRemember);
+				} catch (NumberFormatException ex) {
+					response.sendRedirect("user/login.jsp");
+				}
 			}
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp");
 			rd.forward(request, response);
 		}
-	}
-
-	public void setRememberMe(int id, HttpServletResponse response) {
-		Cookie userRemember = new Cookie("idUserLogin", String.valueOf(id));
-		userRemember.setMaxAge(60 * 60 * 24);
-		response.addCookie(userRemember);
-	}
-
-	public int readCookies(HttpServletRequest request) {
-		int rs = 0;
-		Cookie cookie = null;
-		Cookie[] cookies = null;
-		// Get an array of Cookies associated with this domain
-		cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				cookie = cookies[i];
-				if ("idUserLogin".equals(cookie.getName())) {
-					rs = Integer.parseInt(cookie.getValue());
-				}
-			}
-		}
-		return rs;
-	}
-
-	public int deleteRememberMe(HttpServletRequest request, HttpServletResponse response) {
-		int rs = 0;
-		Cookie cookie = null;
-		Cookie[] cookies = null;
-		// Get an array of Cookies associated with this domain
-		cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				cookie = cookies[i];
-				if ("idUserLogin".equals(cookie.getName())) {
-					cookie.setMaxAge(0);
-					response.addCookie(cookie);
-				}
-			}
-		}
-		return rs;
 	}
 }
