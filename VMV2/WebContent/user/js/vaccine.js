@@ -7,7 +7,7 @@ $(document).ready(function() {
 	setMenuItemActive();
 	getAllVaccine();
   //move page
-    $( ".pagination " ).on( "click", "a", function(){
+    $( ".pagi " ).on( "click", "a", function(){
         var page=$(this).text();
         displayVaccine(page) ;
         setCurrent();
@@ -16,7 +16,7 @@ $(document).ready(function() {
     $("#search").keyup(function(){
         searchVaccine();
         createPage();
-        displayByindex(1); 
+        displayByindex(1);
     });
     $(".part-detail").on( "click", "a", function(){
     });
@@ -47,18 +47,19 @@ function showAllVaccine(listVaccine) {
 }
 
 function displayVaccine(index){
-    if(index.indexOf('Prev')>-1){
+    if(index.indexOf('Trước')>-1){
         currentPage--;
         if(currentPage>=1){
             displayByindex(currentPage);    
         }
        
-    }else if(index.indexOf('Next')>-1){
+    }else if(index.indexOf('Tiếp')>-1){
         currentPage++;
         if(currentPage<=numberPage){
             displayByindex(currentPage);    
         }
     }else{
+    	currentPage=index;
         displayByindex(index);
     }
 }
@@ -112,28 +113,38 @@ function searchVaccine(){
 
 function createPage(){
     currentPage=1;
-    $(".pagination").empty(); 
+    $(".pagi").empty(); 
     numberPage=Math.ceil(lenV/quantum);
-    var code="<li><a href='javascript:void(0)' id='prev'>&#10094; Prev</a></li>"
-                       +" <li><a class='current' href='javascript:void(0)'>1</a></li> ";
+    var code="<li><a href='javascript:void(0)' class='not-active'  id='prev'>&#10094; Trước</a></li>"
+                       +" <li><a class='active' href='javascript:void(0)'>1</a></li> ";
     if(numberPage>1){
         for(i=2;i<=numberPage;i++){
             code +="<li><a  href='javascript:void(0)'>"+i+"</a></li>";
         }
-    }  
-    code+="<li><a id='next' href='javascript:void(0)'>Next &#10095;</a></li>";
-    $(".pagination").append(code);
+        code+="<li><a id='next' href='javascript:void(0)'>Tiếp &#10095;</a></li>";
+    }else{
+    	code+="<li><a id='next' class='not-active' href='javascript:void(0)'>Tiếp &#10095;</a></li>";
+    }
+   
+    $(".pagi").append(code);
 }
 
 function setCurrent(){
-    if(currentPage>numberPage){
-        $('#next').css("cursor","default");
+    if(currentPage>=numberPage){
+    	$('.pagi li a').removeClass("not-active");	
+        $('#next').addClass("not-active");
         currentPage=numberPage;
-    }
-    if(currentPage<1){
-        $('#prev').css("cursor","default");
+    }else if(currentPage<=1){
+    	$('.pagi li a').removeClass("not-active");	
+    	$('#prev').addClass("not-active");
         currentPage=1;
+    }else{
+    	 $('.pagi li a').removeClass("not-active");	
     }
+   
+	$('.pagi li a').removeClass("active");
+	$(".pagi li:nth-child("+(currentPage+1)+") a").addClass("active");
+    
 }
 
 function setMenuItemActive() {
