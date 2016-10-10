@@ -146,7 +146,8 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
 														data-validate-length-range="6" name="vaccine"
-														placeholder="" type="text">
+														placeholder="" type="text" id="text-vaccine">
+														<input id="text-vaccine-id" type="hidden" name="idVaccine"></p>
 												</div>
 											</div>
 											<div class="item form-group">
@@ -174,7 +175,7 @@
 													<button type="submit" class="btn btn-success">Thêm</button>
 													<a class="btn btn-default btn-cancel">Hủy</a>
 												</div>
-											</div>
+											</div> 
 										</form>
 
 									</div>

@@ -24,7 +24,7 @@
 	<link href="<%=request.getContextPath() %>/resources/production/css/icheck/flat/green.css" rel="stylesheet">
 	
 	<link href="<%=request.getContextPath() %>/resources/css/custom.css" rel="stylesheet">
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.css" >
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/production/css/autocomplete/jquery-ui.css" >
 	<script src="<%=request.getContextPath() %>/resources/production/js/jquery.min.js" type='text/javascript'></script>
 	<script  src="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.js" type='text/javascript'></script>
 	

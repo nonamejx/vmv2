@@ -69,7 +69,6 @@ $(document).ready(function() {
 			}
 		},
 		messages : {
-
 		},
 		submitHandler : function(form) {
 			$(".loading-bar").slideDown(100);
@@ -146,6 +145,33 @@ $(document).ready(function() {
 	        return false;
 	    }
 	});
+	$("#text-vaccine").autocomplete({
+	    source: function(request, response) {
+	        $.ajax({
+	            url: contextPath + "/SearchVaccineServlet",
+	            dataType: "json",
+	            type: "POST",
+	            data: {
+	                keywordVaccine: request.term
+	            },
+	            success: function(data){
+	            	$("#ui-id-2").css("z-index","9999"),
+	                response( $.map( data, function( item ) {
+	                    return {
+	                        label: item.vaccineName,
+	                        value: item.vaccineId 
+	                    }
+	                }));
+	             }
+	             
+	        })
+	    },
+	    select: function(event, ui) {
+	        $("#text-vaccine").val(ui.item.label);
+	        $("#text-vaccine-id").val(ui.item.value);
+	        return false;
+	    }
+	});
 	// ==========================
 
 	// code here..
@@ -182,6 +208,20 @@ $(document).ready(function() {
 			} else {
 				showMsg($(".msg-fail"));
 			}
+		}).fail(function(err) {
+		});
+	}
+	function getDose(userId,vaccineId) {
+		$.ajax({
+			url: contextPath + "/GetDoseVaccineServlet",
+	    	type: "POST",
+	    	data: {
+	    		userId:userId,
+	    		vaccineId:vaccineId
+	    	},
+	    	dataType: 'json'
+		}).done(function(data) {
+			$(".dose").val(data["dose"])
 		}).fail(function(err) {
 		});
 	}

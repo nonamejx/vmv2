@@ -50,16 +50,24 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 
 		VaccinationRecordBO vaccinationRecordBO = new VaccinationRecordBO();
 		String status = "fail";
-		String diseaseName = request.getParameter("user");
-		String description = request.getParameter("vaccine");
+		String idUserStr = request.getParameter("idUser");
+		String idVaccineStr = request.getParameter("idVaccine");
 		String doseStr = request.getParameter("dose");
 		String nextDoseDateStr = request.getParameter("nextDoseDate");
 		
-		int dose = -1; 
+		int dose = -1, idUser = -1, idVaccine = -1; 
+		
 		if(doseStr!=null){
 			dose = Integer.parseInt(doseStr);
 		}
 		
+		if(idUserStr!=null){
+			idUser = Integer.parseInt(idUserStr);
+		}
+		
+		if(idVaccineStr!=null){
+			idVaccine = Integer.parseInt(idVaccineStr);
+		}
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
 		Date nextDoseDate = null;
@@ -67,7 +75,6 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 			try {
 				nextDoseDate = dateFormat.parse(nextDoseDateStr);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -77,7 +84,6 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 		try {
 			injectionDate = dateFormat.parse(injectionDateStr);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(nextDoseDate);
