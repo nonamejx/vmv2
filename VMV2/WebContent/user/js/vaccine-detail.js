@@ -56,10 +56,20 @@ function showVaccine(vaccine) {
 }
 
 function showVaccineDisease(data) {
+	$("#vaccineDisease").empty();
+	var rs=0;	
 	for(i=0;i<data.length;i++){
-		var code="<li><p>"+data[i]["diseaseName"]+"</p></li>"
-		$("#vaccineDisease").append(code);
+		if(data[i]["diseaseName"] !=""){
+			var code="<li><p>"+data[i]["diseaseName"]+"</p></li>"
+			$("#vaccineDisease").append(code);
+			rs=1;
+		}
 	}
+	if(rs==0){
+		$("#vaccineDisease").after("<p>Chưa có bệnh nào!</p>");
+	}
+	
+	
 }
 
 function setMenuItemActive() {

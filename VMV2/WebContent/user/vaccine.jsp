@@ -35,11 +35,8 @@
 					</div>
 					<br>
 					<div class="pagging">
-						<ul class="pagination">
-							<li><a class="not-active">Trước</a></li>
-							<li><a class="active">1</a></li>
-							<li><a>2</a></li>
-							<li><a>Tiếp</a></li>
+						<ul class="pagi">
+							
 						</ul>
 					</div>
 				</div>
