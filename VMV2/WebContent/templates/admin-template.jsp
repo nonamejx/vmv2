@@ -1,3 +1,4 @@
+<%@page import="utils.MyUtils"%>
 <%@page import="model.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -54,8 +55,7 @@
 						<div class="profile_info">
 							<span>Chào,</span>
 							<% 
-								HttpSession sess = request.getSession();
-								User userLogin=(User)sess.getAttribute("userLogin");
+							User userLogin=(User)MyUtils.getInstance(request, response).getSessionLogin("userLogin");
 								if(userLogin!=null){
 							%>
 								<h2>Admin <%=userLogin.getFullName()%></h2>
