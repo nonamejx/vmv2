@@ -35,4 +35,8 @@ public class VaccineBO {
 	public int countVaccines() {
 		return dao.countVaccines();
 	}
+	
+	public ArrayList<Vaccine> searchVaccine(String keyword) {
+		return dao.searchVaccine(keyword);
+	}
 }

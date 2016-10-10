@@ -3,6 +3,7 @@ package controller.admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,16 +21,17 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.JsonObject;
 
-import model.bean.User;
-import model.bo.UserBO;
-import utils.DateUtils;
+import model.bean.Vaccine;
+import model.bean.VaccineDisease;
+import model.bo.VaccineBO;
+import model.bo.VaccineDiseaseBO;
 
 /**
  * Servlet implementation class CreateNewsServlet
  */
-@WebServlet("/CreateUserServlet")
+@WebServlet("/CreateVaccineServlet")
 @MultipartConfig
-public class CreateUserServlet extends HttpServlet {
+public class CreateVaccineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String UPLOAD_DIRECTORY = "upload";
@@ -40,7 +42,7 @@ public class CreateUserServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreateUserServlet() {
+	public CreateVaccineServlet() {
 		super();
 	}
 
@@ -62,10 +64,11 @@ public class CreateUserServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
-		UserBO userBO = new UserBO();
-		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
-				password = null, avatar = null, rl = null;
-		boolean role = true;
+		VaccineBO vaccineBO = new VaccineBO();
+		VaccineDiseaseBO vaccineDiseaseBO = new VaccineDiseaseBO();
+		String vaccineName = null, manufacturer = null, price = null, numberOfDoses = null, sideEffects = null,
+				indication = null, contraindication = null, dosageAndUsage = null, image = null, disease = null;
+		ArrayList<String> listDiseases = new ArrayList<>();
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -75,7 +78,6 @@ public class CreateUserServlet extends HttpServlet {
 			writer.flush();
 			return;
 		}
-
 		// configures upload settings
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(THRESHOLD_SIZE);
@@ -102,48 +104,48 @@ public class CreateUserServlet extends HttpServlet {
 				if (!item.isFormField()) {
 					String fileName = item.getName();
 					String endFileName = FilenameUtils.getExtension(fileName);
-					fileName = "User-" + System.nanoTime() + "." + endFileName;
+					fileName = "Vaccine-" + System.nanoTime() + "." + endFileName;
 					item.setFieldName(fileName);
 					String root = getServletContext().getRealPath("/");
 					File path = new File(root + "/uploads");
 					if (!path.exists()) {
 						path.mkdirs();
+
 					}
 					if (!fileName.equals("")) {
 						File uploadedFile = new File(path + "/" + fileName);
 						item.write(uploadedFile);
-						avatar = fileName;
+						image = fileName;
 					}
 				} else {
 					switch (item.getFieldName()) {
-					case "name":
-						fullName = item.getString("UTF-8");
+					case "vaccineName":
+						vaccineName = item.getString("UTF-8");
 						break;
-					case "dateOfBirth":
-						birthday = item.getString("UTF-8");
+					case "manufacturer":
+						manufacturer = item.getString("UTF-8");
 						break;
-					case "gender":
-						gender = item.getString("UTF-8");
+					case "price":
+						price = item.getString("UTF-8");
 						break;
-					case "phoneNumber":
-						phoneNumber = item.getString("UTF-8");
+					case "numberOfDoses":
+						numberOfDoses = item.getString("UTF-8");
 						break;
-					case "address":
-						address = item.getString("UTF-8");
+					case "sideEffects":
+						sideEffects = item.getString("UTF-8");
 						break;
-					case "username":
-						username = item.getString("UTF-8");
+					case "indication":
+						indication = item.getString("UTF-8");
 						break;
-					case "password":
-						password = item.getString("UTF-8");
+					case "contraindication":
+						contraindication = item.getString("UTF-8");
 						break;
-					case "isAdmin":
-						rl = item.getString("UTF-8");
-						if ("on".equals(rl)) {
-							role = true;
-						} else if ("1".equals(rl)) {
-							role = false;
-						}
+					case "disease":
+						disease = item.getString("UTF-8");
+						listDiseases.add(disease);
+						break;
+					case "dosageAndUsage":
+						dosageAndUsage = item.getString("UTF-8");
 						break;
 					default:
 						break;
@@ -151,26 +153,41 @@ public class CreateUserServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception ex) {
-			avatar = null;
+			image = null;
 		}
-
 		// Validate
 		boolean hasError = false;
-		if (userBO.getUserByUsername(username) != null) {
-			hasError = true;
-		}
 		if (!hasError) {
-			User user = new User(fullName, Integer.parseInt(gender), DateUtils.convertToSDate(birthday), phoneNumber,
-					address, username, password, role, avatar);
-			userBO.insertUser(user);
-			status = "success";
+			Vaccine vaccine = new Vaccine(vaccineName, manufacturer, Double.parseDouble(price),
+					Integer.parseInt(numberOfDoses), sideEffects, indication, contraindication, dosageAndUsage, image);
+			int idCreate = vaccineBO.insertVaccine(vaccine);
+			if (idCreate > 0) {
+				if (createVaccineDisease(idCreate, listDiseases) > 0) {
+					status = "success";
+				} else {
+					vaccineDiseaseBO.deleteVaccineDiseaseByVaccineId(idCreate);
+					vaccineBO.deleteVaccine(idCreate);
+				}
+			}
 		}
-
 		// send data
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsonObj.toString());
+	}
+
+	public int createVaccineDisease(int idVaccine, ArrayList<String> listDiseases) {
+		int rs = 1;
+		VaccineDiseaseBO vaccineDiseaseBO = new VaccineDiseaseBO();
+		for (String idDisease : listDiseases) {
+			if (vaccineDiseaseBO
+					.insertVaccineDisease(new VaccineDisease(idVaccine, Integer.parseInt(idDisease), "")) < 1) {
+				rs = 0;
+				break;
+			}
+		}
+		return rs;
 	}
 }

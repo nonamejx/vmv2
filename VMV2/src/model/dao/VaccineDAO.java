@@ -86,7 +86,11 @@ public class VaccineDAO {
 			cstmt.setString(7, vaccine.getContraindication());
 			cstmt.setString(8, vaccine.getDosageAndUsage());
 			cstmt.setString(9, vaccine.getImage());
-			result = cstmt.executeUpdate();
+
+			rs = cstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("VACCINE_ID");
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -198,6 +202,35 @@ public class VaccineDAO {
 			SqlConnection.closeResultSet(rs);
 		}
 		return result;
+	}
+	
+	public ArrayList<Vaccine> searchVaccine(String keyword) {
+		vaccines = new ArrayList<>();
+		
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_searchVaccine(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setString(1, keyword);
+			rs = cstmt.executeQuery();
+			
+			while (rs.next()) {
+				Vaccine vaccine = new Vaccine(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getDouble(4), rs.getInt(5), rs.getString(6), 
+						rs.getString(7), rs.getString(8), rs.getString(9), 
+						rs.getString(10));
+				
+				vaccines.add(vaccine);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+		
+		return vaccines;
 	}
 	
 }

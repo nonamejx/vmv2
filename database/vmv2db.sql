@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 06, 2016 at 03:12 PM
+-- Generation Time: Oct 09, 2016 at 09:35 AM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -54,6 +54,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDisease` (IN `p_vaccine_id` INT(11), IN `p_disease_id` INT(11))  BEGIN
 	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id and `disease_id`=p_disease_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_deleteVaccineDiseaseByVaccineId` (IN `p_vaccine_id` INT(11))  BEGIN
+	DELETE FROM `vaccine_disease` WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllDiseases` ()  BEGIN
@@ -163,6 +167,14 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_insertVaccineDisease` (IN `vaccine_id` INT(11), IN `disease_id` INT(11), IN `note` TEXT)  BEGIN
 INSERT INTO vaccine_disease(`vaccine_id`, `disease_id`, `note`) VALUES(vaccine_id, disease_id, note);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_searchUser` (IN `keyword` VARCHAR(255))  BEGIN
+SELECT `user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar` FROM user Where `full_name` LIKE CONCAT('%', keyword COLLATE utf8_unicode_ci, '%');
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_searchVaccine` (IN `keyword` VARCHAR(255))  BEGIN
+SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine Where `vaccine_name` LIKE CONCAT('%', keyword COLLATE utf8_unicode_ci, '%');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_updateDisease` (IN `disease_name` VARCHAR(255), IN `description` TEXT, IN `p_disease_id` INT(11))  BEGIN
@@ -332,12 +344,12 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -347,7 +359,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- Constraints for dumped tables
 --

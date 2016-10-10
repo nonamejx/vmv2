@@ -18,13 +18,13 @@ import model.bo.UserBO;
  * Servlet implementation class GetListUserServlet
  */
 @WebServlet("/GetListUserServlet")
-public class GetListUserServlet extends HttpServlet {
+public class SearchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetListUserServlet() {
+    public SearchUserServlet() {
         super();
     }
 
@@ -43,6 +43,16 @@ public class GetListUserServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		String keywordUser = request.getParameter("keywordUser");
+		System.out.println("vo day "+keywordUser);
+		UserBO userBO = new UserBO();
+		ArrayList<User> listUser = userBO.searchUser(keywordUser);
+
+		String json = new Gson().toJson(listUser);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(json);
 	}
 
 }

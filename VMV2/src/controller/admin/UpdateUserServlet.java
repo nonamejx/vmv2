@@ -66,7 +66,8 @@ public class UpdateUserServlet extends HttpServlet {
 
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
-				password = null, role = "1", avatar = null, oldAvatar = null, userId = null;
+				password = null, avatar = null, oldAvatar = null, userId = null, rl = null;
+		boolean role = true;
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -144,9 +145,11 @@ public class UpdateUserServlet extends HttpServlet {
 						password = item.getString("UTF-8");
 						break;
 					case "isAdmin":
-						role = item.getString("UTF-8");
-						if ("on".equals(role)) {
-							role = "0";
+						rl = item.getString("UTF-8");
+						if ("on".equals(rl)) {
+							role = true;
+						} else if ("1".equals(rl)) {
+							role = false;
 						}
 						break;
 					case "nameImage":
@@ -172,8 +175,7 @@ public class UpdateUserServlet extends HttpServlet {
 		}
 		if (!hasError) {
 			User user = new User(Integer.parseInt(userId), fullName, Integer.parseInt(gender),
-					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password,
-					Integer.parseInt(role), avatar);
+					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password, role, avatar);
 			if (userBO.updateUser(user) == 1) {
 				status = "success";
 			}
