@@ -24,6 +24,8 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>	
 					<div class="x_content">
 						<form id="form-register" class="form-horizontal form-label-left" method="post" style="">
 							<div class="item form-group">
@@ -99,6 +101,7 @@
 										name="image" type="file">
 		                      	</div>
 	                    	</div>
+	                    	<input name="isAdmin" hidden="true" type="text" value="on">
 	                    	<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
 									<button type="submit" class="btn btn-success">Đăng ký</button>
@@ -128,49 +131,9 @@
         	        showDropdowns: true,
         	        format: 'DD/MM/YYYY'
         	    });
-        		 $("#form-register").validate({
-        				rules: {
-        						name: {
-        							required: true,
-        						},
-        						dateOfBirth: {
-        							required: true
-        						},
-        						phoneNumber: {
-        							required: true,
-        							number: true
-        						},
-        						address: {
-        							required: true
-        						},
-        						username: {
-        							required: true,
-        							maxlength: 50,
-        							minlength: 6,
-        							notSpecialRegex: true
-        						},
-        						password: {
-        							required: true,
-        							maxlength: 50,
-        							minlength: 6
-        						},
-        						passwordf: {
-        							required: true,
-        							maxlength: 50,
-        							minlength: 6,
-        							equalTo: "#password"
-        						}
-        					},
-        					messages: {
-        						
-        					},
-        					submitHandler: function(form) {
-        						form.submit();
-        		        	}		
-        			});
         	});
         </script>
-	  	
+	  	 <script src="<%=request.getContextPath() %>/user/js/register.js"></script>
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>
 		<script>

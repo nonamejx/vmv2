@@ -122,13 +122,14 @@ $(document).ready(function() {
 	$("#text-user").autocomplete({
 	    source: function(request, response) {
 	        $.ajax({
-	            url: contextPath+"/SearchUserServlet",
+	            url: contextPath + "/SearchUserServlet",
 	            dataType: "json",
 	            type: "POST",
 	            data: {
 	                keywordUser: request.term
 	            },
 	            success: function(data){
+	            	$("#ui-id-1").css("z-index","9999"),
 	                response( $.map( data, function( item ) {
 	                    return {
 	                        label: item.fullName,

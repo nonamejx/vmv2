@@ -17,7 +17,7 @@ import model.bo.UserBO;
 /**
  * Servlet implementation class GetListUserServlet
  */
-@WebServlet("/GetListUserServlet")
+@WebServlet("/SearchUserServlet")
 public class SearchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

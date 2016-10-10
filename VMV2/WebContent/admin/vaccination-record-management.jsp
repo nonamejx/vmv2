@@ -31,6 +31,7 @@
 		<link
 			href="<%=request.getContextPath()%>/resources/production/css/multiple-select/multiple-select.css"
 			rel="stylesheet" type="text/css" />
+		<link href="<%=request.getContextPath() %>/resources/production/css/autocomplete/jquery-ui.css" rel="stylesheet">
 		<!-- /Custom styling plus plugins -->
 
 		<div class="page-title" style="margin-bottom: 50px">
@@ -72,7 +73,12 @@
 						</form>
 					</div>
 				</div>
-
+				<div class="col-md-6 col-sm-6 col-xs-12">
+													<input class="form-control col-md-7 col-xs-12"
+														data-validate-length-range="6" name="user" placeholder=""
+														type="text"  >
+														
+				</div>
 				<!-- modals -->
 				<div class="x_content">
 
@@ -130,7 +136,7 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
 														data-validate-length-range="6" name="user" placeholder=""
-														type="text" id="text-user" >
+														type="text"  id="text-user">
 														<input id="text-user-id" type="hidden" name="idUser"></p>
 												</div>
 											</div>
@@ -161,6 +167,7 @@
 														readonly="readonly">
 												</div>
 											</div>
+											
 											<div class="ln_solid"></div>
 											<div class="form-group">
 												<div class="col-md-6 col-md-offset-3">
@@ -176,7 +183,7 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<div class="modal fade update-vaccination-record-modal"
 						tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog">

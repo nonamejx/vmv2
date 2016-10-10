@@ -1,3 +1,4 @@
+<%@page import="model.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -23,9 +24,9 @@
 	<link href="<%=request.getContextPath() %>/resources/production/css/icheck/flat/green.css" rel="stylesheet">
 	
 	<link href="<%=request.getContextPath() %>/resources/css/custom.css" rel="stylesheet">
-	
-	<script src="<%=request.getContextPath() %>/resources/production/js/jquery.min.js"></script>
-	<link href="<%=request.getContextPath() %>/resources/production/css/autocomplete/jquery-ui.css" rel="stylesheet"></script>
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.css" >
+	<script src="<%=request.getContextPath() %>/resources/production/js/jquery.min.js" type='text/javascript'></script>
+	<script  src="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.js" type='text/javascript'></script>
 	
 </head>
 <body class="nav-md">
@@ -52,7 +53,17 @@
 						</div>
 						<div class="profile_info">
 							<span>Chào,</span>
-							<h2>admin</h2>
+							<% 
+								HttpSession sess = request.getSession();
+								User userLogin=(User)sess.getAttribute("userLogin");
+								if(userLogin!=null){
+							%>
+								<h2>Admin <%=userLogin.getFullName()%></h2>
+								<input type="text" hidden="true" name="userId">
+							<%
+								}
+							%>
+							
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -96,7 +107,7 @@
 									</a>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="#">Thông tin cá nhân</a></li>
-										<li><a href="#">Đăng xuất</a></li>
+										<li><a href="<%=request.getContextPath()%>/LogoutServlet">Đăng xuất</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -143,7 +154,7 @@
 								<li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Thông tin cá nhân</a></li>
 								<li><a href="javascript:;"><i class="fa fa-cog pull-right"></i> <span>Cài đặt</span> </a></li>
 								<li><a href="javascript:;"><i class="fa fa-question-circle pull-right"></i>Trợ giúp</a></li>
-								<li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
+								<li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 							</ul></li>
 
 
@@ -191,7 +202,7 @@
 	  <script src="<%=request.getContextPath() %>/resources/production/js/pace/pace.min.js"></script>
 	  
 	  <!-- autocomplete -->
-	  <script src="<%=request.getContextPath() %>/resources/production/js/autocomplete/jquery-ui.js"></script>
+	  
 	  
 	  <!-- javascript source -->
 	  <tiles:insertAttribute name="javascript-source"></tiles:insertAttribute>
