@@ -42,4 +42,8 @@ public class VaccinationRecordBO {
 	public int deleteVaccinationRecord(int userId, int vaccineId, int dose) {
 		return dao.deleteVaccinationRecord(userId, vaccineId, dose);
 	}
+	
+	public int getCurrentDose(int userId, int vaccineId) {
+		return dao.getCurrentDose(userId, vaccineId);
+	}
 }

@@ -223,5 +223,29 @@ public class VaccinationRecordDAO {
 
 		return vaccinationRecordsHolder;
 	}
+	
+	public int getCurrentDose(int userId, int vaccineId) {
+		int result = 0;
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getCurrentDose(?,?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1, userId);
+			cstmt.setInt(2, vaccineId);
+			rs = cstmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+
+		return result;
+	}
 
 }
