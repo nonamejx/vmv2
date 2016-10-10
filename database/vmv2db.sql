@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 09, 2016 at 09:35 AM
+-- Generation Time: Oct 10, 2016 at 03:31 PM
 -- Server version: 5.7.15-0ubuntu0.16.04.1
 -- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
 
@@ -86,6 +86,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getAllVaccines` ()  BEGIN
 	SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getCurrentDose` (IN `p_user_id` INT, IN `p_vaccine_id` INT)  BEGIN
+SELECT `dose` FROM vaccination_record WHERE `user_id`=p_user_id and `vaccine_id`=p_vaccine_id order by `dose` desc limit 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getDiseaseById` (IN `p_disease_id` INT)  BEGIN
@@ -344,7 +348,7 @@ ALTER TABLE `vaccine_disease`
 -- AUTO_INCREMENT for table `disease`
 --
 ALTER TABLE `disease`
-  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `disease_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `news`
 --
