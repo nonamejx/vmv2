@@ -24,17 +24,26 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
+					<p class="msg msg-success">Thao tác thành công!</p>
+					<p class="msg msg-fail">Thao tác thất bại!</p>		
 					<div class="x_content">
-						<form id="form-update-profile" class="form-horizontal form-label-left" method="post" style="">
+						<form id="form-update-profile" class="form-horizontal form-label-left" method="post" >
 							<div class="image-view">
 								<img alt="" src="<%=request.getContextPath() %>/resources/images/avatar-default.jpg">
 		                        <input class="form-control" data-validate-length-range="6" name="image" type="file">
+		                         <input type="text" hidden="true" name="nameImage">
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name"></label>
-								<div class="col-md-6 col-sm-6 col-xs-12" style="font-size: 14px; font-weight: 500" >
-									ID: 10210
+									for="name"><span class="required"></span></label>
+								<div id="idPro" class="col-md-6 col-sm-6 col-xs-12">
+									
+								</div>
+							</div>
+							<div class="item form-group">
+								
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input hidden="true" name="idProfile" type="text" />
 								</div>
 							</div>
 							<div class="item form-group">
@@ -95,7 +104,7 @@
 	                    	</div>
 	                    	<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button type="submit" class="btn btn-success">Cập nhật</button>
+									<button id="profile" type="submit" class="btn btn-success">Cập nhật</button>
 								</div>
 							</div>
 						</form>
@@ -133,7 +142,7 @@
 												<div class="ln_solid"></div>
 												<div class="form-group">
 													<div class="col-md-6 col-md-offset-3">
-														<button type="submit" class="btn btn-success">Cập nhật</button>
+														<button id="submit" type="submit" class="btn btn-success">Cập nhật</button>
 													</div>
 												</div>
 											</form>
@@ -166,60 +175,11 @@
         	        showDropdowns: true,
         	        format: 'DD/MM/YYYY'
         	    });
-        		$("#form-update-profile").validate({
-       				rules: {
-       						name: {
-       							required: true,
-       						},
-       						dateOfBirth: {
-       							required: true
-       						},
-       						phoneNumber: {
-       							required: true,
-       							number: true
-       						},
-       						address: {
-       							required: true
-       						},
-       						username: {
-       							required: true,
-       							maxlength: 50,
-       							minlength: 6,
-       							notSpecialRegex: true
-       						}
-       					},
-       					messages: {
-       						
-       					},
-       					submitHandler: function(form) {
-       						form.submit();
-       		        	}		
-        			});
-        		$("#form-update-password").validate({
-       				rules: {
-       					password: {
-							required: true,
-							maxlength: 50,
-							minlength: 6
-						},
-						passwordf: {
-							required: true,
-							maxlength: 50,
-							minlength: 6,
-							equalTo: "#password"
-       					}
-					},
-   					messages: {
-   						
-   					},
-      					submitHandler: function(form) {
-      						form.submit();
-      		        	}		
-       			});
+        		
         	});
         </script>
         
-        <script src="<%=request.getContextPath() %>/user/js/home.js"></script>
+        <script src="<%=request.getContextPath() %>/user/js/profile.js"></script>
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>

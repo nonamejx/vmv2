@@ -27,64 +27,15 @@
 					<h4><i class="fa fa-eraser"></i> Vắc xin</h4>
 					<br>
 					<form id="search-vaccine" action="">
-						<input class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
-						<button type="submit" class="btn btn-success">Tiềm kiếm</button>
+						<label>Tìm kiếm : </label>
+						<input id="search" class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
 					</form><br>
 					<div class="row list-vaccines">
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="part">
-								<div class="part-image "></div>
-								<div class="part-detail">
-									<p style="font-size: 16px"><b>Axit clohydric</b></p>
-									<p>Phòng bệnh ung thư da, Phòng bệnh ung thư da, Phòng bệnh ung thư da</p>
-									<a><i>Chi tiết >></i></a>
-								</div>
-							</div>
-						</div>
+						
 					</div>
-					<hr>
+					<br>
 					<div class="pagging">
-						<ul>
+						<ul class="pagination">
 							<li><a class="not-active">Trước</a></li>
 							<li><a class="active">1</a></li>
 							<li><a>2</a></li>
@@ -108,7 +59,7 @@
         	$(".vaccine-item").addClass("current-page");
         </script>
         
-        <script src="<%=request.getContextPath() %>/user/js/home.js"></script>
+        <script src="<%=request.getContextPath() %>/user/js/vaccine.js"></script>
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>

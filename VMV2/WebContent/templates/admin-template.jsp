@@ -1,3 +1,4 @@
+<%@page import="model.bean.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -52,7 +53,17 @@
 						</div>
 						<div class="profile_info">
 							<span>Chào,</span>
-							<h2>admin</h2>
+							<% 
+								HttpSession sess = request.getSession();
+								User userLogin=(User)sess.getAttribute("userLogin");
+								if(userLogin!=null){
+							%>
+								<h2>Admin <%=userLogin.getFullName()%></h2>
+								<input type="text" hidden="true" name="userId">
+							<%
+								}
+							%>
+							
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -96,7 +107,7 @@
 									</a>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="#">Thông tin cá nhân</a></li>
-										<li><a href="#">Đăng xuất</a></li>
+										<li><a href="<%=request.getContextPath()%>/LogoutServlet">Đăng xuất</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -143,7 +154,7 @@
 								<li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Thông tin cá nhân</a></li>
 								<li><a href="javascript:;"><i class="fa fa-cog pull-right"></i> <span>Cài đặt</span> </a></li>
 								<li><a href="javascript:;"><i class="fa fa-question-circle pull-right"></i>Trợ giúp</a></li>
-								<li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
+								<li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 							</ul></li>
 
 
