@@ -38,11 +38,18 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>10/10/2016</td>
-										<td>Axit clohydric</td>
 										<td>1</td>
-										<td>20/11/2016</td>
+										<td>2</td>
+										<td>3</td>
+										<td>4</td>
 									</tr>
+									<tr>
+										<td>1</td>
+										<td>2</td>
+										<td>2</td>
+										<td>3</td>
+									</tr>
+									
 								</tbody>
 							</table>
 					</div>
@@ -72,7 +79,8 @@
         <!-- datepicker -->
 		<script src="<%=request.getContextPath() %>/resources/production/js/datepicker/moment.min.js"></script>
        <script src="<%=request.getContextPath() %>/resources/production/js/datepicker/daterangepicker.js"></script>
-            
+        
+        <!--  vaccination history js -->
         <script>
         var handleDataTableButtons = function() {
             "use strict";
@@ -109,9 +117,22 @@
         <!-- variable -->
         <script>
         	var contextPath = "<%=request.getContextPath() %>";
+        	var vaccinationRecordDatatable;
         	$(".vaccination-history-item").addClass("current-page");
         	TableManageButtons.init();
-            $('#datatable').dataTable({
+        	vaccinationRecordDatatable = $('#datatable').dataTable({
+        		ajax: {
+            		"type"   : "POST",
+            		"url": contextPath + "/ListVaccinationHistoryServlet",
+            		"dataSrc": ""
+            	},
+            	"columns": [
+            	              { "data": "injectionDate" },
+            	              { "data": "vaccineName" },
+            	              { "data": "dose" },
+            	              { "data": "nextDoseDate" },
+            	            ],
+                "order": [[ 2, "desc" ]],
             	responsive : true,
         		language : {
         			"sProcessing" : "Đang xử lý...",
@@ -153,6 +174,7 @@
 	        return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
 	    }, "Vui lòng không nhập ký tự đặc biệt.");
 		</script>
+		
 		<!-- /form validation -->	
 	</tiles:putAttribute>
 

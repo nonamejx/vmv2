@@ -276,5 +276,35 @@ public class VaccinationRecordDAO {
 
 		return vaccinationRecordHolder;
 	}
+
+	public ArrayList<VaccinationRecordHolder> getVaccinationRecordHoldersByUser(
+			int userId) {
+		vaccinationRecordsHolders = new ArrayList<>();
+
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getVaccinationRecordHoldersByUser(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1,userId);
+			rs = cstmt.executeQuery();
+
+			while (rs.next()) {
+				VaccinationRecordHolder vaccinationRecordHolder = new VaccinationRecordHolder();
+				vaccinationRecordHolder.setVaccineName(rs.getString(1));
+				vaccinationRecordHolder.setDose(rs.getInt(2));
+				vaccinationRecordHolder.setInjectionDate(rs.getDate(3));
+				vaccinationRecordHolder.setNextDoseDate(rs.getDate(4));
+				vaccinationRecordsHolders.add(vaccinationRecordHolder);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+
+		return vaccinationRecordsHolders;
+	}
 	
 }

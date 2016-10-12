@@ -50,4 +50,9 @@ public class VaccinationRecordBO {
 			int idVaccine, int dose) {
 		return dao.getVaccinationRecordHolderById(idUser,idVaccine,dose);
 	}
+
+	public ArrayList<VaccinationRecordHolder> getVaccinationRecordHoldersByUser(
+			int userId) {
+		return dao.getVaccinationRecordHoldersByUser(userId);
+	}
 }

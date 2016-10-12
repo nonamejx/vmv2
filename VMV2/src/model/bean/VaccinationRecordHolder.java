@@ -88,6 +88,10 @@ public class VaccinationRecordHolder {
 		this.nextDoseDate = nextDoseDate;
 	}
 
+	public VaccinationRecordHolder() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "VaccinationRecordHolder [userId=" + userId + ", vaccineId="
