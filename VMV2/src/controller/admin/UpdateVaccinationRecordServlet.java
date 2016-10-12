@@ -71,14 +71,10 @@ public class UpdateVaccinationRecordServlet extends HttpServlet {
 		}
 
 		// get injection Date in database
-		System.out
-				.println(userId + " " + vaccineId + " " + dose + " id holder");
 
 		VaccinationRecord vaccinationRecords = vaccinationRecordBO
 				.getVaccinationRecord(userId, vaccineId, dose);
 
-		System.out.println("next " + nextDoseDate);
-		System.out.println("current " + vaccinationRecords.getInjectionDate());
 		// Validate
 		boolean hasError = false;
 		if (userId <= 0) {
@@ -91,7 +87,6 @@ public class UpdateVaccinationRecordServlet extends HttpServlet {
 			hasError = true;
 		}
 		if (nextDoseDate.compareTo(vaccinationRecords.getInjectionDate()) < 0) {
-			System.out.println("fail here");
 			hasError = true;
 		}
 
