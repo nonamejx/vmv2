@@ -55,7 +55,7 @@
 						<div class="profile_info">
 							<span>Chào,</span>
 							<% 
-							User userLogin=(User)MyUtils.getInstance(request, response).getSessionLogin("userLogin");
+							User userLogin=(User)MyUtils.getInstance(request).getSessionLogin();
 								if(userLogin!=null){
 							%>
 								<h2>Admin <%=userLogin.getFullName()%></h2>

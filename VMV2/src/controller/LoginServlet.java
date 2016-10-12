@@ -46,58 +46,47 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String submit = request.getParameter("login");
 		UserBO userBO = new UserBO();
-		String keywordSession = "userLogin";
-		String keywordCookie = "idUserLogin";
 		if (submit != null) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String rememberMe = request.getParameter("rememberMe");
-			System.out.println(username+" "+password+" "+rememberMe);
 			User userLogin = userBO.getUserByUsernamePassword(username, password);
 			if (userLogin != null) {
+				// checked remember
 				if ("on".equals(rememberMe)) {
-					// Tạo cookie
-					String idStr = MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
-					if (!"".equals(idStr)){
-						if(!idStr.equals(String.valueOf(userLogin.getUserId()))){
-							if (MyUtils.getInstance(request, response).deleteCookieRemember(keywordCookie)> 0) {
-								MyUtils.getInstance(request, response).setValueCookieRemember(userLogin.getUserId(),
-										keywordCookie);
-							}
+					if (MyUtils.getInstance(request).isRememberMeOn()) {
+						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+						if (!idStr.equals(String.valueOf(userLogin.getUserId()))) {
+							MyUtils.getInstance(request).editCookieRemember(userLogin.getUserId(), response);
 						}
-					}else{
-						MyUtils.getInstance(request, response).setValueCookieRemember(userLogin.getUserId(),
-								keywordCookie);
-					} 
-					
-				} else if(rememberMe==null) {
-					String idStr=MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
-					if(idStr!=null){
-						if(idStr.equals(String.valueOf(userLogin.getUserId()))){
-							// Xóa cookie
-							if (MyUtils.getInstance(request, response).deleteCookieRemember(keywordCookie) <= 0) {
-								response.sendRedirect("user/login.jsp");
-							}
+					} else {
+						MyUtils.getInstance(request).createValueCookieRemember(userLogin.getUserId(), response);
+					}
+
+				} else {
+					if (MyUtils.getInstance(request).isRememberMeOn()) {
+						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+						if (idStr.equals(String.valueOf(userLogin.getUserId()))) {
+							MyUtils.getInstance(request).deleteCookieRemember(response);
 						}
 					}
 				}
 				// Tạo session
-				MyUtils.getInstance(request, response).setSessionLogin(userLogin, keywordSession);
-				response.sendRedirect("user/home.jsp");
+				MyUtils.getInstance(request).createLoginSession(userLogin);
+				if (MyUtils.getInstance(request).isLoggedIn()) {
+					response.sendRedirect("user/home.jsp");
+				} else {
+					response.sendRedirect("user/login.jsp");
+				}
 			} else {
 				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
 			// Lấy cookie remember
-			String idStr = MyUtils.getInstance(request, response).getValueCookieRemember(keywordCookie);
-			if (!"".equals(idStr)) {
-				try {
-					User userRemember = userBO.getUserById(Integer.parseInt(idStr));
-					request.setAttribute("userRemember", userRemember);
-				} catch (NumberFormatException ex) {
-					response.sendRedirect("user/login.jsp");
-				}
+			if (MyUtils.getInstance(request).isRememberMeOn()) {
+				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
 			}
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp");
 			rd.forward(request, response);
