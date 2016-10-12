@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
+import model.bean.Vaccine;
 import model.bo.VaccinationRecordBO;
+import model.bo.VaccineBO;
 
 /**
  * Servlet implementation class GetDoseVaccineServlet
@@ -38,16 +42,43 @@ public class GetDoseVaccineServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		int dose = -1;
+
+		String userIdStr = request.getParameter("userId");
+		String vaccineIdStr = request.getParameter("vaccineId");
+
+		int userId = -1, vaccineId = -1, dose = -1, sumDose = -1;
+		String status = "success";
+
+		if (userIdStr != null) {
+			userId = Integer.parseInt(userIdStr);
+		}
+
+		if (vaccineIdStr != null) {
+			vaccineId = Integer.parseInt(vaccineIdStr);
+		}
+
 		VaccinationRecordBO vaccinationRecordBO = new VaccinationRecordBO();
-		//get dose trong db
-		
-		//get tong so mui cua loai vaccine do
-		
-		//kiem tra, neu so dose < tong so mui thi tang len 1, hoac tra ve 0
-		
-		//tra so do ve json
+		// get dose trong db
+		dose = vaccinationRecordBO.getCurrentDose(userId, vaccineId);
+
+		// get tong so mui cua loai vaccine do
+		VaccineBO vaccineBO = new VaccineBO();
+		Vaccine vaccine = vaccineBO.getVaccineById(vaccineId);
+		sumDose = vaccine.getNumberOfDoses();
+
+		// kiem tra số mũi
+		if (dose < sumDose)
+			dose += 1;
+		else
+			status = "fail";
+
+		// send data
+		JsonObject jsonObj = new JsonObject();
+		jsonObj.addProperty("dose", dose);
+		jsonObj.addProperty("status", status);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(jsonObj.toString());
 	}
 
 }

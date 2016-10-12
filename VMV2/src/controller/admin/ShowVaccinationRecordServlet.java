@@ -1,7 +1,6 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Vaccine;
-import model.bo.VaccineBO;
+import model.bean.VaccinationRecordHolder;
+import model.bo.VaccinationRecordBO;
 
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class SearchVaccineServlet
+ * Servlet implementation class ShowVaccinationRecordServlet
  */
-@WebServlet("/SearchVaccineServlet")
-public class SearchVaccineServlet extends HttpServlet {
+@WebServlet("/ShowVaccinationRecordServlet")
+public class ShowVaccinationRecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchVaccineServlet() {
+    public ShowVaccinationRecordServlet() {
         super();
     }
 
@@ -39,16 +38,23 @@ public class SearchVaccineServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/plain; charset=utf-8");
-		response.setCharacterEncoding("UTF-8");
+		VaccinationRecordBO vaccinationRecordBO = new VaccinationRecordBO();
+		String vaccinationRecordIdStr = request
+				.getParameter("vaccinationRecordId");
+		int idUser = -1, idVaccine = -1, dose = -1;
+		if (vaccinationRecordIdStr != null) {
+			String[] vaccinationRecordId = vaccinationRecordIdStr.split(";");
+			idUser = Integer.parseInt(vaccinationRecordId[0]);
+			idVaccine = Integer.parseInt(vaccinationRecordId[1]);
+			dose = Integer.parseInt(vaccinationRecordId[2]);
+		}
 
-		String keywordVaccine = request.getParameter("keywordVaccine");
-		VaccineBO vaccineBO = new VaccineBO();
-		ArrayList<Vaccine> listVaccin = vaccineBO.searchVaccine(keywordVaccine);
+		VaccinationRecordHolder vaccinationRecordHolder = vaccinationRecordBO
+				.getVaccinationRecordHolderById(idUser, idVaccine, dose);
 
-		String json = new Gson().toJson(listVaccin);
+		String json = new Gson().toJson(vaccinationRecordHolder);
 
+		System.out.println("json " + json);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);

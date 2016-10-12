@@ -2,8 +2,6 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +16,16 @@ import utils.DateUtils;
 import com.google.gson.JsonObject;
 
 /**
- * Servlet implementation class CreateVaccinationRecordServlet
+ * Servlet implementation class UpdateVaccinationRecordServlet
  */
-@WebServlet("/CreateVaccinationRecordServlet")
-public class CreateVaccinationRecordServlet extends HttpServlet {
+@WebServlet("/UpdateVaccinationRecordServlet")
+public class UpdateVaccinationRecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateVaccinationRecordServlet() {
+    public UpdateVaccinationRecordServlet() {
         super();
     }
 
@@ -72,10 +70,15 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 			nextDoseDate = DateUtils.convertToSDate(nextDoseDateStr);
 		}
 
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String injectionDateStr = dateFormat.format(new java.util.Date());
-		Date injectionDate = DateUtils.convertToSDate(injectionDateStr);
+		// get injection Date in database
+		System.out
+				.println(userId + " " + vaccineId + " " + dose + " id holder");
 
+		VaccinationRecord vaccinationRecords = vaccinationRecordBO
+				.getVaccinationRecord(userId, vaccineId, dose);
+
+		System.out.println("next " + nextDoseDate);
+		System.out.println("current " + vaccinationRecords.getInjectionDate());
 		// Validate
 		boolean hasError = false;
 		if (userId <= 0) {
@@ -87,26 +90,30 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 		if (dose <= 0) {
 			hasError = true;
 		}
-		if (nextDoseDate.compareTo(injectionDate) < 0) {
+		if (nextDoseDate.compareTo(vaccinationRecords.getInjectionDate()) < 0) {
+			System.out.println("fail here");
 			hasError = true;
 		}
 
-		// add
+		// update
 		if (!hasError) {
 			VaccinationRecord vaccinationRecord = new VaccinationRecord(userId,
-					vaccineId, dose, injectionDate, nextDoseDate);
+					vaccineId, dose, vaccinationRecords.getInjectionDate(),
+					nextDoseDate);
 			check = vaccinationRecordBO
-					.insertVaccinationRecord(vaccinationRecord);
+					.updateVaccinationRecord(vaccinationRecord);
 			if (check > 0) {
 				status = "success";
 			}
 		}
 		// send Data
+		System.out.println("update send json");
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsonObj.toString());
+
 	}
 
 }

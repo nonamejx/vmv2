@@ -42,14 +42,12 @@ public class SearchUserServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
-		
+
 		String keywordUser = request.getParameter("keywordUser");
-		System.out.println("vo day "+keywordUser);
 		UserBO userBO = new UserBO();
 		ArrayList<User> listUser = userBO.searchUser(keywordUser);
 
 		String json = new Gson().toJson(listUser);
-
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
