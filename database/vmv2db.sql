@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2016 at 06:05 AM
+-- Generation Time: Oct 12, 2016 at 06:29 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -122,6 +122,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecord` (IN `p_user_id` INT, IN `p_vaccine_id` INT, IN `p_dose` INT)  BEGIN
 SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `user_id`=p_user_id and `vaccine_id`=p_vaccine_id and `dose`=p_dose;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordHoldersByUser` (IN `p_user_id` INT)  BEGIN
+SELECT vaccine.vaccine_name, dose, injection_date, next_dose_date FROM vaccination_record INNER JOIN vaccine ON vaccination_record.vaccine_id = vaccine.vaccine_id WHERE vaccination_record.user_id = p_user_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordsByUser` (IN `p_user_id` INT)  BEGIN
@@ -256,15 +260,6 @@ CREATE TABLE `user` (
   `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User''s information table';
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
-(1, 'phương', 1, '2016-10-12', '1231231231', 'bvjdvj', 'adc', '123', b'0', NULL),
-(2, 'phú', 1, '2016-10-21', '1231231231', 'dcd', 'dcd', '123', b'0', NULL),
-(3, 'bình', 1, '2016-10-05', '1231231231', 'dcdcd', 'scsc', 'cdc', b'1', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -278,17 +273,6 @@ CREATE TABLE `vaccination_record` (
   `injection_date` date NOT NULL,
   `next_dose_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vacinnaction-record''s information';
-
---
--- Dumping data for table `vaccination_record`
---
-
-INSERT INTO `vaccination_record` (`user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date`) VALUES
-(1, 1, 1, '2016-10-05', '2016-10-10'),
-(1, 1, 2, '2016-10-10', '2016-10-14'),
-(2, 3, 1, '2016-10-10', '2016-10-15'),
-(2, 3, 2, '2016-10-11', '2016-10-24'),
-(3, 1, 1, '2016-10-12', '2016-10-21');
 
 -- --------------------------------------------------------
 
@@ -308,16 +292,6 @@ CREATE TABLE `vaccine` (
   `dosage_and_usage` text,
   `image` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vaccine''s information table';
-
---
--- Dumping data for table `vaccine`
---
-
-INSERT INTO `vaccine` (`vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES
-(1, 'pentaxin', 'cdfvv', 1232, 2, 'đcdv', 'vdvd', 'cdcdc', 'sscwdf', NULL),
-(2, 'manadi', 'đcdc', 1000, 4, 'xcđv', 'dvds', 'vdsd', 'csdc', NULL),
-(3, 'hihama', 'vdvd', 1234, 2, 'dvdv', 'dvdv', 'cscc', 'cvdvndnk', NULL),
-(4, 'banado', 'dcdcd', 1290, 3, 'cdcd', 'dcdsd', 'ccdsc', 'cscd', NULL);
 
 -- --------------------------------------------------------
 

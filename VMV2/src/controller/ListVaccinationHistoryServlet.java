@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 
+
+import model.bean.User;
 import model.bean.VaccinationRecordHolder;
 import model.bo.VaccinationRecordBO;
 
@@ -43,22 +45,22 @@ public class ListVaccinationHistoryServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(" here 1 ");
-		/*javax.servlet.http.HttpSession session = request.getSession();
+		javax.servlet.http.HttpSession session = request.getSession();
 		User userLogin = (User) session.getAttribute("userLogin");
-		
-		if (userLogin != null) {*/
+
+		if (userLogin != null) {
 			VaccinationRecordBO vaccinationRecordBO = new VaccinationRecordBO();
-			ArrayList<VaccinationRecordHolder> vaccinationRecordHolders = vaccinationRecordBO.getVaccinationRecordHoldersByUser(1);
+			ArrayList<VaccinationRecordHolder> vaccinationRecordHolders = vaccinationRecordBO
+					.getVaccinationRecordHoldersByUser(userLogin.getUserId());
 
 			String json = new Gson().toJson(vaccinationRecordHolders);
 
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(json);
-		/*} else {
+		} else {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
-		}*/
+		}
 	}
 
 }
