@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 10, 2016 at 03:31 PM
--- Server version: 5.7.15-0ubuntu0.16.04.1
--- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
+-- Host: 127.0.0.1
+-- Generation Time: Oct 12, 2016 at 06:05 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -144,6 +144,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseByVaccineId` (IN
 SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineRecordHolderById` (IN `p_idUser` INT, IN `p_idVaccine` INT, IN `p_dose` INT)  BEGIN
+SELECT vaccination_record.user_id,vaccination_record.vaccine_id,dose,injection_date,next_dose_date,vaccine.vaccine_name,user.full_name FROM vaccination_record INNER JOIN user ON vaccination_record.user_id = user.user_id INNER JOIN vaccine ON vaccination_record.vaccine_id = vaccine.vaccine_id WHERE vaccination_record.user_id = p_idUser AND vaccination_record.vaccine_id = p_idVaccine AND vaccination_record.dose = p_dose;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinesLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
 	SELECT `vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image` FROM vaccine limit p_start, p_limit;
 END$$
@@ -252,6 +256,15 @@ CREATE TABLE `user` (
   `avatar` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User''s information table';
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `full_name`, `gender`, `birthday`, `phone_number`, `address`, `username`, `password`, `role`, `avatar`) VALUES
+(1, 'phương', 1, '2016-10-12', '1231231231', 'bvjdvj', 'adc', '123', b'0', NULL),
+(2, 'phú', 1, '2016-10-21', '1231231231', 'dcd', 'dcd', '123', b'0', NULL),
+(3, 'bình', 1, '2016-10-05', '1231231231', 'dcdcd', 'scsc', 'cdc', b'1', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -265,6 +278,17 @@ CREATE TABLE `vaccination_record` (
   `injection_date` date NOT NULL,
   `next_dose_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vacinnaction-record''s information';
+
+--
+-- Dumping data for table `vaccination_record`
+--
+
+INSERT INTO `vaccination_record` (`user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date`) VALUES
+(1, 1, 1, '2016-10-05', '2016-10-10'),
+(1, 1, 2, '2016-10-10', '2016-10-14'),
+(2, 3, 1, '2016-10-10', '2016-10-15'),
+(2, 3, 2, '2016-10-11', '2016-10-24'),
+(3, 1, 1, '2016-10-12', '2016-10-21');
 
 -- --------------------------------------------------------
 
@@ -284,6 +308,16 @@ CREATE TABLE `vaccine` (
   `dosage_and_usage` text,
   `image` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Vaccine''s information table';
+
+--
+-- Dumping data for table `vaccine`
+--
+
+INSERT INTO `vaccine` (`vaccine_id`, `vaccine_name`, `manufacturer`, `price`, `number_of_doses`, `side_effects`, `indication`, `contraindication`, `dosage_and_usage`, `image`) VALUES
+(1, 'pentaxin', 'cdfvv', 1232, 2, 'đcdv', 'vdvd', 'cdcdc', 'sscwdf', NULL),
+(2, 'manadi', 'đcdc', 1000, 4, 'xcđv', 'dvds', 'vdsd', 'csdc', NULL),
+(3, 'hihama', 'vdvd', 1234, 2, 'dvdv', 'dvdv', 'cscc', 'cvdvndnk', NULL),
+(4, 'banado', 'dcdcd', 1290, 3, 'cdcd', 'dcdsd', 'ccdsc', 'cscd', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,12 +392,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
