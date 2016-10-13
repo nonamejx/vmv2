@@ -74,7 +74,6 @@ public class MyUtils {
 	}
 
 	public void deleteCookieRemember(HttpServletResponse response) {
-
 		Cookie cookie = null;
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
