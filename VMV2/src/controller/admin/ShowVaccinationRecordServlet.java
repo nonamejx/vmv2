@@ -48,13 +48,9 @@ public class ShowVaccinationRecordServlet extends HttpServlet {
 			idVaccine = Integer.parseInt(vaccinationRecordId[1]);
 			dose = Integer.parseInt(vaccinationRecordId[2]);
 		}
-
 		VaccinationRecordHolder vaccinationRecordHolder = vaccinationRecordBO
 				.getVaccinationRecordHolderById(idUser, idVaccine, dose);
-
 		String json = new Gson().toJson(vaccinationRecordHolder);
-
-		System.out.println("json " + json);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
