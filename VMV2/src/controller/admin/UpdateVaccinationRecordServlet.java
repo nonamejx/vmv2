@@ -102,13 +102,10 @@ public class UpdateVaccinationRecordServlet extends HttpServlet {
 			}
 		}
 		// send Data
-		System.out.println("update send json");
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsonObj.toString());
-
 	}
-
 }
