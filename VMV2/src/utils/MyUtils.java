@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 public class MyUtils {
 	private static MyUtils instance = null;
 	private HttpServletRequest request = null;
-	private String keywordSession = "userLogin";
-	private String keywordCookie = "userRemember";
 	private boolean isLogin = false;
 	private boolean isRememberMe = false;
 	private javax.servlet.http.HttpSession session;
 	private Cookie[] cookies = null;
 
 	public static final int TIME_REMEMBER = 60 * 60 * 24;
+	private String KEYWORD_SESSION = "userLogin";
+	private String KEYWORD_COOKIE = "userRemember";
 
 	protected MyUtils(HttpServletRequest request) {
 		this.request = request;
@@ -33,16 +33,16 @@ public class MyUtils {
 	 * Create login session
 	 */
 	public void createLoginSession(Object obj) {
-		session.setAttribute(keywordSession, obj);
+		session.setAttribute(KEYWORD_SESSION, obj);
 		this.isLogin = true;
 	}
 
 	public Object getSessionLogin() {
-		return session.getAttribute(keywordSession);
+		return session.getAttribute(KEYWORD_SESSION);
 	}
 
 	public void sessionLogout() {
-		session.removeAttribute(keywordSession);
+		session.removeAttribute(KEYWORD_SESSION);
 		this.isLogin = false;
 	}
 
@@ -51,7 +51,7 @@ public class MyUtils {
 	}
 
 	public void createValueCookieRemember(int value, HttpServletResponse response) {
-		Cookie cookie = new Cookie(keywordCookie, String.valueOf(value));
+		Cookie cookie = new Cookie(KEYWORD_COOKIE, String.valueOf(value));
 		cookie.setMaxAge(TIME_REMEMBER);
 		response.addCookie(cookie);
 		this.isRememberMe = true;
@@ -63,7 +63,7 @@ public class MyUtils {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
-				if (keywordCookie.equals(cookie.getName())) {
+				if (KEYWORD_COOKIE.equals(cookie.getName())) {
 					value = cookie.getValue();
 				}
 			}
@@ -77,7 +77,7 @@ public class MyUtils {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
-				if (keywordCookie.equals(cookie.getName())) {
+				if (KEYWORD_COOKIE.equals(cookie.getName())) {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 					this.isRememberMe = false;
@@ -91,7 +91,7 @@ public class MyUtils {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
-				if (keywordCookie.equals(cookie.getName())) {
+				if (KEYWORD_COOKIE.equals(cookie.getName())) {
 					cookie.setValue(String.valueOf(value));
 					cookie.setMaxAge(TIME_REMEMBER);
 					response.addCookie(cookie);
