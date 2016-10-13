@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.User;
 import model.bo.UserBO;
+import utils.MyUtils;
 
 /**
  * Servlet implementation class LoginServlet
@@ -50,73 +50,46 @@ public class LoginServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String rememberMe = request.getParameter("rememberMe");
-
 			User userLogin = userBO.getUserByUsernamePassword(username, password);
-
 			if (userLogin != null) {
+				// checked remember
 				if ("on".equals(rememberMe)) {
-					setRememberMe(userLogin.getUserId(), response);
+					if (MyUtils.getInstance(request).isRememberMeSelected()) {
+						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+						if (!idStr.equals(String.valueOf(userLogin.getUserId()))) {
+							MyUtils.getInstance(request).editCookieRemember(userLogin.getUserId(), response);
+						}
+					} else {
+						MyUtils.getInstance(request).createValueCookieRemember(userLogin.getUserId(), response);
+					}
+
 				} else {
-					deleteRememberMe(request, response);
+					if (MyUtils.getInstance(request).isRememberMeSelected()) {
+						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+						if (idStr.equals(String.valueOf(userLogin.getUserId()))) {
+							MyUtils.getInstance(request).deleteCookieRemember(response);
+						}
+					}
 				}
-				javax.servlet.http.HttpSession session = request.getSession();
-				session.setAttribute("userLogin", userLogin);
-				if (userLogin.getRole()) {
+				// Tạo session
+				MyUtils.getInstance(request).createLoginSession(userLogin);
+				if (MyUtils.getInstance(request).isLoggedIn()) {
 					response.sendRedirect("user/home.jsp");
+				} else {
+					response.sendRedirect("user/login.jsp");
 				}
 			} else {
 				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
-			int id = readCookies(request);
-			if (id > 0) {
-				User userRemember = userBO.getUserById(id);
-				request.setAttribute("userRemember", userRemember);
+			// Lấy cookie remember
+			if (MyUtils.getInstance(request).isRememberMeSelected()) {
+				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
+				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
 			}
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp");
 			rd.forward(request, response);
 		}
-	}
-
-	public void setRememberMe(int id, HttpServletResponse response) {
-		Cookie userRemember = new Cookie("idUserLogin", String.valueOf(id));
-		userRemember.setMaxAge(60 * 60 * 24);
-		response.addCookie(userRemember);
-	}
-
-	public int readCookies(HttpServletRequest request) {
-		int rs = 0;
-		Cookie cookie = null;
-		Cookie[] cookies = null;
-		// Get an array of Cookies associated with this domain
-		cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				cookie = cookies[i];
-				if ("idUserLogin".equals(cookie.getName())) {
-					rs = Integer.parseInt(cookie.getValue());
-				}
-			}
-		}
-		return rs;
-	}
-
-	public int deleteRememberMe(HttpServletRequest request, HttpServletResponse response) {
-		int rs = 0;
-		Cookie cookie = null;
-		Cookie[] cookies = null;
-		// Get an array of Cookies associated with this domain
-		cookies = request.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				cookie = cookies[i];
-				if ("idUserLogin".equals(cookie.getName())) {
-					cookie.setMaxAge(0);
-					response.addCookie(cookie);
-				}
-			}
-		}
-		return rs;
 	}
 }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.User;
+import utils.MyUtils;
 
 /**
  * Servlet implementation class LoginServlet
@@ -42,14 +42,10 @@ public class LogoutServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
-		javax.servlet.http.HttpSession session = request.getSession();
-		User userLogin = (User) session.getAttribute("userLogin");
-		if (userLogin != null) {
-			session.removeAttribute("userLogin");
-			response.sendRedirect(request.getContextPath() + "/LoginServlet");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		if (MyUtils.getInstance(request).isLoggedIn()) {
+			MyUtils.getInstance(request).sessionLogout();
 		}
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
 	}
 
 }
