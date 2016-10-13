@@ -17,8 +17,9 @@ public class VaccinationRecordDAO {
 	private ArrayList<VaccinationRecord> vaccinationRecords = null;
 	private VaccinationRecord vaccinationRecord = null;
 
-	private ArrayList<VaccinationRecordHolder> vaccinationRecordsHolder = null;
-
+	private ArrayList<VaccinationRecordHolder> vaccinationRecordsHolders = null;
+	private VaccinationRecordHolder vaccinationRecordHolder = null;
+	
 	public ArrayList<VaccinationRecord> getAllVaccinationRecords() {
 		vaccinationRecords = new ArrayList<>();
 
@@ -198,7 +199,7 @@ public class VaccinationRecordDAO {
 	}
 
 	public ArrayList<VaccinationRecordHolder> getAllVaccinationRecordsHolder() {
-		vaccinationRecordsHolder = new ArrayList<>();
+		vaccinationRecordsHolders = new ArrayList<>();
 
 		try {
 			con = SqlConnection.getConnection();
@@ -211,7 +212,7 @@ public class VaccinationRecordDAO {
 						rs.getInt(2), rs.getInt(1), rs.getString(6),
 						rs.getString(7), rs.getInt(3), rs.getDate(4),
 						rs.getDate(5));
-				vaccinationRecordsHolder.add(vaccinationRecordHolder);
+				vaccinationRecordsHolders.add(vaccinationRecordHolder);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -221,7 +222,7 @@ public class VaccinationRecordDAO {
 			SqlConnection.closeResultSet(rs);
 		}
 
-		return vaccinationRecordsHolder;
+		return vaccinationRecordsHolders;
 	}
 	
 	public int getCurrentDose(int userId, int vaccineId) {
@@ -248,4 +249,62 @@ public class VaccinationRecordDAO {
 		return result;
 	}
 
+	public VaccinationRecordHolder getVaccinationRecordHolderById(int idUser,
+			int idVaccine, int dose) {
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getVaccineRecordHolderById(?,?,?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1,idUser);
+			cstmt.setInt(2, idVaccine);
+			cstmt.setInt(3, dose);
+			rs = cstmt.executeQuery();
+			
+			if (rs.next()) {
+				vaccinationRecordHolder = new VaccinationRecordHolder(
+						rs.getInt(1), rs.getInt(2), rs.getString(7),
+						rs.getString(6), rs.getInt(3), rs.getDate(4),
+						rs.getDate(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+
+		return vaccinationRecordHolder;
+	}
+
+	public ArrayList<VaccinationRecordHolder> getVaccinationRecordHoldersByUser(
+			int userId) {
+		vaccinationRecordsHolders = new ArrayList<>();
+
+		try {
+			con = SqlConnection.getConnection();
+			String query = "{CALL p_getVaccinationRecordHoldersByUser(?)}";
+			cstmt = con.prepareCall(query);
+			cstmt.setInt(1,userId);
+			rs = cstmt.executeQuery();
+
+			while (rs.next()) {
+				VaccinationRecordHolder vaccinationRecordHolder = new VaccinationRecordHolder();
+				vaccinationRecordHolder.setVaccineName(rs.getString(1));
+				vaccinationRecordHolder.setDose(rs.getInt(2));
+				vaccinationRecordHolder.setInjectionDate(rs.getDate(3));
+				vaccinationRecordHolder.setNextDoseDate(rs.getDate(4));
+				vaccinationRecordsHolders.add(vaccinationRecordHolder);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			SqlConnection.closeConnection(this.con);
+			SqlConnection.closePrepareStatement(cstmt);
+			SqlConnection.closeResultSet(rs);
+		}
+
+		return vaccinationRecordsHolders;
+	}
+	
 }

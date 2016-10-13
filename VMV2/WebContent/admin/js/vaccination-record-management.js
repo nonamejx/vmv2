@@ -1,4 +1,3 @@
-
 var vaccinationrecordDatatable;
 $(document).ready(function() {
 	setMenuItemActive();
@@ -70,10 +69,10 @@ $(document).ready(function() {
 			}
 		},
 		messages : {
-
 		},
 		submitHandler : function(form) {
 			$(".loading-bar").slideDown(100);
+			addVaccinationRecord();
 		}
 	});
 
@@ -97,6 +96,7 @@ $(document).ready(function() {
 		},
 		submitHandler : function(form) {
 			$(".loading-bar").slideDown(100);
+			updateVaccinationRecord();
 		}
 	});
 
@@ -119,6 +119,69 @@ $(document).ready(function() {
 		$(".loading-bar").slideDown(100);
 		deleteVaccinationRecord($(".delete-vaccination-record-modal input[name='vaccinationRecordId']").val());
 	});
+	$("#addUser").autocomplete({
+	    source: function(request, response) {
+	        $.ajax({
+	            url: contextPath + "/SearchUserServlet",
+	            dataType: "json",
+	            type: "POST",
+	            data: {
+	                keywordUser: request.term
+	            },
+	            success: function(data){
+	            	$("#ui-id-1").css("z-index","9999"),
+	                response( $.map( data, function( item ) {
+	                    return {
+	                        label: item.fullName,
+	                        value: item.userId 
+	                    }
+	                }));
+	             }
+	             
+	        })
+	    },
+	    select: function(event, ui) {
+	        $("#addUser").val(ui.item.label);
+	        $("#addUserId").val(ui.item.value);
+	        callGetDose();
+	        return false;
+	    }
+	});
+	
+	$("#addVaccine").autocomplete({
+	    source: function(request, response) {
+	        $.ajax({
+	            url: contextPath + "/SearchVaccineServlet",
+	            dataType: "json",
+	            type: "POST",
+	            data: {
+	                keywordVaccine: request.term
+	            },
+	            success: function(data){
+	            	$("#ui-id-2").css("z-index","9999"),
+	                response( $.map( data, function( item ) {
+	                    return {
+	                        label: item.vaccineName,
+	                        value: item.vaccineId 
+	                    }
+	                }));
+	             }
+	             
+	        })
+	    },
+	    select: function(event, ui) {
+	        $("#addVaccine").val(ui.item.label);
+	        $("#addVaccineId").val(ui.item.value);
+	        
+	        callGetDose();
+	        return false;
+	    }
+	});
+	
+    $("#datatable").on("click", ".btn-update-vaccination-record", function() {
+    	var vaccinationRecordId = $(this).attr("value");
+    	getVaccinationRecordById(vaccinationRecordId);
+    });
 	// ==========================
 
 	// code here..
@@ -133,7 +196,7 @@ $(document).ready(function() {
 		}).done(function(data) {
 			if (data["status"] == "success") {
 				$(".modal").modal("hide");
-				showMsg($(".msg-success"));
+				showMsg($(".msg-show-success"));
 				vaccinationrecordDatatable.api().ajax.reload();
 			} else {
 				showMsg($(".msg-fail"));
@@ -141,6 +204,96 @@ $(document).ready(function() {
 		}).fail(function(err) {
 		});
 	}
+	function addVaccinationRecord() {
+		$.ajax({
+			url: contextPath + "/CreateVaccinationRecordServlet",
+	    	type: "POST",
+	    	data: $("#form-add-vaccination-record").serialize(),
+	    	dataType: 'json'
+		}).done(function(data) {
+			if (data["status"] == "success") {
+				$(".modal").modal("hide");
+				showMsg($(".msg-show-success"));
+				vaccinationrecordDatatable.api().ajax.reload();
+			} else {
+				showMsg($(".msg-fail"));
+			}
+		}).fail(function(err) {
+		});
+	}
+	function updateVaccinationRecord(){
+		console.log("update here");
+		$.ajax({
+			url: contextPath + "/UpdateVaccinationRecordServlet",
+	    	type: "POST",
+	    	data: $("#form-update-vaccination-record").serialize(),
+	    	dataType: 'json'
+		}).done(function(data) {
+			if (data["status"] == "success") {
+				$(".modal").modal("hide");
+				showMsg($(".msg-show-success"));
+				vaccinationrecordDatatable.api().ajax.reload();
+			} else {
+				showMsg($(".msg-fail"));
+			}
+		}).fail(function(err) {
+		});
+	}
+	function getDose(userId,vaccineId) {
+		$.ajax({
+			url: contextPath + "/GetDoseVaccineServlet",
+	    	type: "POST",
+	    	data: {
+	    		userId:userId,
+	    		vaccineId:vaccineId
+	    	},
+	    	dataType: 'json'
+		}).done(function(data) {
+			if(data["status"]=="fail"){
+				$(".modal").modal("hide");
+				showMsg($(".msg-notification"));
+			}
+			$("#NumberofDose").val(data["dose"])
+		}).fail(function(err) {
+		});
+	}
+	
+	function callGetDose(){
+		var idVaccine = $("#addVaccineId").val();
+        var idUser = $("#addUserId").val();
+        if(idUser>0 && idVaccine >0){
+        	getDose(idUser,idVaccine);
+        }
+	}
+	
+	function getVaccinationRecordById(vaccinationRecordId) {
+    	$.ajax({
+    		url: contextPath + "/ShowVaccinationRecordServlet",
+        	type: "POST",
+    	    data: {
+    	    	vaccinationRecordId: vaccinationRecordId
+    	    },
+        	dataType: 'json'
+    	}).done(function(data) {
+    		showVaccinationRecord(data);
+    	}).fail(function(err) {
+    	});
+    }
+	function showVaccinationRecord(vaccinationRecord) {
+    	$("#form-update-vaccination-record input[name='user']").val(vaccinationRecord["userName"]);
+    	$("#form-update-vaccination-record input[name='idUser']").val(vaccinationRecord["userId"]);
+    	$("#form-update-vaccination-record input[name='vaccine']").val(vaccinationRecord["vaccineName"]);
+    	$("#form-update-vaccination-record input[name='idVaccine']").val(vaccinationRecord["vaccineId"]);
+    	$("#form-update-vaccination-record input[name='dose']").val(vaccinationRecord["dose"]);
+    	$("#form-update-vaccination-record input[name='nextDoseDate']").val(convertSDate(vaccinationRecord["nextDoseDate"]));
+    }
+	
+	function convertSDate(date){
+		var date =new Date(Date.parse(date));
+		var sDate=(date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(); 
+		return sDate;
+	}
+	
 	function showMsg(msgElem) {
 		$(".msg").hide();
 		msgElem.fadeIn(1000);

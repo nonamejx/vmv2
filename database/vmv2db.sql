@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 10, 2016 at 03:31 PM
--- Server version: 5.7.15-0ubuntu0.16.04.1
--- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
+-- Host: 127.0.0.1
+-- Generation Time: Oct 12, 2016 at 06:29 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -124,6 +124,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecord` (IN `p_user
 SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `user_id`=p_user_id and `vaccine_id`=p_vaccine_id and `dose`=p_dose;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordHoldersByUser` (IN `p_user_id` INT)  BEGIN
+SELECT vaccine.vaccine_name, dose, injection_date, next_dose_date FROM vaccination_record INNER JOIN vaccine ON vaccination_record.vaccine_id = vaccine.vaccine_id WHERE vaccination_record.user_id = p_user_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinationRecordsByUser` (IN `p_user_id` INT)  BEGIN
 SELECT `user_id`, `vaccine_id`, `dose`, `injection_date`, `next_dose_date` FROM vaccination_record WHERE `user_id`=p_user_id;
 END$$
@@ -142,6 +146,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineDiseaseByVaccineId` (IN `p_vaccine_id` INT)  BEGIN
 SELECT `vaccine_id`, `disease_id`, `note` FROM vaccine_disease WHERE `vaccine_id`=p_vaccine_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccineRecordHolderById` (IN `p_idUser` INT, IN `p_idVaccine` INT, IN `p_dose` INT)  BEGIN
+SELECT vaccination_record.user_id,vaccination_record.vaccine_id,dose,injection_date,next_dose_date,vaccine.vaccine_name,user.full_name FROM vaccination_record INNER JOIN user ON vaccination_record.user_id = user.user_id INNER JOIN vaccine ON vaccination_record.vaccine_id = vaccine.vaccine_id WHERE vaccination_record.user_id = p_idUser AND vaccination_record.vaccine_id = p_idVaccine AND vaccination_record.dose = p_dose;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_getVaccinesLimit` (IN `p_start` INT(11), IN `p_limit` INT(11))  BEGIN
@@ -358,12 +366,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `vaccine`
 --
 ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

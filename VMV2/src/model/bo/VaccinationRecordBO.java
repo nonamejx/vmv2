@@ -46,4 +46,13 @@ public class VaccinationRecordBO {
 	public int getCurrentDose(int userId, int vaccineId) {
 		return dao.getCurrentDose(userId, vaccineId);
 	}
+	public VaccinationRecordHolder getVaccinationRecordHolderById(int idUser,
+			int idVaccine, int dose) {
+		return dao.getVaccinationRecordHolderById(idUser,idVaccine,dose);
+	}
+
+	public ArrayList<VaccinationRecordHolder> getVaccinationRecordHoldersByUser(
+			int userId) {
+		return dao.getVaccinationRecordHoldersByUser(userId);
+	}
 }
