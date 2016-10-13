@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			if (userLogin != null) {
 				// checked remember
 				if ("on".equals(rememberMe)) {
-					if (MyUtils.getInstance(request).isRememberMeOn()) {
+					if (MyUtils.getInstance(request).isRememberMeSelected()) {
 						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 						if (!idStr.equals(String.valueOf(userLogin.getUserId()))) {
 							MyUtils.getInstance(request).editCookieRemember(userLogin.getUserId(), response);
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 					}
 
 				} else {
-					if (MyUtils.getInstance(request).isRememberMeOn()) {
+					if (MyUtils.getInstance(request).isRememberMeSelected()) {
 						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 						if (idStr.equals(String.valueOf(userLogin.getUserId()))) {
 							MyUtils.getInstance(request).deleteCookieRemember(response);
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			// Lấy cookie remember
-			if (MyUtils.getInstance(request).isRememberMeOn()) {
+			if (MyUtils.getInstance(request).isRememberMeSelected()) {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
 			}

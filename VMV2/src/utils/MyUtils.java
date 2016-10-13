@@ -4,6 +4,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.User;
+
 public class MyUtils {
 	private static MyUtils instance = null;
 	private HttpServletRequest request = null;
@@ -12,9 +14,9 @@ public class MyUtils {
 	private javax.servlet.http.HttpSession session;
 	private Cookie[] cookies = null;
 
-	public static final int TIME_REMEMBER = 60 * 60 * 24;
-	private String KEYWORD_SESSION = "userLogin";
-	private String KEYWORD_COOKIE = "userRemember";
+	private static final int TIME_REMEMBER = 60 * 60 * 24;
+	private static final String KEYWORD_SESSION = "userLogin";
+	private static final String KEYWORD_COOKIE = "userRemember";
 
 	protected MyUtils(HttpServletRequest request) {
 		this.request = request;
@@ -32,13 +34,13 @@ public class MyUtils {
 	/**
 	 * Create login session
 	 */
-	public void createLoginSession(Object obj) {
-		session.setAttribute(KEYWORD_SESSION, obj);
+	public void createLoginSession(User user) {
+		session.setAttribute(KEYWORD_SESSION, user);
 		this.isLogin = true;
 	}
 
-	public Object getSessionLogin() {
-		return session.getAttribute(KEYWORD_SESSION);
+	public User getSessionLogin() {
+		return (User) session.getAttribute(KEYWORD_SESSION);
 	}
 
 	public void sessionLogout() {
@@ -100,7 +102,7 @@ public class MyUtils {
 		}
 	}
 
-	public boolean isRememberMeOn() {
+	public boolean isRememberMeSelected() {
 		return this.isRememberMe;
 	}
 }
