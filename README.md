@@ -2,8 +2,8 @@
 Vaccination Management Version 2
 
 # contributors
-Huynh Minh Kiet
-Ho Minh Huy
-Pham Thi Phuong
-Nguyen Tuan Anh
+Huynh Minh Kiet </br>
+Ho Minh Huy </br>
+Pham Thi Phuong </br>
+Nguyen Tuan Anh </br>
 Huynh Ba Hai
