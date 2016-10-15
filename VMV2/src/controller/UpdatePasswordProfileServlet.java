@@ -52,7 +52,6 @@ public class UpdatePasswordProfileServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String userId = request.getParameter("userId");
 		String status = "fail";
-		System.out.println(userId + "" + password);
 		if (password != null && userId != null) {
 			// Validate
 			boolean hasError = false;

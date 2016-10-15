@@ -83,7 +83,7 @@ function displayByindex(index){
 							"<div class='part-detail'>"+
         						"<p style='font-size: 16px'><b>"+dataDisplay[i]["vaccineName"]+"</b></p>"+
 								"<p>"+dataDisplay[i]["indication"]+"</p>"+
-								"<a href='vaccine-detail.jsp?idV="+dataDisplay[i]["vaccineId"]+"'><i>Chi tiết >></i></a>"+
+								"<a href='"+contextPath+"/GetVaccinesDetailUserServlet?idV="+dataDisplay[i]["vaccineId"]+"'><i>Chi tiết >></i></a>"+
 							"</div></div></div>"  ;
         $(".list-vaccines").append(code);
     }
