@@ -127,7 +127,7 @@
 														for="name">Mật khẩu mới<span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="password" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-															name="password" type="text">
+															name="password" type="password">
 													</div>
 												</div>
 												<div class="item form-group">
@@ -135,7 +135,7 @@
 														for="name">Xác nhận mật khẩu <span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-															name="passwordf" type="text">
+															name="passwordf" type="password">
 													</div>
 												</div>
 												
