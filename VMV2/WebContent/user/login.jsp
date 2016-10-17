@@ -30,10 +30,16 @@
 					User userRemember=(User)request.getAttribute("userRemember");
 					String msg=request.getParameter("msg");
 					if(msg!=null){ 
+						if("1".equals(msg)){	
 					%>
 						<p style="display:inline-block" class="msg msg-fail col-md-12 col-sm-12 col-xs-12 ">Tên đăng nhập hoặc mật khẩu chưa đúng</p>
 					<% 	
+						}else if("2".equals(msg)){
+					%>
+						<p style="display:inline-block" class="msg msg-fail col-md-12 col-sm-12 col-xs-12 ">Không thể thực hiện chức năng Remember me</p>
+					<% 		
 						}
+					}
 					%>		
 					<div class="x_content">
 						<form id="form-login" action="<%=request.getContextPath()%>/login" class="form-horizontal form-label-left" method="post" style="padding-top: 70px;padding-bottom: 100px;">
