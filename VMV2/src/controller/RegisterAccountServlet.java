@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/RegisterAccountServlet")
+@WebServlet("/register")
 public class RegisterAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class RegisterAccountServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		// kiem tra dang nhap
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/register.jsp");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/register.jsp");
 		rd.forward(request, response);
 	}
 

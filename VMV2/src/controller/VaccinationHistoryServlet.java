@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class VaccinationHistoryServlet
  */
-@WebServlet("/VaccinationHistoryServlet")
+@WebServlet("/user/vaccination-history")
 public class VaccinationHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class VaccinationHistoryServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		RequestDispatcher rd = request
-				.getRequestDispatcher("user/vaccination-history.jsp");
+				.getRequestDispatcher("/user/vaccination-history.jsp");
 		rd.forward(request, response);
 	}
 

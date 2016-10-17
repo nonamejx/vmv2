@@ -67,16 +67,16 @@
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
 								<li class="home-item">
-									<a href="<%=request.getContextPath() %>/user/home.jsp"><i class="fa fa-home"></i> Trang chủ</a>
+									<a href="<%=request.getContextPath() %>/home"><i class="fa fa-home"></i> Trang chủ</a>
 								</li>
 								<li class="vaccine-item">
-									<a href="<%=request.getContextPath() %>/user/vaccine.jsp"><i class="fa fa-eraser"></i> Vắc xin</a>
+									<a href="<%=request.getContextPath() %>/vaccine"><i class="fa fa-eraser"></i> Vắc xin</a>
 								</li>
 								<li class="login-item">
-									<a href="<%=request.getContextPath() %>/user/login.jsp"><i class="fa fa-lock"></i> Đăng nhập</a>
+									<a href="<%=request.getContextPath() %>/login"><i class="fa fa-lock"></i> Đăng nhập</a>
 								</li>
 								<li class="register-item">
-									<a href="<%=request.getContextPath() %>/user/register.jsp"><i class="fa fa-user-plus"></i> Đăng ký</a>
+									<a href="<%=request.getContextPath() %>/register"><i class="fa fa-user-plus"></i> Đăng ký</a>
 								</li>
 							</ul>
 						</div>

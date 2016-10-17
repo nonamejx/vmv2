@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.User;
+import utils.MyUtils;
+
 /**
  * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/ProfileManagementUserServlet")
+@WebServlet(urlPatterns = {"/user/profile", "/admin/profile"})
 public class ProfileManagementUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +44,10 @@ public class ProfileManagementUserServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		// kiem tra dang nhap
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/profile.jsp");
+		User user = MyUtils.getInstance(request).getSessionLogin();
+        request.setAttribute("template", (user!= null && user.getRole()) ? "admin" : "user");
+        
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/profile.jsp");
 		rd.forward(request, response);
 	}
 

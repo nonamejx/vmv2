@@ -16,7 +16,7 @@ import model.bo.DiseaseBO;
 /**
  * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/VaccineManagementServlet")
+@WebServlet("/admin/vaccine-management")
 public class VaccineManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -49,7 +49,7 @@ public class VaccineManagementServlet extends HttpServlet {
 		ArrayList<Disease> listDisease = diseaseBO.getAllDiseases();
 		request.setAttribute("listDisease", listDisease);
 		// kiem tra dang nhap
-		RequestDispatcher rd = request.getRequestDispatcher("admin/vaccine-management.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/vaccine-management.jsp");
 		rd.forward(request, response);
 
 	}

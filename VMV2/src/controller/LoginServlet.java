@@ -15,7 +15,7 @@ import utils.MyUtils;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -74,12 +74,12 @@ public class LoginServlet extends HttpServlet {
 				// Tạo session
 				MyUtils.getInstance(request).createLoginSession(userLogin);
 				if (MyUtils.getInstance(request).isLoggedIn()) {
-					response.sendRedirect("user/home.jsp");
+					response.sendRedirect("home");
 				} else {
-					response.sendRedirect("user/login.jsp");
+					response.sendRedirect("user/login");
 				}
 			} else {
-				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp?msg=1");
+				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
 			}
-			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/login.jsp");
+			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
 			rd.forward(request, response);
 		}
 	}

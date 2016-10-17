@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.News;
+import model.bean.User;
 import model.bo.NewsBO;
+import utils.MyUtils;
 
 /**
  * Servlet implementation class HomeServlet
  */
-@WebServlet("/HomeServlet")
+@WebServlet(urlPatterns = {"/home", "/user/home", "/admin/home"})
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,8 +63,17 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("newsList", newsList);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
+        
+        User user = MyUtils.getInstance(request).getSessionLogin();
+        String template = "guest";
+        if (user != null)
+        	if (user.getRole())
+        		template = "admin";
+        	else
+        		template = "user";
+        request.setAttribute("template", template);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("user/home.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/user/home.jsp");
 		rd.forward(request, response);
 	}
 

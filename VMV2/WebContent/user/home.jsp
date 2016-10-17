@@ -1,3 +1,5 @@
+<%@page import="utils.MyUtils"%>
+<%@page import="model.bean.User"%>
 <%@page import="utils.StringUtils"%>
 <%@page import="model.bean.News"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
@@ -6,7 +8,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<tiles:insertTemplate template="../templates/guest-template.jsp" >
+<tiles:insertTemplate template="../templates/${template}-template.jsp" >
 
 	<tiles:putAttribute name="content">
 		<!-- Custom styling plus plugins -->
@@ -51,7 +53,7 @@
 								<div class="part-detail">
 									<p><b><%=news.getTitle() %></b></p>
 									<p><%=StringUtils.shorten(news.getContent(), 200) + " ..." %></p>
-									<a href="<%=request.getContextPath()%>/NewsDetailServlet?id=<%=news.getNewsId()%>"><i>Đọc thêm >></i></a>
+									<a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"><i>Đọc thêm >></i></a>
 								</div>
 							</div>
 						</div>
@@ -66,7 +68,7 @@
 									<li><a class="not-active">Trước</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="<%=request.getContextPath()%>/HomeServlet?page=${currentPage - 1 }">
+									<li><a href="<%=request.getContextPath()%>/home?page=${currentPage - 1 }">
 									Trước</a></li>
 								</c:otherwise>
 							</c:choose>
@@ -76,13 +78,13 @@
 										<li><a class="active">${i}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="<%=request.getContextPath()%>/HomeServlet?page=${i }">${i }</a></li>
+										<li><a href="<%=request.getContextPath()%>/home?page=${i }">${i }</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${currentPage lt noOfPages}">
-									<li><a href="<%=request.getContextPath()%>/HomeServlet?page=${currentPage + 1 }">Tiếp</a></li>
+									<li><a href="<%=request.getContextPath()%>/home?page=${currentPage + 1 }">Tiếp</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><a class="not-active">Tiếp</a></li>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/UserManagementServlet")
+@WebServlet("/admin/user-management")
 public class UserManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class UserManagementServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		// kiem tra dang nhap
-		RequestDispatcher rd = request.getRequestDispatcher("admin/user-management.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/user-management.jsp");
 		rd.forward(request, response);
 
 	}

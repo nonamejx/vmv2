@@ -13,7 +13,7 @@ import utils.MyUtils;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LogoutServlet")
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class LogoutServlet extends HttpServlet {
 		if (MyUtils.getInstance(request).isLoggedIn()) {
 			MyUtils.getInstance(request).sessionLogout();
 		}
-		response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		response.sendRedirect(request.getContextPath() + "/login");
 	}
 
 }
