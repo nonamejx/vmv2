@@ -8,7 +8,6 @@ import model.bean.User;
 
 public class MyUtils {
 	private static MyUtils instance = null;
-	private HttpServletRequest request = null;
 	private boolean isLogin = false;
 	private boolean isRememberMe = false;
 	private javax.servlet.http.HttpSession session;
@@ -19,7 +18,6 @@ public class MyUtils {
 	private static final String KEYWORD_COOKIE = "userRemember";
 
 	protected MyUtils(HttpServletRequest request) {
-		this.request = request;
 		this.session = request.getSession();
 		this.cookies = request.getCookies();
 	}
