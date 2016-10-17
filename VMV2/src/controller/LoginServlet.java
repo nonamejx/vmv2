@@ -86,7 +86,10 @@ public class LoginServlet extends HttpServlet {
 			// Lấy cookie remember
 			if (MyUtils.getInstance(request).isRememberMeSelected()) {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
-				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
+				if (idStr != null) {
+					request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
+				}
+
 			}
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
 			rd.forward(request, response);
