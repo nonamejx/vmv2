@@ -58,7 +58,8 @@ $(document).ready(function() {
 				},
 				phoneNumber: {
 					required: true,
-					number: true
+					number: true,
+					maxlength: 11
 				},
 				address: {
 					required: true
@@ -93,7 +94,8 @@ $(document).ready(function() {
 				},
 				phoneNumber: {
 					required: true,
-					number: true
+					number: true,
+					maxlength: 11,
 				},
 				address: {
 					required: true
@@ -181,6 +183,7 @@ function addUser() {
 			showMsg($(".msg-success"));
 			userDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {
@@ -203,6 +206,7 @@ function deleteUser() {
 			showMsg($(".msg-success"));
 			userDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {
@@ -266,6 +270,7 @@ function updateUser() {
 			showMsg($(".msg-success"));
 			userDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {

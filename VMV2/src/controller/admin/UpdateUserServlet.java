@@ -173,6 +173,9 @@ public class UpdateUserServlet extends HttpServlet {
 		if (us != null && us.getUserId() != Integer.parseInt(userId)) {
 			hasError = true;
 		}
+		if (phoneNumber.length() <= 0 || phoneNumber.length() > 11) {
+			hasError = true;
+		}
 		if (!hasError) {
 			User user = new User(Integer.parseInt(userId), fullName, Integer.parseInt(gender),
 					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password, role, avatar);

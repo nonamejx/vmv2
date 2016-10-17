@@ -136,6 +136,7 @@ function addVaccine() {
 			showMsg($(".msg-success"));
 			vaccineDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {
@@ -158,6 +159,7 @@ function deleteVaccine() {
 			showMsg($(".msg-success"));
 			vaccineDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {
@@ -220,6 +222,7 @@ function updateVaccine() {
 			showMsg($(".msg-success"));
 			vaccineDatatable.api().ajax.reload();
 		} else {
+			$(".modal").modal("hide");
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {

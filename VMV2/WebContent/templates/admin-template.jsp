@@ -154,7 +154,7 @@
 								<li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Thông tin cá nhân</a></li>
 								<li><a href="javascript:;"><i class="fa fa-cog pull-right"></i> <span>Cài đặt</span> </a></li>
 								<li><a href="javascript:;"><i class="fa fa-question-circle pull-right"></i>Trợ giúp</a></li>
-								<li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
+								<li><a href="<%=request.getContextPath()%>/logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 							</ul></li>
 
 
