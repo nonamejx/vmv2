@@ -90,10 +90,10 @@ public class LoginServlet extends HttpServlet {
 					int id = Integer.parseInt(idStr);
 					request.setAttribute("userRemember", userBO.getUserById(id));
 				} catch (NumberFormatException ex) {
-					javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
-					rd.forward(request, response);
+
 				}
 			}
+
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
 			rd.forward(request, response);
 		}
