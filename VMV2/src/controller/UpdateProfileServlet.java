@@ -67,7 +67,6 @@ public class UpdateProfileServlet extends HttpServlet {
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, avatar = null,
 				oldAvatar = null, userId = null;
-		boolean role = true;
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -155,6 +154,9 @@ public class UpdateProfileServlet extends HttpServlet {
 		}
 		// Validate
 		boolean hasError = false;
+		if (phoneNumber.length() <= 0 || phoneNumber.length() > 11) {
+			hasError = true;
+		}
 		if (!hasError) {
 			if (userId != null) {
 				User user = userBO.getUserById(Integer.parseInt(userId));
@@ -165,7 +167,6 @@ public class UpdateProfileServlet extends HttpServlet {
 					user.setBirthday(DateUtils.convertToSDate(birthday));
 					user.setPhoneNumber(phoneNumber);
 					user.setAddress(address);
-					user.setRole(role);
 					if (userBO.updateUser(user) > 0) {
 						status = "success";
 					}

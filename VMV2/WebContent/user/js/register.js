@@ -14,7 +14,8 @@ $(document).ready(function() {
 					},
 					phoneNumber: {
 						required: true,
-						number: true
+						number: true,
+						maxlength: 11,
 					},
 					address: {
 						required: true

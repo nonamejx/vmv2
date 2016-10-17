@@ -86,8 +86,17 @@ public class LoginServlet extends HttpServlet {
 			// Lấy cookie remember
 			if (MyUtils.getInstance(request).isRememberMeSelected()) {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
-				request.setAttribute("userRemember", userBO.getUserById(Integer.parseInt(idStr)));
+				try {
+					int id = Integer.parseInt(idStr);
+					request.setAttribute("userRemember", userBO.getUserById(id));
+				} catch (NumberFormatException ex) {
+					javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp?msg=2");
+					rd.forward(request, response);
+					return;
+				}
+
 			}
+
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
 			rd.forward(request, response);
 		}

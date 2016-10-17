@@ -159,6 +159,9 @@ public class CreateUserServlet extends HttpServlet {
 		if (userBO.getUserByUsername(username) != null) {
 			hasError = true;
 		}
+		if (phoneNumber.length() <= 0 || phoneNumber.length() > 11) {
+			hasError = true;
+		}
 		if (!hasError) {
 			User user = new User(fullName, Integer.parseInt(gender), DateUtils.convertToSDate(birthday), phoneNumber,
 					address, username, password, role, avatar);
