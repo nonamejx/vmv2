@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.News;
+import model.bean.User;
 import model.bo.NewsBO;
+import utils.MyUtils;
 
 /**
  * Servlet implementation class NewsDetailServlet
  */
-@WebServlet("/NewsDetailServlet")
+@WebServlet(urlPatterns = {"/news-detail", "/user/news-detail", "/admin/news-detail"})
 public class NewsDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,7 +56,16 @@ public class NewsDetailServlet extends HttpServlet {
 		
 		request.setAttribute("news", news);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("user/news-detail.jsp");
+		User user = MyUtils.getInstance(request).getSessionLogin();
+		String template = "guest";
+		if (user != null)
+			if (user.getRole())
+				template = "admin";
+			else
+				template = "user";
+		request.setAttribute("template", template);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/user/news-detail.jsp");
 		rd.forward(request, response);
 	}
 

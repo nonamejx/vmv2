@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DeseasesManagementServlet
  */
-@WebServlet("/DiseasesManagementServlet")
+@WebServlet("/admin/disease-management")
 public class DiseasesManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class DiseasesManagementServlet extends HttpServlet {
 
 		// kiem tra dang nhap
 		RequestDispatcher rd = request
-				.getRequestDispatcher("admin/disease-management.jsp");
+				.getRequestDispatcher("/admin/disease-management.jsp");
 		rd.forward(request, response);
 	}
 

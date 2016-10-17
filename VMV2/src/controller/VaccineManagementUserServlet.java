@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.User;
+import utils.MyUtils;
+
 /**
  * Servlet implementation class NewsManagementServlet
  */
-@WebServlet("/VaccineManagementUserServlet")
+@WebServlet(urlPatterns = {"/vaccine", "/user/vaccine"})
 public class VaccineManagementUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,8 +43,17 @@ public class VaccineManagementUserServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
-		// kiem tra dang nhap
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/vaccine.jsp");
+		
+		User user = MyUtils.getInstance(request).getSessionLogin();
+        String template = "guest";
+        if (user != null)
+        	if (user.getRole())
+        		template = "admin";
+        	else
+        		template = "user";
+        request.setAttribute("template", template);
+		
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/vaccine.jsp");
 		rd.forward(request, response);
 	}
 

@@ -36,7 +36,7 @@
 						}
 					%>		
 					<div class="x_content">
-						<form id="form-login" action="<%=request.getContextPath()%>/LoginServlet" class="form-horizontal form-label-left" method="post" style="padding-top: 70px;padding-bottom: 100px;">
+						<form id="form-login" action="<%=request.getContextPath()%>/login" class="form-horizontal form-label-left" method="post" style="padding-top: 70px;padding-bottom: 100px;">
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">Tên đăng nhập <span class="required">*</span></label>

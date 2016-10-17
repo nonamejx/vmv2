@@ -77,19 +77,19 @@
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
 								<li class="home-item">
-									<a href="<%=request.getContextPath() %>/user/home.jsp"><i class="fa fa-home"></i> Trang chủ</a>
+									<a href="<%=request.getContextPath() %>/user/home"><i class="fa fa-home"></i> Trang chủ</a>
 								</li>
 								<li class="vaccine-item">
-									<a href="<%=request.getContextPath() %>/user/vaccine.jsp"><i class="fa fa-eraser"></i> Vắc xin</a>
+									<a href="<%=request.getContextPath() %>/user/vaccine"><i class="fa fa-eraser"></i> Vắc xin</a>
 								</li>
 								<li class="vaccination-history-item">
-									<a href="<%=request.getContextPath() %>/user/vaccination-history.jsp"><i class="fa fa-list" aria-hidden="true"></i> Lịch sử tiêm chủng</a>
+									<a href="<%=request.getContextPath() %>/user/vaccination-history"><i class="fa fa-list" aria-hidden="true"></i> Lịch sử tiêm chủng</a>
 								</li>
 								<li class="profile-item">
-									<a href="<%=request.getContextPath() %>/user/profile.jsp"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</a>
+									<a href="<%=request.getContextPath() %>/user/profile"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</a>
 								</li>
 								<li class="">
-									<a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
+									<a href="<%=request.getContextPath()%>/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
 								</li>
 							</ul>
 						</div>

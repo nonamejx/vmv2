@@ -77,23 +77,23 @@
 						<div class="menu_section">
 							<h3>&nbsp;</h3>
 							<ul class="nav side-menu">
-								<li class="">
-									<a href=""><i class="fa fa-home"></i> Trang chủ</a>
+								<li class="home-item">
+									<a href="<%=request.getContextPath() %>/admin/home"><i class="fa fa-home"></i> Trang chủ</a>
 								</li>
 								<li class="vaccination-record-management-menu-item">
-									<a href="<%=request.getContextPath() %>/admin/vaccination-record-management.jsp"><i class="fa fa-eyedropper"></i> Tiêm phòng</a>
+									<a href="<%=request.getContextPath() %>/admin/vaccination-record-management"><i class="fa fa-eyedropper"></i> Tiêm phòng</a>
 								</li>
 								<li class="user-management-menu-item">
-									<a href="<%=request.getContextPath() %>/admin/user-management.jsp"><i class="fa fa-male"></i> Khách tiêm</a>
+									<a href="<%=request.getContextPath() %>/admin/user-management"><i class="fa fa-male"></i> Khách tiêm</a>
 								</li>
 								<li class="vaccine-management-menu-item">
-									<a href="<%=request.getContextPath() %>/admin/vaccine-management.jsp"><i class="fa fa-eraser"></i> Vắc xin</a>
+									<a href="<%=request.getContextPath() %>/admin/vaccine-management"><i class="fa fa-eraser"></i> Vắc xin</a>
 								</li>
 								<li class="disease-management-menu-item">
-									<a href="<%=request.getContextPath() %>/admin/disease-management.jsp"><i class="fa fa-heartbeat"></i> Bệnh</a>
+									<a href="<%=request.getContextPath() %>/admin/disease-management"><i class="fa fa-heartbeat"></i> Bệnh</a>
 								</li>
 								<li class="news-management-menu-item">
-									<a href="<%=request.getContextPath() %>/admin/news-management.jsp"><i class="fa fa-newspaper-o"></i> Tin tức</a>
+									<a href="<%=request.getContextPath() %>/admin/news-management"><i class="fa fa-newspaper-o"></i> Tin tức</a>
 								</li>
 							</ul>
 						</div>
@@ -106,8 +106,8 @@
 										<span class="fa fa-chevron-down"></span>
 									</a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="#">Thông tin cá nhân</a></li>
-										<li><a href="<%=request.getContextPath()%>/LogoutServlet">Đăng xuất</a></li>
+										<li><a href="<%=request.getContextPath()%>/admin/profile">Thông tin cá nhân</a></li>
+										<li><a href="<%=request.getContextPath()%>/logout">Đăng xuất</a></li>
 									</ul>
 								</li>
 							</ul>
