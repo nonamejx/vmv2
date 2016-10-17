@@ -17,7 +17,7 @@ import utils.MyUtils;
 /**
  * Servlet Filter implementation class UserFilter
  */
-@WebFilter("/UserFilter")
+@WebFilter("/AdminFilter")
 public class AdminFilter implements Filter {
 
     /**
