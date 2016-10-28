@@ -58,6 +58,7 @@ $(document).ready(function() {
 		submitHandler: function(form) {
 			$(".loading-bar").slideDown(100);
 			addDisease();
+			$("#form-add-disease")[0].reset();
     	}		
 	});
     
@@ -103,23 +104,6 @@ $(document).ready(function() {
     
     //code here...
     
-    function addDisease() {
-    	$.ajax({
-    		url: contextPath + "/CreateDiseaseServlet",
-        	type: "POST",
-    	    data: $("#form-add-disease").serialize(),
-        	dataType: 'json'
-    	}).done(function(data) {
-    		if (data["status"] == "success") {
-    			$(".modal").modal("hide");
-    			showMsg($(".msg-success"));
-    			deseasesDatatable.api().ajax.reload();
-    		} else {
-    			showMsg($(".msg-fail"));
-    		}
-    	}).fail(function(err) {
-    	});
-    }
     
     function deleteDiseases(diseaseId) {
     	$.ajax({
@@ -135,6 +119,7 @@ $(document).ready(function() {
     			showMsg($(".msg-success"));
     			deseasesDatatable.api().ajax.reload();
     		} else {
+    			$(".modal").modal("hide")
     			showMsg($(".msg-fail"));
     		}
     	}).fail(function(err) {
@@ -173,6 +158,7 @@ $(document).ready(function() {
     			showMsg($(".msg-success"));
     			deseasesDatatable.api().ajax.reload();
     		} else {
+    			$(".modal").modal("hide")
     			showMsg($(".msg-fail"));
     		}
     	}).fail(function(err) {
@@ -191,6 +177,7 @@ $(document).ready(function() {
     			showMsg($(".msg-success"));
     			deseasesDatatable.api().ajax.reload();
     		} else {
+    			$(".modal").modal("hide")
     			showMsg($(".msg-fail"));
     		}
     	}).fail(function(err) {

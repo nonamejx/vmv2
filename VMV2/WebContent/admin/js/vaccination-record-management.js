@@ -73,6 +73,7 @@ $(document).ready(function() {
 		submitHandler : function(form) {
 			$(".loading-bar").slideDown(100);
 			addVaccinationRecord();
+			$("#form-add-vaccination-record")[0].reset();
 		}
 	});
 
@@ -199,6 +200,7 @@ $(document).ready(function() {
 				showMsg($(".msg-show-success"));
 				vaccinationrecordDatatable.api().ajax.reload();
 			} else {
+				$(".modal").modal("hide");
 				showMsg($(".msg-fail"));
 			}
 		}).fail(function(err) {
@@ -216,6 +218,7 @@ $(document).ready(function() {
 				showMsg($(".msg-show-success"));
 				vaccinationrecordDatatable.api().ajax.reload();
 			} else {
+				$(".modal").modal("hide");
 				showMsg($(".msg-fail"));
 			}
 		}).fail(function(err) {
@@ -234,6 +237,7 @@ $(document).ready(function() {
 				showMsg($(".msg-show-success"));
 				vaccinationrecordDatatable.api().ajax.reload();
 			} else {
+				$(".modal").modal("hide");
 				showMsg($(".msg-fail"));
 			}
 		}).fail(function(err) {
