@@ -64,20 +64,14 @@
 									<tr>
 										<th>#Mã</th>
 										<th>Tên</th>
+										<th>Giá</th>
+										<th>Số mũi tiêm</th>
 										<th>Chỉ định</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Axit clohydric</td>
-										<td>Phòng bệnh ung thư da</td>
-										<td><a class="btn btn-primary btn-xs" data-toggle="modal"
-											data-target=".update-vaccine-modal">Xem</a> <a
-											class="btn btn-danger btn-xs" data-toggle="modal"
-											data-target=".bs-example-modal-sm">Xóa</a></td>
-									</tr>
+									
 								</tbody>
 							</table>
 						</form>
@@ -174,7 +168,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chỉ định </label>
+													for="textarea">Chỉ định <span class="required">*</span> </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="indication"
 														class="form-control col-md-7 col-xs-12"></textarea>
@@ -182,7 +176,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Chống Chỉ định </label>
+													for="textarea">Chống Chỉ định <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="contraindication"
 														class="form-control col-md-7 col-xs-12"></textarea>
@@ -190,7 +184,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Tác dụng phụ </label>
+													for="textarea">Tác dụng phụ <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="sideEffects"
 														class="form-control col-md-7 col-xs-12"></textarea>
@@ -198,7 +192,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Liều lượng và cách sử dụng</label>
+													for="textarea">Liều lượng và cách sử dụng <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="dosageAndUsage"
 														class="form-control col-md-7 col-xs-12"></textarea>
@@ -206,9 +200,9 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="textarea">Phòng bệnh </label>
+													for="textarea">Phòng bệnh <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select id="select-disease" name="disease" multiple="multiple" class="form-control">
+													<select id="select-disease" name="disease" multiple="multiple" class="form-control" required="required">
 											            <%
 											            	if(listDiseases!=null){
 											            		for(Disease disease:listDiseases){
@@ -226,7 +220,7 @@
 													for="textarea">Hình ảnh </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input id="ten" class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="image" type="file">
+														data-validate-length-range="6" name="image" type="file" accept="image/*">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -266,7 +260,7 @@
 												<img alt=""
 													src="<%=request.getContextPath()%>/resources/images/vaccine-default.jpg">
 												<input class="form-control" data-validate-length-range="6"
-													name="image" type="file">
+													name="image" type="file" accept="image/*">
 												 <input type="text" hidden="true" name="nameImage">
 						                         <input type="text" hidden="true" name="vaccineId">	
 											</div>

@@ -116,7 +116,7 @@
         	});
         </script>
         
-        <script src="<%=request.getContextPath() %>/user/js/home.js"></script>
+      
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>

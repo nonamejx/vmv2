@@ -2,8 +2,13 @@ var userDatatable;
 var listUserName=$("#datatable tr td:nth-child(4)");
 var checksubmit=true;
 $(document).ready(function() {
+	$(".register-item").addClass("current-page");
+	$('input[name="dateOfBirth"]').daterangepicker({
+    	singleDatePicker: true,
+        showDropdowns: true,
+        format: 'DD/MM/YYYY'
+    });
 	setMenuItemActive();
-	
 	 $("#form-register").validate({
 			rules: {
 					name: {
@@ -82,6 +87,7 @@ function addUser() {
 			showMsg($(".msg-fail"));
 		}
 	}).fail(function(err) {
+		
 	});
 }
 /*addUser*/

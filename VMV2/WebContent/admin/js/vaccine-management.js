@@ -11,6 +11,8 @@ $(document).ready(function() {
     	"columns": [
     	              { "data": "vaccineId" },
     	              { "data": "vaccineName" },
+    	              { "data": "price" },
+    	              { "data": "numberOfDoses" },
     	              { "data": "indication"},
     	              null
     	            ],
@@ -55,7 +57,22 @@ $(document).ready(function() {
 			numberOfDoses: {
 				required: true,
 				number: true
-			}
+			},
+			indication: {
+				required: true,
+			},
+			contraindication: {
+				required: true,
+			},
+			sideEffects: {
+				required: true,
+			},
+			dosageAndUsage: {
+				required: true,
+			},
+			disease: {
+				required: true,
+			},
 		},
 		messages: {
 		},
@@ -78,13 +95,29 @@ $(document).ready(function() {
 			numberOfDoses: {
 				required: true,
 				number: true
-			}
+			},
+			indication: {
+				required: true,
+			},
+			contraindication: {
+				required: true,
+			},
+			sideEffects: {
+				required: true,
+			},
+			dosageAndUsage: {
+				required: true,
+			},
+			disease: {
+				required: true,
+			},
 		},
 		messages: {
 		},
 		submitHandler: function(form) {
 			$(".loading-bar").slideDown(100);
 			updateVaccine();
+			$("#form-update-vaccine")[0].reset();
 		}		
 	});
     
@@ -92,6 +125,8 @@ $(document).ready(function() {
     	$(".loading-bar").hide();
     });
     $(".btn-cancel").click(function() {
+    	$("#form-update-vaccine")[0].reset();
+    	$("#form-add-vaccine")[0].reset();
     	$(".modal").modal("hide");
     });
     $(".btn-delete-vaccine").click(function() {

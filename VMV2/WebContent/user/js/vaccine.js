@@ -47,13 +47,13 @@ function showAllVaccine(listVaccine) {
 }
 
 function displayVaccine(index){
-    if(index.indexOf('Prev')>-1){
+    if(index.indexOf('Trước')>-1){
         currentPage--;
         if(currentPage>=1){
             displayByindex(currentPage);    
         }
        
-    }else if(index.indexOf('Next')>-1){
+    }else if(index.indexOf('Tiếp')>-1){
         currentPage++;
         if(currentPage<=numberPage){
             displayByindex(currentPage);    
@@ -114,14 +114,14 @@ function createPage(){
     currentPage=1;
     $(".pagination").empty(); 
     numberPage=Math.ceil(lenV/quantum);
-    var code="<li><a href='javascript:void(0)' id='prev'>&#10094; Prev</a></li>"
+    var code="<li><a href='javascript:void(0)' id='prev'>&#10094; Trước</a></li>"
                        +" <li><a class='current' href='javascript:void(0)'>1</a></li> ";
     if(numberPage>1){
         for(i=2;i<=numberPage;i++){
             code +="<li><a  href='javascript:void(0)'>"+i+"</a></li>";
         }
     }  
-    code+="<li><a id='next' href='javascript:void(0)'>Next &#10095;</a></li>";
+    code+="<li><a id='next' href='javascript:void(0)'>Tiếp &#10095;</a></li>";
     $(".pagination").append(code);
 }
 

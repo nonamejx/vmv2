@@ -20,13 +20,24 @@ public class MyUtils {
 	protected MyUtils(HttpServletRequest request) {
 		this.session = request.getSession();
 		this.cookies = request.getCookies();
+		isLogin();
+		setRememberMe();
 	}
 
 	public static MyUtils getInstance(HttpServletRequest request) {
 		if (instance == null) {
 			instance = new MyUtils(request);
 		}
+
 		return instance;
+	}
+
+	public boolean isLogin() {
+		return isLogin;
+	}
+
+	public boolean isRememberMe() {
+		return this.isRememberMe;
 	}
 
 	/**
@@ -44,10 +55,6 @@ public class MyUtils {
 	public void sessionLogout() {
 		session.removeAttribute(KEYWORD_SESSION);
 		this.isLogin = false;
-	}
-
-	public boolean isLoggedIn() {
-		return this.isLogin;
 	}
 
 	public void createValueCookieRemember(int value, HttpServletResponse response) {
@@ -76,13 +83,14 @@ public class MyUtils {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
-				if (KEYWORD_COOKIE.equals(cookie.getName())) {
+				if ((cookie.getName()).compareTo(KEYWORD_COOKIE) == 0) {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
-					this.isRememberMe = false;
+
 				}
 			}
 		}
+		this.isRememberMe = false;
 	}
 
 	public void editCookieRemember(int value, HttpServletResponse response) {
@@ -97,9 +105,29 @@ public class MyUtils {
 				}
 			}
 		}
+		this.isRememberMe = true;
 	}
 
-	public boolean isRememberMeSelected() {
-		return this.isRememberMe;
+	public void setRememberMe() {
+		this.isRememberMe = false;
+		Cookie cookie = null;
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				cookie = cookies[i];
+				if (KEYWORD_COOKIE.equals(cookie.getName())) {
+					this.isRememberMe = true;
+				}
+
+			}
+		}
 	}
+
+	public void setLogin() {
+		if (getSessionLogin() != null) {
+			this.isLogin = true;
+		} else {
+			this.isLogin = false;
+		}
+	}
+
 }

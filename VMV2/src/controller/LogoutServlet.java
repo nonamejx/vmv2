@@ -42,7 +42,7 @@ public class LogoutServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
-		if (MyUtils.getInstance(request).isLoggedIn()) {
+		if (MyUtils.getInstance(request).isLogin()) {
 			MyUtils.getInstance(request).sessionLogout();
 		}
 		response.sendRedirect(request.getContextPath() + "/login");

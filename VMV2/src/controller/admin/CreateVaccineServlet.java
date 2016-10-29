@@ -102,20 +102,22 @@ public class CreateVaccineServlet extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
-					String fileName = item.getName();
-					String endFileName = FilenameUtils.getExtension(fileName);
-					fileName = "Vaccine-" + System.nanoTime() + "." + endFileName;
-					item.setFieldName(fileName);
-					String root = getServletContext().getRealPath("/");
-					File path = new File(root + "/uploads");
-					if (!path.exists()) {
-						path.mkdirs();
+					if (item.getSize() > 0) {
+						String fileName = item.getName();
+						String endFileName = FilenameUtils.getExtension(fileName);
+						fileName = "Vaccine-" + System.nanoTime() + "." + endFileName;
+						item.setFieldName(fileName);
+						String root = getServletContext().getRealPath("/");
+						File path = new File(root + "/uploads");
+						if (!path.exists()) {
+							path.mkdirs();
 
-					}
-					if (!fileName.equals("")) {
-						File uploadedFile = new File(path + "/" + fileName);
-						item.write(uploadedFile);
-						image = fileName;
+						}
+						if (!fileName.equals("")) {
+							File uploadedFile = new File(path + "/" + fileName);
+							item.write(uploadedFile);
+							image = fileName;
+						}
 					}
 				} else {
 					switch (item.getFieldName()) {

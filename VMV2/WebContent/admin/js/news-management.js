@@ -114,6 +114,7 @@ function setMenuItemActive() {
 
 function addNews() {
 	var formData = new FormData($("#form-add-news")[0]);
+	alert(formData);
 	$.ajax({
 		url: contextPath + "/CreateNewsServlet",
     	type: "POST",
