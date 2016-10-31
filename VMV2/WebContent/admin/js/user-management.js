@@ -117,6 +117,7 @@ $(document).ready(function() {
 			submitHandler: function(form) {
 				$(".loading-bar").slideDown(100);
 				updateUser();
+				$("#form-update-user")[0].reset();
         	}		
 	});
     $(".modal").on("hidden.bs.modal", function() {
@@ -126,6 +127,7 @@ $(document).ready(function() {
     $(".btn-cancel").click(function() {
     	$(".modal").modal("hide");
     	$("#form-add-user")[0].reset();
+    	$("#form-update-user")[0].reset();
     });
     $('input[name="dateOfBirth"]').daterangepicker({
     	singleDatePicker: true,
@@ -138,6 +140,7 @@ $(document).ready(function() {
     //==========================
     $("#datatable").on("click", ".btn-update-user", function() {
     	var userId = $(this).attr("value");
+    	$(".failUserUpdate").hide();
     	getUserById(userId);
     });
     $("#datatable").on("click", ".btn-delete-user", function() {
@@ -215,6 +218,7 @@ function deleteUser() {
 /*DeleteUser*/
 /*getUserById*/
 function getUserById(userId) {
+	$("#form-update-user")[0].reset();
 	$.ajax({
 		url: contextPath + "/ShowUserServlet",
     	type: "POST",
@@ -317,6 +321,7 @@ function validateUserName(userId){
 		$("#updateUser").removeAttr("disabled");
 	}
 }
+
 function convertSDate(date){
 	var date =new Date(Date.parse(date));
 	var sDate=(date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(); 

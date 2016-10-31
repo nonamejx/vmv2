@@ -67,7 +67,7 @@ public class UpdateUserServlet extends HttpServlet {
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
 				password = null, avatar = null, oldAvatar = null, userId = null, rl = null;
-		boolean role = true;
+		boolean role = false;
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -148,8 +148,6 @@ public class UpdateUserServlet extends HttpServlet {
 						rl = item.getString("UTF-8");
 						if ("on".equals(rl)) {
 							role = true;
-						} else if ("1".equals(rl)) {
-							role = false;
 						}
 						break;
 					case "nameImage":

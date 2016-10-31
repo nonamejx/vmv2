@@ -65,8 +65,9 @@ public class CreateUserServlet extends HttpServlet {
 		UserBO userBO = new UserBO();
 		String fullName = null, gender = null, birthday = null, phoneNumber = null, address = null, username = null,
 				password = null, avatar = null, rl = null;
-		boolean role = true;
+		boolean role = false;
 		String status = "fail";
+		boolean hasError = false;
 
 		// checks if the request actually contains upload file
 		if (!ServletFileUpload.isMultipartContent(request)) {
@@ -100,20 +101,23 @@ public class CreateUserServlet extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (!item.isFormField()) {
-					String fileName = item.getName();
-					String endFileName = FilenameUtils.getExtension(fileName);
-					fileName = "User-" + System.nanoTime() + "." + endFileName;
-					item.setFieldName(fileName);
-					String root = getServletContext().getRealPath("/");
-					File path = new File(root + "/uploads");
-					if (!path.exists()) {
-						path.mkdirs();
+					if (item.getSize() > 0) {
+						String fileName = item.getName();
+						String endFileName = FilenameUtils.getExtension(fileName);
+						fileName = "User-" + System.nanoTime() + "." + endFileName;
+						item.setFieldName(fileName);
+						String root = getServletContext().getRealPath("/");
+						File path = new File(root + "/uploads");
+						if (!path.exists()) {
+							path.mkdirs();
+						}
+						if (!fileName.equals("")) {
+							File uploadedFile = new File(path + "/" + fileName);
+							item.write(uploadedFile);
+							avatar = fileName;
+						}
 					}
-					if (!fileName.equals("")) {
-						File uploadedFile = new File(path + "/" + fileName);
-						item.write(uploadedFile);
-						avatar = fileName;
-					}
+
 				} else {
 					switch (item.getFieldName()) {
 					case "name":
@@ -141,8 +145,6 @@ public class CreateUserServlet extends HttpServlet {
 						rl = item.getString("UTF-8");
 						if ("on".equals(rl)) {
 							role = true;
-						} else if ("1".equals(rl)) {
-							role = false;
 						}
 						break;
 					default:
@@ -155,7 +157,7 @@ public class CreateUserServlet extends HttpServlet {
 		}
 
 		// Validate
-		boolean hasError = false;
+
 		if (userBO.getUserByUsername(username) != null) {
 			hasError = true;
 		}
@@ -168,7 +170,6 @@ public class CreateUserServlet extends HttpServlet {
 			userBO.insertUser(user);
 			status = "success";
 		}
-
 		// send data
 		JsonObject jsonObj = new JsonObject();
 		jsonObj.addProperty("status", status);

@@ -77,6 +77,7 @@
 										name="username" type="text">
 								</div>
 							</div>
+							
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">Mật khẩu <span class="required">*</span></label>
@@ -87,7 +88,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">Xác nhận mật khẩu <span class="required">*</span></label>
+									for="name">Xác nhận mật khẩu  <span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 										name="passwordf" type="password">
@@ -98,7 +99,7 @@
 		                      	<div class="col-md-6 col-sm-6 col-xs-12"	>
 		                        	<input id="ten" class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6"
-										name="image" type="file">
+										name="image" type="file" accept="image/*">
 		                      	</div>
 	                    	</div>
 	                    	<input name="isAdmin" hidden="true" type="text" value="on">
@@ -124,16 +125,9 @@
         <!-- variable -->
         <script>
         	var contextPath = "<%=request.getContextPath() %>";
-        	$(document).ready(function() {
-        		$(".register-item").addClass("current-page");
-        		$('input[name="dateOfBirth"]').daterangepicker({
-        	    	singleDatePicker: true,
-        	        showDropdowns: true,
-        	        format: 'DD/MM/YYYY'
-        	    });
-        	});
+        	
         </script>
-	  	 <script src="<%=request.getContextPath() %>/user/js/register.js"></script>
+	  	 <script type="text/javascript" src="<%=request.getContextPath() %>/user/js/register.js"></script>
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>
 		<script>

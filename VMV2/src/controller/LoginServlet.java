@@ -47,14 +47,14 @@ public class LoginServlet extends HttpServlet {
 		String submit = request.getParameter("login");
 		UserBO userBO = new UserBO();
 		if (submit != null) {
-			String username = request.getParameter("username");
+			String username = request.getParameter("username").trim();
 			String password = request.getParameter("password");
 			String rememberMe = request.getParameter("rememberMe");
 			User userLogin = userBO.getUserByUsernamePassword(username, password);
 			if (userLogin != null) {
 				// checked remember
 				if ("on".equals(rememberMe)) {
-					if (MyUtils.getInstance(request).isRememberMeSelected()) {
+					if (MyUtils.getInstance(request).isRememberMe()) {
 						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 						if (!idStr.equals(String.valueOf(userLogin.getUserId()))) {
 							MyUtils.getInstance(request).editCookieRemember(userLogin.getUserId(), response);
@@ -64,16 +64,17 @@ public class LoginServlet extends HttpServlet {
 					}
 
 				} else {
-					if (MyUtils.getInstance(request).isRememberMeSelected()) {
+					if (MyUtils.getInstance(request).isRememberMe()) {
 						String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 						if (idStr.equals(String.valueOf(userLogin.getUserId()))) {
+
 							MyUtils.getInstance(request).deleteCookieRemember(response);
 						}
 					}
 				}
 				// Tạo session
 				MyUtils.getInstance(request).createLoginSession(userLogin);
-				if (MyUtils.getInstance(request).isLoggedIn()) {
+				if (MyUtils.getInstance(request).isLogin()) {
 					response.sendRedirect("home");
 				} else {
 					response.sendRedirect("user/login");
@@ -84,7 +85,8 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			// Lấy cookie remember
-			if (MyUtils.getInstance(request).isRememberMeSelected()) {
+
+			if (MyUtils.getInstance(request).isRememberMe()) {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
 				try {
 					int id = Integer.parseInt(idStr);
@@ -96,7 +98,6 @@ public class LoginServlet extends HttpServlet {
 				}
 
 			}
-
 			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
 			rd.forward(request, response);
 		}

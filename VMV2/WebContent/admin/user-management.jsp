@@ -164,16 +164,16 @@
 											<div class="item form-group">
 						                      	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Hình ảnh </label>
 						                      	<div class="col-md-6 col-sm-6 col-xs-12"	>
-						                        	<input id="ten" class="form-control col-md-7 col-xs-12"
+						                        	<input id="imgId" class="form-control col-md-7 col-xs-12"
 														data-validate-length-range="6"
-														name="image" type="file">
+														name="image" type="file" accept="image/*">
 						                      	</div>
 					                    	</div>
 					                    	<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Admin <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px" checked>
+													<input id="adminn" name="isAdmin" type="checkbox" style="width: 16px; height: 30px" >
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -205,7 +205,7 @@
 										<form id="form-update-user" class="form-horizontal form-label-left" method="post">
 											<div class="image-view">
 												<img alt="" src="<%=request.getContextPath() %>/resources/images/avatar-default.jpg">
-						                        <input class="form-control" data-validate-length-range="6" name="image" type="file">
+						                        <input class="form-control" data-validate-length-range="6" name="image" type="file" accept="image/*" />
 						                        <input type="text" hidden="true" name="nameImage">
 						                        <input type="text" hidden="true" name="userId">
 											</div>
@@ -271,7 +271,7 @@
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="name">Admin <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px">
+													<input name="isAdmin" type="checkbox" style="width: 16px; height: 30px" >
 												</div>
 											</div>
 											<div class="ln_solid"></div>

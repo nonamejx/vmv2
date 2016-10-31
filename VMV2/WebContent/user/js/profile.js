@@ -1,7 +1,9 @@
 var checksubmit=true;
+var oldPass="";
 $(document).ready(function() {
 	setMenuItemActive();
 	getUserById();
+	setDefaulFormPass();
 	$("#form-update-profile").validate({
 			rules: {
 					name: {
@@ -36,17 +38,22 @@ $(document).ready(function() {
 	
 	$("#form-update-password").validate({
 			rules: {
+				oldPassword: {
+					required: true,
+					maxlength: 50,
+					minlength: 6
+				},
 				password: {
-				required: true,
-				maxlength: 50,
-				minlength: 6
-			},
-			passwordf: {
-				required: true,
-				maxlength: 50,
-				minlength: 6,
-				equalTo: "#password"
-				}
+					required: true,
+					maxlength: 50,
+					minlength: 6
+				},
+				passwordf: {
+					required: true,
+					maxlength: 50,
+					minlength: 6,
+					equalTo: "#password"
+				},
 		},
 			messages: {
 				
@@ -70,7 +77,10 @@ $(document).ready(function() {
    
     $("#form-update-profile .image-view input[name='image']").change(function(){
     	readURL(this);
-	}); 
+	});
+    $("#form-update-password").on("keyup", "#oldPassword",function(){
+    	setFormChangePassword();
+    });
     //=========================
 });
 function setMenuItemActive() {
@@ -97,6 +107,7 @@ function getUserById() {
 /*showUser*/
 function showUser(user) {
 	var image = "";
+	oldPass= user["password"] ;
 	if (user["avatar"] != null && user["avatar"].trim() != ""){
 		image = contextPath + "/uploads/" + user["avatar"];
 	}else{
@@ -108,7 +119,6 @@ function showUser(user) {
 	$("#form-update-profile input[name='nameImage']").val(user["avatar"]);
 	$("#form-update-profile input[name='dateOfBirth']").val(convertSDate(user["birthday"]));
 	$("#form-update-profile  select").val(user["gender"]);
-	$("#idPro").append("<span>ID "+user["userId"]+"</span>")
 	$("#form-update-profile input[name='phoneNumber']").val(user["phoneNumber"]);
 	$("#form-update-profile textarea[name='address']").val(user["address"]);
 	$("#form-update-profile input[name='username']").val(user["username"]);
@@ -202,3 +212,18 @@ function convertSDate(date){
 	var sDate=(date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(); 
 	return sDate;
 }
+function setFormChangePassword(){
+	var pass=$("#oldPassword").val();
+	if(oldPass == pass){
+		$("#confirmPassword").removeAttr('disabled');
+		$("#password").removeAttr('disabled');
+	}else{
+		setDefaulFormPass();
+	}
+	
+}
+function setDefaulFormPass(){
+	$("#confirmPassword").attr('disabled', 'disabled');
+	$("#password").attr('disabled', 'disabled');
+}
+
