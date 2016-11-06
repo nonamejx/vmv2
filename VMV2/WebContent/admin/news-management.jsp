@@ -100,7 +100,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="birthday"> Nội dung</label>
+													for="birthday"> Nội dung <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="content" class="form-control col-md-7 col-xs-12" 
 													></textarea>
@@ -157,7 +157,7 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for=""> Nội dung</label>
+													for=""> Nội dung <span class="required">*</span></label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="content" class="form-control col-md-7 col-xs-12" 
 													></textarea>
