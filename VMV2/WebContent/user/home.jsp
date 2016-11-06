@@ -46,13 +46,13 @@
 							<div class="part">
 								<% if (news.getImage() != null) {%>
 								<div class="part-image" style="background: url('<%=request.getContextPath() %>/uploads/<%=news.getImage() %>') 
-								no-repeat no-repeat center center; background-size: cover;"></div>
+								no-repeat no-repeat center center; background-size: cover;"><a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"></a></div>
 								<%} else {%>
-								<div class="part-image"></div>
+								<div class="part-image"><a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"></a></div>
 								<%} %>
-								<div class="part-detail">
+								<div class="part-detail" style="word-wrap: break-word;">
 									<p><b><%=news.getTitle() %></b></p>
-									<p><%=StringUtils.shorten(news.getContent(), 200) + " ..." %></p>
+									<p><%=StringUtils.shorten(news.getContent(), 140) + " ..." %></p>
 									<a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"><i>Đọc thêm >></i></a>
 								</div>
 							</div>

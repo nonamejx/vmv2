@@ -39,9 +39,9 @@
 						<%if (news != null) {%>
 						<h4><%=news.getTitle() %></h4>
 						<p><i>Ngày đăng: <%=DateUtils.formatDatetime(news.getCreatedDate()) %></i><p>
-						<div class="news-detail-content">
+						<div class="news-detail-content" style="word-wrap: break-word;">
 							<%if (news.getImage() != null) {%>
-							<img alt="" src="<%=request.getContextPath()%>/uploads/<%=news.getImage()%>">
+							<img style="width: 60%; display: block" alt="" src="<%=request.getContextPath()%>/uploads/<%=news.getImage()%>">
 							<% }%>
 							<p style="margin-top: 10px"><%=news.getContent() %></p>
 						</div>

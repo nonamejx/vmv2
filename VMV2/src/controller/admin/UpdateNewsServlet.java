@@ -3,7 +3,7 @@ package controller.admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 
 import model.bean.News;
 import model.bo.NewsBO;
+import utils.DateUtils;
 import utils.Validate;
 
 /**
@@ -143,6 +144,7 @@ public class UpdateNewsServlet extends HttpServlet {
 			News news = newsBO.getNewsById(Integer.parseInt(newsId));
 			news.setTitle(title);
 			news.setContent(content);
+			news.setCreatedDate(DateUtils.convertToTimestamp(new Date()));
 			if (image != null)
 				news.setImage(image);
 			if (newsBO.updateNews(news) > 0)

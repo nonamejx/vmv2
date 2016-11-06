@@ -49,6 +49,7 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
+				required: true,
 				maxlength: 500
 			}
 		},
@@ -67,6 +68,7 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
+				required: true,
 				maxlength: 500
 			}
 		},
@@ -128,6 +130,7 @@ function addNews() {
 			$(".modal").modal("hide");
 			showMsg($(".msg-success"));
 			newsDatatable.ajax.reload();
+			$("#form-add-news")[0].reset();
 		} else {
 			showMsg($(".msg-fail"));
 		}

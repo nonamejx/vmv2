@@ -41,7 +41,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.html" class="site_title"><i class="fa fa-plus-square"></i>
+						<a href="<%=request.getContextPath() %>/admin/home" class="site_title"><i class="fa fa-plus-square"></i>
 							<span>VacxinTeam</span></a>
 					</div>
 					<div class="clearfix"></div>
@@ -58,7 +58,7 @@
 							User userLogin=MyUtils.getInstance(request).getSessionLogin();
 								if(userLogin!=null){
 							%>
-								<h2>Admin <%=userLogin.getFullName()%></h2>
+								<h2><%=userLogin.getFullName()%></h2>
 								<input type="text" hidden="true" name="userId">
 							<%
 								}
@@ -117,20 +117,17 @@
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Trang chủ">
+					<%-- <div class="sidebar-footer hidden-small">
+						<a data-toggle="tooltip" data-placement="top" title="Trang chủ" href="<%=request.getContextPath() %>/admin/home">
 							<span class="fa fa-home" aria-hidden="true"></span>
 						</a>
-						<a data-toggle="tooltip" data-placement="top" title="Trang cá nhân"> 
+						<a data-toggle="tooltip" data-placement="top" title="Trang cá nhân" href=""> 
 							<span class="fa fa-user	" aria-hidden="true"></span>
 						</a>
-						<a data-toggle="tooltip" data-placement="top" title="Cài đặt">
-							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a> 
-						<a data-toggle="tooltip" data-placement="top" title="Đăng xuất">
+						<a data-toggle="tooltip" data-placement="top" title="Đăng xuất" href="">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> --%>
 					<!-- /menu footer buttons -->
 				</div>
 			</div>
@@ -151,9 +148,7 @@
 						</a>
 							<ul
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-								<li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Thông tin cá nhân</a></li>
-								<li><a href="javascript:;"><i class="fa fa-cog pull-right"></i> <span>Cài đặt</span> </a></li>
-								<li><a href="javascript:;"><i class="fa fa-question-circle pull-right"></i>Trợ giúp</a></li>
+								<li><a href="<%=request.getContextPath()%>/admin/profile"><i class="fa fa-user pull-right"></i> Thông tin cá nhân</a></li>
 								<li><a href="<%=request.getContextPath()%>/logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 							</ul></li>
 
