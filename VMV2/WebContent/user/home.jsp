@@ -35,8 +35,6 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
 					<h4><i class="fa fa-newspaper-o"></i> Tin mới</h4>
-					<p><i>Thứ 3, ngày 21/9/2016</i></p>
-					<br>
 					<div class="row list-news">
 					<%
 						if (newsList != null)
@@ -44,15 +42,16 @@
 					%>
 						<div class="col-sm-6">
 							<div class="part">
+								<a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>">
 								<% if (news.getImage() != null) {%>
-								<div class="part-image" style="background: url('<%=request.getContextPath() %>/uploads/<%=news.getImage() %>') 
-								no-repeat no-repeat center center; background-size: cover;"><a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"></a></div>
+									<span class="part-image img-thumbnail" style="background: url('<%=request.getContextPath() %>/uploads/<%=news.getImage() %>') no-repeat no-repeat center center; background-size: cover;"></span>
 								<%} else {%>
-								<div class="part-image"><a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"></a></div>
+									<span class="part-image"></span>
 								<%} %>
+								</a>
 								<div class="part-detail" style="word-wrap: break-word;">
-									<p><b><%=news.getTitle() %></b></p>
-									<p><%=StringUtils.shorten(news.getContent(), 140) + " ..." %></p>
+									<p><a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"><b><%=news.getTitle() %></b></a></p>
+									<p><%=StringUtils.shorten(news.getContent(), 140)%></p>
 									<a href="<%=request.getContextPath()%>/news-detail?id=<%=news.getNewsId()%>"><i>Đọc thêm >></i></a>
 								</div>
 							</div>
