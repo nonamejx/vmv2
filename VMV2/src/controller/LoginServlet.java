@@ -77,10 +77,10 @@ public class LoginServlet extends HttpServlet {
 				if (MyUtils.getInstance(request).isLogin()) {
 					response.sendRedirect("home");
 				} else {
-					response.sendRedirect("user/login");
+					response.sendRedirect("login");
 				}
 			} else {
-				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp?msg=1");
+				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
@@ -92,13 +92,13 @@ public class LoginServlet extends HttpServlet {
 					int id = Integer.parseInt(idStr);
 					request.setAttribute("userRemember", userBO.getUserById(id));
 				} catch (NumberFormatException ex) {
-					javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp?msg=2");
+					javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("login.jsp?msg=2");
 					rd.forward(request, response);
 					return;
 				}
 
 			}
-			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/login.jsp");
+			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 			rd.forward(request, response);
 		}
 	}

@@ -43,7 +43,7 @@ public class GetVaccinesDetailUserServlet extends HttpServlet {
 
 		String idVaccine = request.getParameter("idV");
 		request.setAttribute("idV", idVaccine);
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("user/vaccine-detail.jsp");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("vaccine-detail.jsp");
 		rd.forward(request, response);
 
 	}

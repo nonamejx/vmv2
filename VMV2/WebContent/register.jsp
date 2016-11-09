@@ -4,7 +4,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<tiles:insertTemplate template="../templates/guest-template.jsp" >
+<tiles:insertTemplate template="/templates/guest-template.jsp" >
 
 	<tiles:putAttribute name="content">
 	
@@ -127,7 +127,7 @@
         	var contextPath = "<%=request.getContextPath() %>";
         	
         </script>
-	  	 <script type="text/javascript" src="<%=request.getContextPath() %>/user/js/register.js"></script>
+	  	 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/register.js"></script>
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>
 		<script>
