@@ -12,13 +12,14 @@ public class MyUtils {
 	private boolean isRememberMe = false;
 	private javax.servlet.http.HttpSession session;
 	private Cookie[] cookies = null;
-
+	private HttpServletRequest request;
 	private static final int TIME_REMEMBER = 60 * 60 * 24;
 	private static final String KEYWORD_SESSION = "userLogin";
 	private static final String KEYWORD_COOKIE = "userRemember";
 
 	protected MyUtils(HttpServletRequest request) {
-		this.session = request.getSession();
+		this.request=request;
+		
 		this.cookies = request.getCookies();
 		isLogin();
 		setRememberMe();
@@ -44,15 +45,30 @@ public class MyUtils {
 	 * Create login session
 	 */
 	public void createLoginSession(User user) {
-		session.setAttribute(KEYWORD_SESSION, user);
-		this.isLogin = true;
+		try{
+			this.session = request.getSession();
+			session.setAttribute(KEYWORD_SESSION, user);
+			this.isLogin = true;
+		}catch(IllegalStateException ex){
+			System.err.println(ex.getMessage());
+		}
+		
 	}
 
 	public User getSessionLogin() {
-		return (User) session.getAttribute(KEYWORD_SESSION);
+		System.out.println(this.isLogin);
+		User user=null;
+		try{
+			this.session = request.getSession();
+			user=(User) session.getAttribute(KEYWORD_SESSION);
+		}catch(IllegalStateException ex){
+			System.err.println(ex.getMessage());
+		}
+		return user ;
 	}
 
 	public void sessionLogout() {
+		this.session = request.getSession();
 		session.removeAttribute(KEYWORD_SESSION);
 		this.isLogin = false;
 	}
