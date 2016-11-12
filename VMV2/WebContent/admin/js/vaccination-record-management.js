@@ -1,6 +1,5 @@
 var vaccinationrecordDatatable;
 $(document).ready(function() {
-	$("")
 	setMenuItemActive();
 	TableManageButtons.init();
 	vaccinationrecordDatatable = $('#datatable').dataTable({
