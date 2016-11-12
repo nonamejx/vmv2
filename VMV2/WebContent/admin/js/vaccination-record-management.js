@@ -1,5 +1,6 @@
 var vaccinationrecordDatatable;
 $(document).ready(function() {
+	$("")
 	setMenuItemActive();
 	TableManageButtons.init();
 	vaccinationrecordDatatable = $('#datatable').dataTable({
@@ -53,7 +54,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#form-add-vaccination-record").validate({
+	var addFormValidate = $("#form-add-vaccination-record").validate({
 		rules : {
 			user : {
 				required : true,
@@ -107,11 +108,13 @@ $(document).ready(function() {
 	$(".btn-cancel").click(function() {
 		$(".modal").modal("hide");
 	});
-	$('input[name="nextDoseDate"]').daterangepicker({
+	$('#form-add-vaccination-record input[name="nextDoseDate"]').daterangepicker({
 		singleDatePicker : true,
 		showDropdowns : true,
-		format : 'DD/MM/YYYY'
+		format : 'DD/MM/YYYY',
+		minDate: moment()
 	});
+	
 	$("#datatable").on("click", ".btn-delete-vaccination-record", function() {
     	var vaccinationRecordId = $(this).attr("value");
     	$(".delete-vaccination-record-modal input[name='vaccinationRecordId']").val(vaccinationRecordId);
@@ -119,6 +122,18 @@ $(document).ready(function() {
 	$(".btn-delete-disease").click(function() {
 		$(".loading-bar").slideDown(100);
 		deleteVaccinationRecord($(".delete-vaccination-record-modal input[name='vaccinationRecordId']").val());
+	});
+	
+	$("#btn_open_add_vr").click(function() {
+		$("#addUser, #addVaccine, #addUserId, #addVaccineId, #NumberofDose").val("");
+		$(".user_info").hide();
+		$(".vaccine_info").hide();
+		 $("#btn_add_vr").prop('disabled', false);
+		 addFormValidate.resetForm();
+	});
+	
+	$("#addUser").blur(function() {
+		$(this).val("");
 	});
 	$("#addUser").autocomplete({
 	    source: function(request, response) {
@@ -134,7 +149,9 @@ $(document).ready(function() {
 	                response( $.map( data, function( item ) {
 	                    return {
 	                        label: item.fullName,
-	                        value: item.userId 
+	                        value: item.userId,
+	                        dob: item.birthday,
+	                        address: item.address
 	                    }
 	                }));
 	             }
@@ -142,13 +159,19 @@ $(document).ready(function() {
 	        })
 	    },
 	    select: function(event, ui) {
+	    	$(this).blur();
 	        $("#addUser").val(ui.item.label);
 	        $("#addUserId").val(ui.item.value);
+	        showMoreUserInfo(".user_info", ui.item.value, ui.item.dob, ui.item.address);
+	        $(".user_info").slideDown(200);
 	        callGetDose();
+	        $("#btn_add_vr").prop('disabled', false);
 	        return false;
 	    }
 	});
-	
+	$("#addVaccine").blur(function() {
+		$(this).val("");
+	});
 	$("#addVaccine").autocomplete({
 	    source: function(request, response) {
 	        $.ajax({
@@ -163,7 +186,10 @@ $(document).ready(function() {
 	                response( $.map( data, function( item ) {
 	                    return {
 	                        label: item.vaccineName,
-	                        value: item.vaccineId 
+	                        value: item.vaccineId,
+	                        nsx: item.manufacturer,
+	                        dose: item.numberOfDoses,
+	                        sideEffects: item.sideEffects
 	                    }
 	                }));
 	             }
@@ -171,10 +197,13 @@ $(document).ready(function() {
 	        })
 	    },
 	    select: function(event, ui) {
+	    	$(this).blur();
 	        $("#addVaccine").val(ui.item.label);
 	        $("#addVaccineId").val(ui.item.value);
-	        
+	        showMoreVaccineInfo(".vaccine_info", ui.item.nsx, ui.item.dose, ui.item.sideEffects);
+	        $(".vaccine_info").slideDown(200);
 	        callGetDose();
+	        $("#btn_add_vr").prop('disabled', false);
 	        return false;
 	    }
 	});
@@ -254,11 +283,13 @@ $(document).ready(function() {
 	    	dataType: 'json'
 		}).done(function(data) {
 			if(data["status"]=="fail"){
-				$(".modal").modal("hide");
-				showMsg($(".msg-notification"));
+				$("#NumberofDose").val("Vắc xin này đã tiêm đủ!");
+				$("#btn_add_vr").prop('disabled', true);
+			} else {
+				$("#NumberofDose").val(data["dose"]);
+				$("#btn_add_vr").prop('disabled', false);
 			}
-			$("#NumberofDose").val(data["dose"])
-		}).fail(function(err) {
+			}).fail(function(err) {
 		});
 	}
 	
@@ -279,22 +310,35 @@ $(document).ready(function() {
     	    },
         	dataType: 'json'
     	}).done(function(data) {
-    		showVaccinationRecord(data);
+    		showVaccinationRecord(JSON.parse(data["vaccinationRecord"]));
+    		showMoreVaccineInfo(".update_vaccine_info", JSON.parse(data["vaccine"])["manufacturer"], 
+    				JSON.parse(data["vaccine"])["numberOfDoses"], 
+    				JSON.parse(data["vaccine"])["sideEffects"]);
+    		showMoreUserInfo(".update_user_info", JSON.parse(data["user"])["userId"], 
+    				JSON.parse(data["user"])["birthday"], 
+    				JSON.parse(data["user"])["address"]);
     	}).fail(function(err) {
     	});
     }
 	function showVaccinationRecord(vaccinationRecord) {
-    	$("#form-update-vaccination-record input[name='user']").val(vaccinationRecord["userName"]);
+		$("#form-update-vaccination-record input[name='nextDoseDate']").val(convertSDate(vaccinationRecord["nextDoseDate"]));
+		$('#form-update-vaccination-record input[name="nextDoseDate"]').daterangepicker({
+			singleDatePicker : true,
+			showDropdowns : true,
+			format : 'DD/MM/YYYY',
+			minDate: moment()
+		});
+		$("#form-update-vaccination-record input[name='user']").val(vaccinationRecord["userName"]);
     	$("#form-update-vaccination-record input[name='idUser']").val(vaccinationRecord["userId"]);
     	$("#form-update-vaccination-record input[name='vaccine']").val(vaccinationRecord["vaccineName"]);
     	$("#form-update-vaccination-record input[name='idVaccine']").val(vaccinationRecord["vaccineId"]);
     	$("#form-update-vaccination-record input[name='dose']").val(vaccinationRecord["dose"]);
-    	$("#form-update-vaccination-record input[name='nextDoseDate']").val(convertSDate(vaccinationRecord["nextDoseDate"]));
+   
     }
 	
 	function convertSDate(date){
 		var date =new Date(Date.parse(date));
-		var sDate=(date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(); 
+		var sDate =  date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear(); 
 		return sDate;
 	}
 	
@@ -308,3 +352,18 @@ $(document).ready(function() {
 function setMenuItemActive() {
 	$(".vaccination-record-management-menu-item").addClass("current-page");
 }
+
+
+function showMoreUserInfo(classSelector, id, dob, address) {
+	$(classSelector + " p.user_id").html("<b>ID: </b>" + id);
+	$(classSelector + " p.user_dob").html("<b>Ngày sinh: </b>" + dob);
+	$(classSelector + " p.user_address").html("<b>Địa chỉ: </b>" + address);
+}
+
+function showMoreVaccineInfo(classSelector, nsx, dose, sideEffects) {
+	console.log(nsx);
+	$(classSelector + " p.vaccine_nsx").html("<b>Nhà sản xuất: </b>" + nsx);
+	$(classSelector + " p.vaccine_dose").html("<b>Số mũi: </b>" + dose);
+	$(classSelector  + " p.vaccine_sideEffects").html("<b>Chỉ định: </b>" + sideEffects);
+}
+
