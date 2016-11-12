@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="utils.DateUtils"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -31,7 +33,9 @@
 		<link
 			href="<%=request.getContextPath()%>/resources/production/css/multiple-select/multiple-select.css"
 			rel="stylesheet" type="text/css" />
-		<link href="<%=request.getContextPath() %>/resources/production/css/autocomplete/jquery-ui.css" rel="stylesheet">
+		<link
+			href="<%=request.getContextPath()%>/resources/production/css/autocomplete/jquery-ui.css"
+			rel="stylesheet">
 		<!-- /Custom styling plus plugins -->
 
 		<div class="page-title" style="margin-bottom: 50px">
@@ -46,13 +50,15 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<a class="btn btn-success btn-sm" href="" data-toggle="modal"
+						<a id="btn_open_add_vr" class="btn btn-success btn-sm" href="" data-toggle="modal"
 							data-target=".add-vaccination-record-modal"><i
 							class="fa fa-plus"></i> Thêm mới</a>
 						<div class="clearfix"></div>
 					</div>
-					<p class="msg msg-success msg-notification ">Quý khách đã tiêm đủ liều cho loại vắc xin này!</p>
-					<p class="msg msg-success msg-show-success">Thao tác thành công!</p>
+					<p class="msg msg-success msg-notification ">Quý khách đã tiêm
+						đủ liều cho loại vắc xin này!</p>
+					<p class="msg msg-success msg-show-success">Thao tác thành
+						công!</p>
 					<p class="msg msg-fail">Thao tác thất bại!</p>
 					<div class="x_content">
 						<!-- Put your code here -->
@@ -110,7 +116,7 @@
 
 					<div class="modal fade add-vaccination-record-modal" tabindex="-1"
 						role="dialog" aria-hidden="true">
-						<div class="modal-dialog">
+						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
@@ -124,65 +130,87 @@
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
 										<form id="form-add-vaccination-record"
-											class="form-horizontal form-label-left" method="post">
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Khách tiêm<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="user" placeholder=""
-														type="text"  id="addUser" >
-														<input id="addUserId" type="hidden" name="idUser">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Vắc xin<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="vaccine"
-														placeholder="" type="text" id="addVaccine" >
-														<input id="addVaccineId" type="hidden" name="idVaccine">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Mũi<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="dose" placeholder=""
-														type="number" id="NumberofDose" readonly>
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="birthday"> Ngày tiêm kế<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="nextDoseDate" type="text"
-														class="form-control col-md-7 col-xs-12" value="10/10/2016"
-														readonly="readonly">
-												</div>
-											</div>
+												class="form-label-left" method="post">
+										<div
+											style="display: inline-block; width: 49%; float: left; margin-right: 2%">
 											
-											<div class="ln_solid"></div>
-											<div class="form-group">
-												<div class="col-md-6 col-md-offset-3">
-													<button type="submit" class="btn btn-success">Thêm</button>
-													<a class="btn btn-default btn-cancel">Hủy</a>
+												<div class="item form-group">
+													<label class="control-label" for="name">Khách tiêm<span
+														class="required">*</span></label>
+													<div>
+														<input class="form-control" data-validate-length-range="6"
+															name="user" placeholder="" type="text" id="addUser">
+														<input id="addUserId" type="hidden" name="idUser">
+													</div>
 												</div>
-											</div> 
-										</form>
+												<div class="item form-group">
+													<div>
+														<div class="more_info user_info" style="display: none">
+															<p class="user_id"></p>
+															<p class="user_dob"></p>
+															<p class="user_address"></p>
+														</div>
+													</div>
+												</div>
 
+												<div class="item form-group">
+													<label class="control-label col-md-3 col-sm-3 col-xs-12"
+														for="name">Mũi<span class="required">*</span></label>
+													<div>
+														<input class="form-control" data-validate-length-range="6"
+															name="dose" placeholder=""
+															id="NumberofDose" readonly>
+													</div>
+												</div>
+										</div>
+										<div style="display: inline-block; width: 49%">
+											<div class="item form-group">
+												<label class="control-label" for="name">Vắc xin<span
+													class="required">*</span></label>
+												<div>
+													<input class="form-control" data-validate-length-range="6"
+														name="vaccine" placeholder="" type="text" id="addVaccine">
+													<input id="addVaccineId" type="hidden" name="idVaccine">
+												</div>
+											</div>
+											<div class="item form-group">
+												<div>
+													<div class="more_info vaccine_info" style="display: none">
+														<p class="vaccine_nsx"></p>
+														<p class="vaccine_dose"></p>
+														<p class="vaccine_sideEffects"></p>
+													</div>
+												</div>
+											</div>
+											<div class="item form-group">
+												<label class="control-label" for="birthday"> Ngày
+													tiêm kế<span class="required">*</span>
+												</label>
+												<div>
+													<input name="nextDoseDate" type="text" class="form-control"
+														value="<%=DateUtils.formatDate(new Date()) %>" readonly="readonly">
+												</div>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="ln_solid"></div>
+										<div class="form-group text-center">
+											<div>
+												<button type="submit" class="btn btn-success" id="btn_add_vr">Thêm</button>
+												<a class="btn btn-default btn-cancel">Hủy</a>
+											</div>
+										</div>
+										</form>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="modal fade update-vaccination-record-modal"
 						tabindex="-1" role="dialog" aria-hidden="true">
-						<div class="modal-dialog">
+						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
@@ -196,48 +224,74 @@
 										<div class="loading-bar">Đang xử lý...</div>
 										<!-- Put your code here -->
 										<form id="form-update-vaccination-record"
-											class="form-horizontal form-label-left" method="post">
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Khách tiêm<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="user" placeholder=""
-														type="text" value="Nguyễn A" id="updateUser" readonly>
-													<input type="hidden" name="idUser" id="updateUserId">
+											class="form-label-left" method="post">
+											<div
+											style="display: inline-block; width: 49%; float: left; margin-right: 2%">
+												<div class="item form-group">
+													<label class="control-label"
+														for="name">Khách tiêm<span class="required">*</span></label>
+													<div>
+														<input class="form-control"
+															data-validate-length-range="6" name="user" placeholder=""
+															type="text" value="Nguyễn A" id="updateUser" readonly>
+														<input type="hidden" name="idUser" id="updateUserId">
+													</div>
+												</div>
+												<div class="item form-group">
+													<div>
+														<div class="more_info update_user_info">
+															<p class="user_id">fdghdfg</p>
+															<p class="user_dob">dfhgh</p>
+															<p class="user_address">dfhdfh</p>
+														</div>
+													</div>
+												</div>
+												
+												<div class="item form-group">
+													<label class="control-label"
+														for="name">Mũi<span class="required">*</span></label>
+													<div>
+														<input class="form-control"
+															data-validate-length-range="6" name="dose" placeholder=""
+															type="number" value="1" readonly id="updateNumberofDose">
+													</div>
 												</div>
 											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Vắc xin<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="vaccine"
-														placeholder="" type="text" value="Axit clohydric" readonly id="updateVaccine">
-													<input name="idVaccine" type="hidden" id="updateVaccineId">
+											<div style="display: inline-block; width: 49%">
+												<div class="item form-group">
+													<label class="control-label"
+														for="name">Vắc xin<span class="required">*</span></label>
+													<div>
+														<input class="form-control"
+															data-validate-length-range="6" name="vaccine"
+															placeholder="" type="text" value="Axit clohydric" readonly
+															id="updateVaccine"> <input name="idVaccine"
+															type="hidden" id="updateVaccineId">
+													</div>
+												</div>
+												<div class="item form-group">
+													<div>
+														<div class="more_info update_vaccine_info">
+															<p class="vaccine_nsx"></p>
+															<p class="vaccine_dose"></p>
+															<p class="vaccine_sideEffects"></p>
+														</div>
+													</div>
+												</div>
+												<div class="item form-group">
+													<label class="control-label"
+														for="birthday"> Ngày tiêm kế<span class="required">*</span></label>
+													<div>
+														<input name="nextDoseDate" type="text"
+															class="form-control col-md-7 col-xs-12 up_nextDoseDate" value="10/10/2016"
+															readonly="readonly">
+													</div>
 												</div>
 											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="name">Mũi<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input class="form-control col-md-7 col-xs-12"
-														data-validate-length-range="6" name="dose" placeholder=""
-														type="number" value="1" readonly id="updateNumberofDose">
-												</div>
-											</div>
-											<div class="item form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="birthday"> Ngày tiêm kế<span class="required">*</span></label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input name="nextDoseDate" type="text"
-														class="form-control col-md-7 col-xs-12" value="10/10/2016"
-														readonly="readonly">
-												</div>
-											</div>
+											<div class="clearfix"></div>
 											<div class="ln_solid"></div>
-											<div class="form-group">
-												<div class="col-md-6 col-md-offset-3">
+											<div class="form-group text-center">
+												<div>
 													<button type="submit" class="btn btn-success">Cập
 														nhật</button>
 													<a class="btn btn-default btn-cancel">Hủy</a>
