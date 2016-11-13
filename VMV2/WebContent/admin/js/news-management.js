@@ -12,6 +12,7 @@ $(document).ready(function() {
     	              { "data": "newsId" },
     	              { "data": "title" },
     	              { "data": "createdDate" },
+    	              { "data": "endDate" },
     	              null
     	            ],
         "columnDefs": [ {
@@ -39,6 +40,27 @@ $(document).ready(function() {
 				"sNext" : "Tiếp",
 				"sLast" : "Cuối"
 			}
+		}
+    });
+	
+	$("#form-add-news input[name='end_date']").daterangepicker({
+		singleDatePicker: true,
+		timePicker: true,
+		timePickerIncrement: 10,
+		timePicker24Hour: true,
+		locale: {
+			format: 'DD/MM/YYYY HH:mm:ss'
+		}
+    });
+	
+	$("#form-update-news input[name='end_date']").daterangepicker({
+		drops: 'up',
+		singleDatePicker: true,
+		timePicker: true,
+		timePickerIncrement: 10,
+		timePicker24Hour: true,
+		locale: {
+			format: 'DD/MM/YYYY HH:mm:ss'
 		}
     });
     

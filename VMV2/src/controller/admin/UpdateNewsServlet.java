@@ -61,7 +61,7 @@ public class UpdateNewsServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		NewsBO newsBO = new NewsBO();
-		String newsId = null, title = null, content = null, image = null;
+		String newsId = null, title = null, content = null, image = null, endDateStr = null;
 		String status = "fail";
 		
 		// checks if the request actually contains upload file
@@ -121,6 +121,9 @@ public class UpdateNewsServlet extends HttpServlet {
 						case "content":
 							content = item.getString("UTF-8");
 							break;
+						case "end_date":
+							endDateStr = item.getString("UTF-8");
+							break;
 						default:
 							break;
 					}
@@ -145,6 +148,7 @@ public class UpdateNewsServlet extends HttpServlet {
 			news.setTitle(title);
 			news.setContent(content);
 			news.setCreatedDate(DateUtils.convertToTimestamp(new Date()));
+			news.setEndDate(DateUtils.convertToTimestamp(endDateStr));
 			if (image != null)
 				news.setImage(image);
 			if (newsBO.updateNews(news) > 0)

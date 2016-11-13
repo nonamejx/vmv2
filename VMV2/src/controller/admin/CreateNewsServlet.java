@@ -61,7 +61,7 @@ public class CreateNewsServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		NewsBO newsBO = new NewsBO();
-		String title = null, content = null, image = null;
+		String title = null, content = null, image = null, endDateStr = null;
 		String status = "fail";
 
 		// checks if the request actually contains upload file
@@ -118,6 +118,9 @@ public class CreateNewsServlet extends HttpServlet {
 						case "content":
 							content = item.getString("UTF-8");
 							break;
+						case "end_date":
+							endDateStr = item.getString("UTF-8");
+							break;
 						default:
 							break;
 					}
@@ -134,7 +137,7 @@ public class CreateNewsServlet extends HttpServlet {
     	}
     	
 		if (!hasError) {
-			News news = new News(title, content, image, DateUtils.convertToTimestamp(new Date()));
+			News news = new News(title, content, image, DateUtils.convertToTimestamp(new Date()), DateUtils.convertToTimestamp(endDateStr));
 			System.out.println(news.toString());
 			if (newsBO.insertNews(news) > 0)
 				status = "success";
