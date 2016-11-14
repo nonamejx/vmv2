@@ -41,6 +41,7 @@
 									<th>#Mã</th>
 									<th>Tiêu đề</th>
 									<th>Ngày tạo</th>
+									<th>Ngày hết hạn</th>
 									<th></th>
 									
 								</tr>
@@ -108,6 +109,14 @@
 											</div>
 											<div class="item form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="name">Ngày hết hạn <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input class="form-control col-md-7 col-xs-12" 
+														name="end_date" type="text">
+												</div>
+											</div>
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="textarea">Hình ảnh </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input class="form-control col-md-7 col-xs-12"
@@ -161,6 +170,14 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<textarea rows="5" name="content" class="form-control col-md-7 col-xs-12" 
 													></textarea>
+												</div>
+											</div>
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="name">Ngày hết hạn <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input class="form-control col-md-7 col-xs-12" 
+														name="end_date" type="text">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
