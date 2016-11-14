@@ -1,13 +1,15 @@
+<%@page import="utils.DateUtils"%>
+<%@page import="utils.StringUtils"%>
+<%@page import="model.bean.News"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<tiles:insertTemplate template="../templates/${template}-template.jsp" >
+<tiles:insertTemplate template="/templates/guest-template.jsp" >
 
 	<tiles:putAttribute name="content">
-	
 		<!-- Custom styling plus plugins -->
 		<link href="<%=request.getContextPath() %>/resources/production/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 		<link href="<%=request.getContextPath() %>/resources/production/js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -16,6 +18,7 @@
 		<link href="<%=request.getContextPath() %>/resources/production/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="<%=request.getContextPath() %>/resources/production/css/datepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
 		<!-- /Custom styling plus plugins -->
+		
 		<div class="head-info">
 			<h1>Trung Tâm Y tế dự phòng <b>ABC</b></h1>
 			<p>Địa chỉ: 54 Nguyễn Lương Bằng, Liên Chiểu, tp Đà Nẵng</p>
@@ -24,23 +27,39 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
-					<h4><i class="fa fa-eraser"></i> Vắc xin</h4>
+				<%
+					String idV=request.getParameter("idV");
+				%>
+					<input type="text" hidden="true" name="vaccineId" value="<% if(idV!=null){out.print(idV);} %>">
+					<h4><i class="fa fa-eraser"></i> Thông tin vắc xin</h4>
 					<br>
-					<form id="search-vaccine" action="">
-						<label>Tìm kiếm : </label>
-						<input id="search" class="form-control" placeholder="Nhập tên vắc xin .." style="width: 200px; display: inline-block;">
-					</form><br>
-					<div class="row list-vaccines">
-						
-					</div>
-					<br>
-					<div class="pagging">
-						<ul class="pagination">
-							<li><a class="not-active">Trước</a></li>
-							<li><a class="active">1</a></li>
-							<li><a>2</a></li>
-							<li><a>Tiếp</a></li>
-						</ul>
+					<div class="row" style="padding: 10px;">
+						<div id="idVaccineDetail_P1" class="col-md-4 text-center">
+							<img src="<%=request.getContextPath()%>/resources/images/vaccine-default.jpg" style="width: 100%;">
+							<h4><b>PriorixTM</b></h4>
+							<p><i>Giá: 50 000 VND</i></p>
+						</div>
+						<div id="idVaccineDetail_P2" class="col-md-8" style="padding-left: 30px;">
+							<h5><b>Chỉ định:</b></h5>
+							<p id="indication">PriorixTM được chỉ định để gây miễn dịch chủ động chống sởi, quai bị và rubella.</p>
+							<br>
+							<h5><b>Số mũi:</b></h5>
+							<p id="numberOfDoses">1</p>
+							<br>
+							<h5><b>Liều lượng và cách sử dụng:</b></h5>
+							<p id="dosageAndUsage">Liều đề nghị là một liều 0,5 ml vaccine hoàn nguyên. Lịch tiêm chủng ở mỗi nước một khác, do vậy nên theo lịch tiêm chủng được khuyến cáo ở quốc gia đó. Cách dùng: PriorixTM nên tiêm dưới da mặc dù có thể dùng để tiêm bắp.</p>
+							<br>
+							<h5><b>Phòng bệnh:</b></h5>
+							<ul id="vaccineDisease">
+								
+							</ul>
+							<br>
+							<h5><b>Chống chỉ định:</b></h5>
+							<p id="contraindication">Không nên dùng PriorixTM cho những người suy giảm đáp ứng miễn dịch, bao gồm những bệnh nhân suy giảm miễn dịch tiên phát hoặc thứ phát. Tuy nhiên, có thể dùng vaccine kết hợp sởi, quai bị và rubella cho những người nhiễm HIV không triệu chứng mà không gây những ảnh hưởng bất lợi đến tình trạng bệnh của họ và có thể cân nhắc sử dụng cho những người nhiễm HIV có triệu chứng.</p>
+							<br>
+							<h5><b>Tác dụng phụ:</b></h5>
+							<p id="sideEffects">Rất phổ biến: đỏ tại chỗ tiêm, sốt ≥ 38oC (trực tràng), hoặc ≥ 37.5oC (nách/miệng) Phổ biến: sưng và đau tại chỗ tiêm, sốt > 39.5oC (trực tràng) hay > 39oC (nách/miệng). Nhìn chung, phân loại tần suất các tác dụng phụ là tương tự như nhau khi tiêm liều đầu tiên hoặc liều thứ hai vaccine. Chỉ có một khác biệt là tác dụng phụ đau tại chỗ tiêm là “Phổ biến” sau khi tiêm liều đầu tiên và “Rất phổ biến” sau khi tiêm liều thứ hai.</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -59,7 +78,7 @@
         	$(".vaccine-item").addClass("current-page");
         </script>
         
-        <script src="<%=request.getContextPath() %>/user/js/vaccine.js"></script>
+        <script src="<%=request.getContextPath() %>/resources/js/vaccine-detail.js"></script>
 	  	
 		<!-- prepare form validation -->
 		<script src="<%=request.getContextPath()%>/resources/production/js/validate/jquery.validate.js"></script>
