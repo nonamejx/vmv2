@@ -3,6 +3,7 @@ package utils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.bean.User;
 
@@ -10,17 +11,15 @@ public class MyUtils {
 	private static MyUtils instance = null;
 	private boolean isLogin = false;
 	private boolean isRememberMe = false;
-	private javax.servlet.http.HttpSession session;
 	private Cookie[] cookies = null;
-
-	private static final int TIME_REMEMBER = 60 * 60 * 24;
+	private HttpServletRequest request;
+	private static final int TIME_REMEMBER = 60 * 60 * 24 * 365;
 	private static final String KEYWORD_SESSION = "userLogin";
 	private static final String KEYWORD_COOKIE = "userRemember";
 
 	protected MyUtils(HttpServletRequest request) {
-		this.session = request.getSession();
+		this.request = request;
 		this.cookies = request.getCookies();
-		isLogin();
 		setRememberMe();
 	}
 
@@ -43,18 +42,29 @@ public class MyUtils {
 	/**
 	 * Create login session
 	 */
-	public void createLoginSession(User user) {
-		session.setAttribute(KEYWORD_SESSION, user);
-		this.isLogin = true;
+	public static void createLoginSession(HttpServletRequest request,User user) {
+		HttpSession  session = request.getSession(true);
+		if (session != null) {
+			session.setAttribute(KEYWORD_SESSION, user);
+		}
+		
 	}
 
-	public User getSessionLogin() {
-		return (User) session.getAttribute(KEYWORD_SESSION);
+	public static User getSessionLogin(HttpServletRequest request) {
+		User user = null;
+		HttpSession  session = request.getSession(true);
+		if (session != null) {
+			user = (User) session.getAttribute(KEYWORD_SESSION);
+		}
+		return user;
 	}
 
-	public void sessionLogout() {
-		session.removeAttribute(KEYWORD_SESSION);
-		this.isLogin = false;
+	public static void sessionLogout(HttpServletRequest request) {
+		HttpSession  session = request.getSession(true);
+		if (session != null) {
+			session.removeAttribute(KEYWORD_SESSION);
+		}
+
 	}
 
 	public void createValueCookieRemember(int value, HttpServletResponse response) {
@@ -65,17 +75,16 @@ public class MyUtils {
 	}
 
 	public String getDetailCookieRemember() {
-		String value = "";
 		Cookie cookie = null;
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
 				if (KEYWORD_COOKIE.equals(cookie.getName())) {
-					value = cookie.getValue();
+					return cookie.getValue();
 				}
 			}
 		}
-		return value;
+		return "";
 	}
 
 	public void deleteCookieRemember(HttpServletResponse response) {
@@ -83,7 +92,7 @@ public class MyUtils {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				cookie = cookies[i];
-				if ((cookie.getName()).compareTo(KEYWORD_COOKIE) == 0) {
+				if ((cookie.getName()).toString().compareTo(KEYWORD_COOKIE) == 0) {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 
@@ -122,12 +131,7 @@ public class MyUtils {
 		}
 	}
 
-	public void setLogin() {
-		if (getSessionLogin() != null) {
-			this.isLogin = true;
-		} else {
-			this.isLogin = false;
-		}
-	}
+
+
 
 }

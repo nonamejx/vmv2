@@ -64,7 +64,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
         
-        User user = MyUtils.getInstance(request).getSessionLogin();
+        User user = MyUtils.getSessionLogin(request);
         String template = "guest";
         if (user != null)
         	if (user.getRole())

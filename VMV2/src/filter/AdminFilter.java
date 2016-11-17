@@ -42,7 +42,7 @@ public class AdminFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
-		User user = MyUtils.getInstance(httpRequest).getSessionLogin();
+		User user = MyUtils.getSessionLogin(httpRequest);
 		if (user == null || !user.getRole()) {
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 			return;
