@@ -11,7 +11,6 @@ public class MyUtils {
 	private static MyUtils instance = null;
 	private boolean isLogin = false;
 	private boolean isRememberMe = false;
-	private HttpSession session;
 	private Cookie[] cookies = null;
 	private HttpServletRequest request;
 	private static final int TIME_REMEMBER = 60 * 60 * 24 * 365;
@@ -20,9 +19,7 @@ public class MyUtils {
 
 	protected MyUtils(HttpServletRequest request) {
 		this.request = request;
-		this.session = request.getSession();
 		this.cookies = request.getCookies();
-		setLogin();
 		setRememberMe();
 	}
 
@@ -45,27 +42,27 @@ public class MyUtils {
 	/**
 	 * Create login session
 	 */
-	public void createLoginSession(User user) {
-
+	public static void createLoginSession(HttpServletRequest request,User user) {
+		HttpSession  session = request.getSession(true);
 		if (session != null) {
-			session.removeAttribute(KEYWORD_SESSION);
+			session.setAttribute(KEYWORD_SESSION, user);
 		}
-		session.setAttribute(KEYWORD_SESSION, user);
-		this.isLogin = true;
+		
 	}
 
-	public User getSessionLogin() {
+	public static User getSessionLogin(HttpServletRequest request) {
 		User user = null;
+		HttpSession  session = request.getSession(true);
 		if (session != null) {
 			user = (User) session.getAttribute(KEYWORD_SESSION);
 		}
 		return user;
 	}
 
-	public void sessionLogout() {
+	public static void sessionLogout(HttpServletRequest request) {
+		HttpSession  session = request.getSession(true);
 		if (session != null) {
 			session.removeAttribute(KEYWORD_SESSION);
-			this.isLogin = false;
 		}
 
 	}
@@ -134,12 +131,7 @@ public class MyUtils {
 		}
 	}
 
-	public void setLogin() {
-		if (getSessionLogin() != null) {
-			this.isLogin = true;
-		} else {
-			this.isLogin = false;
-		}
-	}
+
+
 
 }

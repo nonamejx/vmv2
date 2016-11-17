@@ -18,12 +18,7 @@
 		<link href="<%=request.getContextPath() %>/resources/production/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="<%=request.getContextPath() %>/resources/production/css/datepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
 		<!-- /Custom styling plus plugins -->
-		
-		
-		<%
-		News news = (News) request.getAttribute("news");
-		%>
-		
+		<%News news = (News) request.getAttribute("news");%>
 		<div class="head-info">
 			<h1>Trung Tâm Y tế dự phòng <b>ABC</b></h1>
 			<p>Địa chỉ: 54 Nguyễn Lương Bằng, Liên Chiểu, tp Đà Nẵng</p>
@@ -33,16 +28,16 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="content-page">
 					<h4><i class="fa fa-newspaper-o"></i> Tin mới</h4>
-					<p><i>Thứ 3, ngày 21/9/2016</i></p>
-					<br>
-					<div class="row list-new" style="padding: 10px;">
+					<div class="list-new">
 						<%if (news != null) {%>
 						<h4><%=news.getTitle() %></h4>
-						<p><i>Ngày đăng: <%=DateUtils.formatDatetime(news.getCreatedDate()) %></i><p>
-						<div class="news-detail-content">
-							<%if (news.getImage() != null) {%>
-							<img alt="" src="<%=request.getContextPath()%>/uploads/<%=news.getImage()%>">
-							<% }%>
+						<i>Ngày đăng: <%=DateUtils.formatDatetime(news.getCreatedDate()) %></i>
+						<%if (news.getImage() != null) {%>
+							<div class="text-xs-center">
+							  <img class="img-thumbnail center-block" width="304" height="236" alt="" src="<%=request.getContextPath()%>/uploads/<%=news.getImage()%>">
+							</div>
+						<% }%>
+						<div class="news-detail-content" style="word-wrap: break-word;">
 							<p style="margin-top: 10px"><%=news.getContent() %></p>
 						</div>
 						<%} %>

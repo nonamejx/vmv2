@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String rememberMe = request.getParameter("rememberMe");
 			User userLogin = userBO.getUserByUsernamePassword(username, password);
+			System.out.println(userLogin);
 			if (userLogin != null) {
 				// checked remember
 				if ("on".equals(rememberMe)) {
@@ -73,17 +74,15 @@ public class LoginServlet extends HttpServlet {
 					}
 				}
 				// Tạo session
-				MyUtils.getInstance(request).createLoginSession(userLogin);
-				if (MyUtils.getInstance(request).isLogin()) {
-					response.sendRedirect("home");
-				} else {
-					response.sendRedirect("login");
-				}
+				MyUtils.getInstance(request).createLoginSession(request, userLogin);
+				response.sendRedirect("home");
+
 			} else {
 				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("login.jsp?msg=1");
 				rd.forward(request, response);
 			}
 		} else {
+			int ck = 1;
 			// Lấy cookie remember
 			if (MyUtils.getInstance(request).isRememberMe()) {
 				String idStr = MyUtils.getInstance(request).getDetailCookieRemember();
@@ -93,12 +92,16 @@ public class LoginServlet extends HttpServlet {
 				} catch (NumberFormatException ex) {
 					javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("login.jsp?msg=2");
 					rd.forward(request, response);
-					return;
+					ck = 0;
 				}
 
 			}
-			javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-			rd.forward(request, response);
+			if (ck == 0) {
+				return;
+			} else {
+				javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+				rd.forward(request, response);
+			}
 		}
 	}
 }

@@ -39,7 +39,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.html" class="site_title"><i class="fa fa-plus-square"></i>
+						<a href="<%=request.getContextPath() %>/home" class="site_title"><i class="fa fa-plus-square"></i>
 							<span>ABC</span></a>
 					</div>
 					<div class="clearfix"></div>
@@ -84,7 +84,7 @@
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
+					<!-- <div class="sidebar-footer hidden-small">
 						<a data-toggle="tooltip" data-placement="top" title="Trang chủ">
 							<span class="fa fa-home" aria-hidden="true"></span>
 						</a>
@@ -97,7 +97,7 @@
 						<a data-toggle="tooltip" data-placement="top" title="Đăng xuất">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 					<!-- /menu footer buttons -->
 				</div>
 			</div>
