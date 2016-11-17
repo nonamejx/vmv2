@@ -41,7 +41,7 @@ public class RegisterAccountServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		// kiem tra dang nhap
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/register.jsp");
 		rd.forward(request, response);
 	}
 

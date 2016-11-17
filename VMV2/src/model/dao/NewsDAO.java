@@ -26,7 +26,7 @@ public class NewsDAO {
 			rs = cstmt.executeQuery();
 			
 			while (rs.next()) {
-				News news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5), rs.getTimestamp(6));;
+				News news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5));
 				newsList.add(news);
 			}
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class NewsDAO {
 			rs = cstmt.executeQuery();
 			
 			if (rs.next()) {
-				news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5), rs.getTimestamp(6));
+				news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,13 +66,12 @@ public class NewsDAO {
 		int result = 0;
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_insertNews(?, ?, ?, ?, ?)}";
+			String query = "{CALL p_insertNews(?, ?, ?, ?)}";
 			cstmt = con.prepareCall(query);
 			cstmt.setString(1, news.getTitle());
 			cstmt.setString(2, news.getContent());
 			cstmt.setString(3, news.getImage());
 			cstmt.setTimestamp(4, news.getCreatedDate());
-			cstmt.setTimestamp(5, news.getEndDate());
 			result = cstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -90,15 +89,14 @@ public class NewsDAO {
 		int result = 0;
 		try {
 			con = SqlConnection.getConnection();
-			String query = "{CALL p_updateNews(?, ?, ?, ?, ?, ?)}";
+			String query = "{CALL p_updateNews(?, ?, ?, ?, ?)}";
 			cstmt = con.prepareCall(query);
 			cstmt = con.prepareCall(query);
 			cstmt.setString(1, news.getTitle());
 			cstmt.setString(2, news.getContent());
 			cstmt.setString(3, news.getImage());
 			cstmt.setTimestamp(4, news.getCreatedDate());
-			cstmt.setTimestamp(5, news.getEndDate());
-			cstmt.setInt(6, news.getNewsId());
+			cstmt.setInt(5, news.getNewsId());
 			result = cstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -144,7 +142,7 @@ public class NewsDAO {
 			rs = cstmt.executeQuery();
 			
 			while (rs.next()) {
-				News news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5), rs.getTimestamp(6));
+				News news = new News(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getTimestamp(5));
 				newsList.add(news);
 			}
 		} catch (SQLException e) {

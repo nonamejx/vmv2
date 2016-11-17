@@ -12,7 +12,6 @@ $(document).ready(function() {
     	              { "data": "newsId" },
     	              { "data": "title" },
     	              { "data": "createdDate" },
-    	              { "data": "endDate" },
     	              null
     	            ],
         "columnDefs": [ {
@@ -42,27 +41,6 @@ $(document).ready(function() {
 			}
 		}
     });
-	
-	$("#form-add-news input[name='end_date']").daterangepicker({
-		singleDatePicker: true,
-		timePicker: true,
-		timePickerIncrement: 10,
-		timePicker24Hour: true,
-		locale: {
-			format: 'DD/MM/YYYY HH:mm:ss'
-		}
-    });
-	
-	$("#form-update-news input[name='end_date']").daterangepicker({
-		drops: 'up',
-		singleDatePicker: true,
-		timePicker: true,
-		timePickerIncrement: 10,
-		timePicker24Hour: true,
-		locale: {
-			format: 'DD/MM/YYYY HH:mm:ss'
-		}
-    });
     
     $("#form-add-news").validate({
 		rules: {
@@ -71,7 +49,6 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
-				required: true,
 				maxlength: 500
 			}
 		},
@@ -90,7 +67,6 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
-				required: true,
 				maxlength: 500
 			}
 		},
@@ -152,7 +128,6 @@ function addNews() {
 			$(".modal").modal("hide");
 			showMsg($(".msg-success"));
 			newsDatatable.ajax.reload();
-			$("#form-add-news")[0].reset();
 		} else {
 			showMsg($(".msg-fail"));
 		}

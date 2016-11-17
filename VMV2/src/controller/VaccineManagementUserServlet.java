@@ -53,7 +53,7 @@ public class VaccineManagementUserServlet extends HttpServlet {
         		template = "user";
         request.setAttribute("template", template);
 		
-		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/vaccine.jsp");
+		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/vaccine.jsp");
 		rd.forward(request, response);
 	}
 

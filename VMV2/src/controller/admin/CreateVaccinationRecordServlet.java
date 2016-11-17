@@ -2,6 +2,8 @@ package controller.admin;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,6 +72,10 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 			nextDoseDate = DateUtils.convertToSDate(nextDoseDateStr);
 		}
 
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String injectionDateStr = dateFormat.format(new java.util.Date());
+		Date injectionDate = DateUtils.convertToSDate(injectionDateStr);
+
 		// Validate
 		boolean hasError = false;
 		if (userId <= 0) {
@@ -81,11 +87,14 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 		if (dose <= 0) {
 			hasError = true;
 		}
+		if (nextDoseDate.compareTo(injectionDate) < 0) {
+			hasError = true;
+		}
 
 		// add
 		if (!hasError) {
 			VaccinationRecord vaccinationRecord = new VaccinationRecord(userId,
-					vaccineId, dose, DateUtils.convertToSDate(new java.util.Date()), nextDoseDate);
+					vaccineId, dose, injectionDate, nextDoseDate);
 			check = vaccinationRecordBO
 					.insertVaccinationRecord(vaccinationRecord);
 			if (check > 0) {

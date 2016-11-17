@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.User;
 import utils.MyUtils;
 
 /**
@@ -42,8 +43,9 @@ public class LogoutServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		request.setCharacterEncoding("UTF-8");
-		if (MyUtils.getInstance(request).isLogin()) {
-			MyUtils.getInstance(request).sessionLogout();
+		User userLogin=MyUtils.getSessionLogin(request);
+		if (userLogin!=null) {
+			MyUtils.sessionLogout(request);
 		}
 		response.sendRedirect(request.getContextPath() + "/login");
 	}

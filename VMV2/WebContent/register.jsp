@@ -102,7 +102,7 @@
 										name="image" type="file" accept="image/*">
 		                      	</div>
 	                    	</div>
-	                    	<input name="isAdmin" hidden="true" type="text" value="on">
+	                    	<input name="isAdmin" hidden="true" type="text" value="null">
 	                    	<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
 									<button type="submit" class="btn btn-success">Đăng ký</button>

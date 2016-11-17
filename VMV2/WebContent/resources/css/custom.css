@@ -41,16 +41,10 @@ label.error {
 .part-image {
 	width: 120px;
 	height: 120px;
+	background-color: #eee;
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 20px;
-	background: url("/VMV2/resources/images/vaccine-default.jpg") transparent no-repeat center left;
-	background-size: cover;
-}
-.part-image a {
-	width: 100%;
-	height: 100%;
-	display: block;
 }
 .part-detail {
 }
@@ -106,14 +100,7 @@ label.error {
 .ms-parent {
 	padding: 0;
 }
-.more_info {
-	background-color: rgb(205, 212, 210);
-    padding: 5px;
-}
 
-#form-add-vaccination-record input[readonly], #form-update-vaccination-record input.up_nextDoseDate[readonly] {
-  background-color: white;
-}
 
 
 

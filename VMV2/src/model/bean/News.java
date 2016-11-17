@@ -8,23 +8,20 @@ public class News {
 	private String content;
 	private String image;
 	private Timestamp createdDate;
-	private Timestamp endDate;
 	
-	public News(int newsId, String title, String content, String image, Timestamp createdDate, Timestamp endDate) {
+	public News(int newsId, String title, String content, String image, Timestamp createdDate) {
 		this.newsId = newsId;
 		this.title = title;
 		this.content = content;
 		this.image = image;
 		this.createdDate = createdDate;
-		this.endDate = endDate;
 	}
 
-	public News(String title, String content, String image, Timestamp createdDate, Timestamp endDate) {
+	public News(String title, String content, String image, Timestamp createdDate) {
 		this.title = title;
 		this.content = content;
 		this.image = image;
 		this.createdDate = createdDate;
-		this.endDate = endDate;
 	}
 
 	public News() {
@@ -69,14 +66,6 @@ public class News {
 
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
-	}
-	
-	public Timestamp getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
 	}
 
 	@Override
