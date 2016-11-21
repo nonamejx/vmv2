@@ -30,6 +30,15 @@ public class MyUtils {
 
 		return instance;
 	}
+	
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 
 	public boolean isLogin() {
 		return isLogin;

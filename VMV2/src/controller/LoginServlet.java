@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 					}
 				}
 				// T?o session
-				MyUtils.getInstance(request).createLoginSession(request, userLogin);
+				MyUtils.createLoginSession(request, userLogin);
 				response.sendRedirect("home");
 
 			} else {
