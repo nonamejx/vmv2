@@ -110,7 +110,9 @@ $(document).ready(function() {
 	$('#form-add-vaccination-record input[name="nextDoseDate"]').daterangepicker({
 		singleDatePicker : true,
 		showDropdowns : true,
-		format : 'DD/MM/YYYY',
+		locale: {
+			format: 'DD/MM/YYYY'
+		},
 		minDate: moment()
 	});
 	
@@ -324,7 +326,9 @@ $(document).ready(function() {
 		$('#form-update-vaccination-record input[name="nextDoseDate"]').daterangepicker({
 			singleDatePicker : true,
 			showDropdowns : true,
-			format : 'DD/MM/YYYY',
+			locale: {
+				format: 'DD/MM/YYYY'
+			},
 			minDate: moment()
 		});
 		$("#form-update-vaccination-record input[name='user']").val(vaccinationRecord["userName"]);
