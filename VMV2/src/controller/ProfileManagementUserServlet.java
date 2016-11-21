@@ -44,7 +44,7 @@ public class ProfileManagementUserServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		// kiem tra dang nhap
-		User user = MyUtils.getInstance(request).getSessionLogin();
+		User user = MyUtils.getSessionLogin(request);
         request.setAttribute("template", (user!= null && user.getRole()) ? "admin" : "user");
         
 		javax.servlet.RequestDispatcher rd = request.getRequestDispatcher("/user/profile.jsp");

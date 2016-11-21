@@ -44,7 +44,7 @@ public class VaccineManagementUserServlet extends HttpServlet {
 		response.setContentType("text/plain; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		User user = MyUtils.getInstance(request).getSessionLogin();
+		User user = MyUtils.getSessionLogin(request);
         String template = "guest";
         if (user != null)
         	if (user.getRole())

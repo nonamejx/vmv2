@@ -56,7 +56,7 @@ public class NewsDetailServlet extends HttpServlet {
 		
 		request.setAttribute("news", news);
 		
-		User user = MyUtils.getInstance(request).getSessionLogin();
+		User user = MyUtils.getSessionLogin(request);
 		String template = "guest";
 		if (user != null)
 			if (user.getRole())
