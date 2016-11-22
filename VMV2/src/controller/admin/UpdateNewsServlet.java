@@ -151,7 +151,7 @@ public class UpdateNewsServlet extends HttpServlet {
 			news.setEndDate(DateUtils.convertToTimestamp(endDateStr));
 			if (image != null)
 				news.setImage(image);
-			if (newsBO.updateNews(news) > 0)
+			if (newsBO.updateNews(news) != 0)
 				status = "success";
 		}
 		

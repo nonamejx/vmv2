@@ -177,7 +177,7 @@ public class UpdateUserServlet extends HttpServlet {
 		if (!hasError) {
 			User user = new User(Integer.parseInt(userId), fullName, Integer.parseInt(gender),
 					DateUtils.convertToSDate(birthday), phoneNumber, address, username, password, role, avatar);
-			if (userBO.updateUser(user) == 1) {
+			if (userBO.updateUser(user) != 0) {
 				status = "success";
 			}
 		}

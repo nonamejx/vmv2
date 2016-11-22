@@ -88,7 +88,7 @@ public class CreateVaccinationRecordServlet extends HttpServlet {
 					vaccineId, dose, DateUtils.convertToSDate(new java.util.Date()), nextDoseDate);
 			check = vaccinationRecordBO
 					.insertVaccinationRecord(vaccinationRecord);
-			if (check > 0) {
+			if (check != 0) {
 				status = "success";
 			}
 		}

@@ -174,7 +174,7 @@ public class UpdateVaccineServlet extends HttpServlet {
 			Vaccine vaccine = new Vaccine(Integer.parseInt(vaccineId), vaccineName, manufacturer,
 					Double.parseDouble(price), Integer.parseInt(numberOfDoses), sideEffects, indication,
 					contraindication, dosageAndUsage, image);
-			if (vaccineBO.updateVaccine(vaccine) > 0) {
+			if (vaccineBO.updateVaccine(vaccine) != 0) {
 				ArrayList<VaccineDisease> listVaccineDisease = vaccineDiseaseBO
 						.getVaccineDiseasesByVaccineId(Integer.parseInt(vaccineId));
 

@@ -97,7 +97,7 @@ public class UpdateVaccinationRecordServlet extends HttpServlet {
 					nextDoseDate);
 			check = vaccinationRecordBO
 					.updateVaccinationRecord(vaccinationRecord);
-			if (check > 0) {
+			if (check != 0) {
 				status = "success";
 			}
 		}
