@@ -131,6 +131,8 @@ $(document).ready(function() {
     	$("#form-update-user")[0].reset();
     	$(".failUserUpdate").fadeOut();
 		$("#updateUser").removeAttr("disabled");
+		$(".failUserAdd").fadeOut();
+		$("#addUser").removeAttr("disabled");
     });
     $('input[name="dateOfBirth"]').daterangepicker({
     	singleDatePicker: true,
