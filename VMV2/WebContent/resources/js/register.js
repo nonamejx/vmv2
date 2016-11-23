@@ -1,4 +1,5 @@
-var userDatatable;
+var listUsers;
+var lenU;
 var listUserName=$("#datatable tr td:nth-child(4)");
 var checksubmit=true;
 $(document).ready(function() {
@@ -59,8 +60,10 @@ $(document).ready(function() {
     });
    
     //==========================
-    $("#form-add-user").on("keyup", "#unAdd",function(){
-    	validateUserName(null);
+    $("#form-register").on("keyup", "#unAdd",function(){
+    	
+    	getListUsers() 
+    	validateUserName();
     });
     //=========================
 });
@@ -91,37 +94,40 @@ function addUser() {
 	});
 }
 /*addUser*/
+/*getUserById*/
+function getListUsers() {
+	
+	$.ajax({
+		url: contextPath + "/ListUserServlet",
+    	type: "POST",
+	    data: {
+	    	userId: null
+	    },
+    	dataType: 'json'
+	}).done(function(data) {
+		listUsers=data;
+		lenU=listUsers.length;
+	}).fail(function(err) {
+	});
+}
+/*getUserById*/
 function showMsg(msgElem) {
 	$(".msg").hide();
 	msgElem.fadeIn(1000);
 }
-function validateUserName(userId){
-	listUserName=$("#datatable tr td:nth-child(4)");
-	if(userId==null){
-		var userCreate=$("#unAdd").val();
-		for(var i=1;i<=listUserName.length;i++){
-			if($("#datatable tr:nth-child("+i+") td:nth-child(4)").text() == userCreate){
-				$(".failUserAdd").fadeIn();
-				 $("#addUser").attr("disabled","disabled");
-				return;
-			}
+function validateUserName(){
+	var userCreate=$("#unAdd").val();
+	for(j=0;j<lenU;j++){
+		var str=listUsers[j]["username"];
+		if(str==userCreate){
+			$(".failUserAdd").fadeIn();
+			$("#btnRegister").attr("disabled","disabled");
+			return;
 		}
-		$(".failUserAdd").fadeOut();
-		$("#addUser").removeAttr("disabled");
-	}else{
-		var userCreate=$("#unUpdate").val();
-		for(var i=1;i<=listUserName.length;i++){
-			var valUserName=$("#datatable tr:nth-child("+i+") td:nth-child(4)").text();
-			var valUserId=$("#datatable tr:nth-child("+i+") td:nth-child(1)").text();
-			if( valUserName== userCreate&&valUserId!=userId){
-				$(".failUserUpdate").fadeIn();
-				$("#updateUser").attr("disabled","disabled");
-				return;
-			}
-		}
-		$(".failUserUpdate").fadeOut();
-		$("#updateUser").removeAttr("disabled");
 	}
+	$(".failUserAdd").fadeOut();
+	$("#btnRegister").removeAttr("disabled");
+	
 }
 function convertSDate(date){
 	var date =new Date(Date.parse(date));

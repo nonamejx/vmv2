@@ -150,7 +150,7 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input id="unAdd" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 														name="username" type="text">
-													<p class="failUserAdd" style="display:none;color:red">Username đã có người sử dụng</p>		
+													<p class="failUserAdd" style="display:none;color:#EF937F">Username đã có người sử dụng</p>		
 												</div>
 											</div>
 											<div class="item form-group">
@@ -256,7 +256,7 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input id="unUpdate" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 														name="username" type="text">
-													<p class="failUserUpdate" style="display:none;color:red">Username đã có người sử dụng</p>		
+													<p class="failUserUpdate" style="display:none;color:#EF937F">Username đã có người sử dụng</p>		
 												</div>
 											</div>
 											<div class="item form-group">
