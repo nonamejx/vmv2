@@ -59,7 +59,7 @@ public class UpdatePasswordProfileServlet extends HttpServlet {
 				User user = userBO.getUserById(Integer.parseInt(userId));
 				if (user != null) {
 					user.setPassword(password);
-					if (userBO.updateUser(user) > 0) {
+					if (userBO.updateUser(user) != 0) {
 						status = "success";
 					}
 				}

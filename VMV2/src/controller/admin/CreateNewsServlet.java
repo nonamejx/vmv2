@@ -139,7 +139,7 @@ public class CreateNewsServlet extends HttpServlet {
 		if (!hasError) {
 			News news = new News(title, content, image, DateUtils.convertToTimestamp(new Date()), DateUtils.convertToTimestamp(endDateStr));
 			System.out.println(news.toString());
-			if (newsBO.insertNews(news) > 0)
+			if (newsBO.insertNews(news) != 0)
 				status = "success";
 		}
 

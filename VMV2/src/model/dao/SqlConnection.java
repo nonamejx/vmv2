@@ -7,23 +7,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 public class SqlConnection {
 	private static Connection con = null;
 
 	public static Connection getConnection() {
 		try {
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				System.out.println("Loi khong tim thay class");
-				e.printStackTrace();
-			}
-		
-			String connectionURL = "jdbc:mysql://127.0.0.1/vmv2db?useUnicode=true&characterEncoding=UTF-8";
-			con = DriverManager.getConnection(connectionURL, "root", "");
-		
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager
+					.getConnection("jdbc:sqlserver://localhost:1433; database=vmv2db; username=sa; password=123456");
+		} catch (ClassNotFoundException e) {
+			System.err.println("Can not get SQLServerDriver class !");
+			e.printStackTrace();
+		} catch (SQLServerException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Khong ket noi voi database");
+			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error connect");
+			// TODO Auto-generated catch block
+			System.out.println("Khong the mo duoc ket noi");
 			e.printStackTrace();
 		}
 		return con;

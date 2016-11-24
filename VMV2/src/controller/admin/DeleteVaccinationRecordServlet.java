@@ -52,7 +52,7 @@ public class DeleteVaccinationRecordServlet extends HttpServlet {
 		int dose = Integer.parseInt(vaccinationRecordId[2]);
 
 		if (vaccinationRecordBO
-				.deleteVaccinationRecord(userId, vaccineId, dose) > 0)
+				.deleteVaccinationRecord(userId, vaccineId, dose) != 0)
 			status = "success";
 
 		JsonObject jsonObj = new JsonObject();

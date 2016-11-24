@@ -47,7 +47,7 @@ public class DeleteVaccineServlet extends HttpServlet {
 		if (vaccineIdStr != null) {
 			vaccineId = Integer.parseInt(vaccineIdStr);
 		}
-		if (vaccineBO.deleteVaccine(vaccineId) > 0) {
+		if (vaccineBO.deleteVaccine(vaccineId) != 0) {
 			status = "success";
 		}
 		JsonObject jsonObj = new JsonObject();

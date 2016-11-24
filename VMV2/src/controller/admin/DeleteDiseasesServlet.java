@@ -50,7 +50,7 @@ public class DeleteDiseasesServlet extends HttpServlet {
 			diseaseId = Integer.parseInt(diseaseIdStr);
 		}
 
-		if (diseaseBO.deleteDisease(diseaseId) > 0)
+		if (diseaseBO.deleteDisease(diseaseId) != 0)
 			status = "success";
 
 		JsonObject jsonObj = new JsonObject();

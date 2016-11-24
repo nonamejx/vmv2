@@ -167,7 +167,7 @@ public class UpdateProfileServlet extends HttpServlet {
 					user.setBirthday(DateUtils.convertToSDate(birthday));
 					user.setPhoneNumber(phoneNumber);
 					user.setAddress(address);
-					if (userBO.updateUser(user) > 0) {
+					if (userBO.updateUser(user) != 0) {
 						status = "success";
 					}
 				}
