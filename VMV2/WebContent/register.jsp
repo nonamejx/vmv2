@@ -73,8 +73,9 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">Tên đăng nhập <span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
+									<input id="unAdd" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
 										name="username" type="text">
+									<p class="failUserAdd" style="display:none;color:#EF937F">Username đã có người sử dụng</p>			
 								</div>
 							</div>
 							
@@ -105,7 +106,7 @@
 	                    	<input name="isAdmin" hidden="true" type="text" value="null">
 	                    	<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button type="submit" class="btn btn-success">Đăng ký</button>
+									<button id="btnRegister" type="submit" class="btn btn-success">Đăng ký</button>
 								</div>
 							</div>
 						</form>

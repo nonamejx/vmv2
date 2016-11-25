@@ -120,6 +120,7 @@ $(document).ready(function() {
 				$("#form-update-user")[0].reset();
         	}		
 	});
+    
     $(".modal").on("hidden.bs.modal", function() {
     	$(".loading-bar").hide();
     	
@@ -128,6 +129,10 @@ $(document).ready(function() {
     	$(".modal").modal("hide");
     	$("#form-add-user")[0].reset();
     	$("#form-update-user")[0].reset();
+    	$(".failUserUpdate").fadeOut();
+		$("#updateUser").removeAttr("disabled");
+		$(".failUserAdd").fadeOut();
+		$("#addUser").removeAttr("disabled");
     });
     $('input[name="dateOfBirth"]').daterangepicker({
     	singleDatePicker: true,
