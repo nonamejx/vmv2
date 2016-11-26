@@ -63,12 +63,6 @@ $(document).ready(function() {
 	        	}		
 		});
 
-	
-    $('input[name="dateOfBirth"]').daterangepicker({
-    	singleDatePicker: true,
-        showDropdowns: true,
-        format: 'DD/MM/YYYY'
-    });
     $(".btn-delete-user").click(function() {
     	$(".loading-bar").slideDown(100);
     });
@@ -209,7 +203,7 @@ function validateUserName(userId){
 }
 function convertSDate(date){
 	var date =new Date(Date.parse(date));
-	var sDate=(date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(); 
+	var sDate=date.getDate() + '/' + (date.getMonth() + 1) + '/' +   date.getFullYear(); 
 	return sDate;
 }
 function setFormChangePassword(){

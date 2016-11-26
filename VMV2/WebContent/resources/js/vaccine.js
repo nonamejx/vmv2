@@ -82,7 +82,7 @@ function displayByindex(index){
         				"</div>"+
 							"<div class='part-detail'>"+
         						"<p style='font-size: 16px'><b>"+dataDisplay[i]["vaccineName"]+"</b></p>"+
-								"<p>"+dataDisplay[i]["indication"]+"</p>"+
+								"<p>"+dataDisplay[i]["indication"].trunc(140)+"</p>"+
 								"<a href='"+contextPath+"/GetVaccinesDetailUserServlet?idV="+dataDisplay[i]["vaccineId"]+"'><i>Chi tiết >></i></a>"+
 							"</div></div></div>"  ;
         $(".list-vaccines").append(code);
@@ -140,3 +140,7 @@ function setMenuItemActive() {
 	$(".vaccine-management-menu-item").addClass("current-page");
 }
 	
+String.prototype.trunc = String.prototype.trunc ||
+function(n){
+    return (this.length > n) ? this.substr(0,n-1)+'&hellip;' : this;
+};

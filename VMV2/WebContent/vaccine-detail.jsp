@@ -40,6 +40,9 @@
 							<p><i>Giá: 50 000 VND</i></p>
 						</div>
 						<div id="idVaccineDetail_P2" class="col-md-8" style="padding-left: 30px;">
+							<h5><b>Nhà sản xuất:</b></h5>
+							<p id="manufacturer">PriorixTM được chỉ định để gây miễn dịch chủ động chống sởi, quai bị và rubella.</p>
+							<br>
 							<h5><b>Chỉ định:</b></h5>
 							<p id="indication">PriorixTM được chỉ định để gây miễn dịch chủ động chống sởi, quai bị và rubella.</p>
 							<br>

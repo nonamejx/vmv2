@@ -43,9 +43,9 @@ function showVaccine(vaccine) {
 	}	
 	
 	$("#idVaccineDetail_P1 img").attr("src", image);
-	$("#idVaccineDetail_P1 h4 b").text(vaccine["manufacturer"]);
-	$("#idVaccineDetail_P1 p i").text("Giá : "+vaccine["price"]);
-	$("#idVaccineDetail_P2 #vaccineName").text(vaccine["vaccineName"]);
+	$("#idVaccineDetail_P1 h4 b").text(vaccine["vaccineName"]);
+	$("#idVaccineDetail_P1 p i").text("Giá : "+vaccine["price"] + " VND");
+	$("#idVaccineDetail_P2 #vaccineName").text();
 	$("#idVaccineDetail_P2 #manufacturer").text(vaccine["manufacturer"]);
 	$("#idVaccineDetail_P2 #price").text(vaccine["price"]);
 	$("#idVaccineDetail_P2 #numberOfDoses").text(vaccine["numberOfDoses"]);

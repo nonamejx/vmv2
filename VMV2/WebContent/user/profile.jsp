@@ -181,7 +181,9 @@
         		$('input[name="dateOfBirth"]').daterangepicker({
         	    	singleDatePicker: true,
         	        showDropdowns: true,
-        	        format: 'DD/MM/YYYY'
+        	        locale: {
+        				format: 'DD/MM/YYYY'
+        			}
         	    });
         		
         	});

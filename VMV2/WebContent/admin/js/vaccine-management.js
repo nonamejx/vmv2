@@ -23,7 +23,7 @@ $(document).ready(function() {
                 return '<a class="btn btn-primary btn-xs btn-update-vaccine" value="'+ data +'" data-toggle="modal" data-target=".update-vaccine-modal">Xem</a><a class="btn btn-danger btn-xs btn-delete-vaccine" value="'+ data +'" data-toggle="modal" data-target=".bs-example-modal-sm">Xóa</a>';
               }
         } ],
-        "order": [[ 2, "desc" ]],
+        "order": [[ 0, "desc" ]],
     	
     	responsive : true,
     	language : {

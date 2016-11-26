@@ -71,8 +71,7 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
-				required: true,
-				maxlength: 500
+				required: true
 			}
 		},
 		messages: {
@@ -90,8 +89,7 @@ $(document).ready(function() {
 				maxlength: 100
 			},
 			content: {
-				required: true,
-				maxlength: 500
+				required: true
 			}
 		},
 		messages: {
