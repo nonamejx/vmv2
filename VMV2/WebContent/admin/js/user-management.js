@@ -223,6 +223,8 @@ function deleteUser() {
 /*DeleteUser*/
 /*getUserById*/
 function getUserById(userId) {
+	$(".failUserUpdate").fadeOut();
+	$("#updateUser").removeAttr("disabled");
 	$("#form-update-user")[0].reset();
 	$.ajax({
 		url: contextPath + "/ShowUserServlet",

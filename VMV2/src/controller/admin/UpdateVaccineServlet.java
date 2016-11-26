@@ -206,7 +206,7 @@ public class UpdateVaccineServlet extends HttpServlet {
 		VaccineDiseaseBO vaccineDiseaseBO = new VaccineDiseaseBO();
 		for (String idDisease : listDiseases) {
 			if (vaccineDiseaseBO
-					.insertVaccineDisease(new VaccineDisease(idVaccine, Integer.parseInt(idDisease), "")) <= 0) {
+					.insertVaccineDisease(new VaccineDisease(idVaccine, Integer.parseInt(idDisease), "")) == 0) {
 				rs = 0;
 				break;
 			}

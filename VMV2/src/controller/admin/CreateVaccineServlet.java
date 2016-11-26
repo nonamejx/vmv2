@@ -163,8 +163,8 @@ public class CreateVaccineServlet extends HttpServlet {
 			Vaccine vaccine = new Vaccine(vaccineName, manufacturer, Double.parseDouble(price),
 					Integer.parseInt(numberOfDoses), sideEffects, indication, contraindication, dosageAndUsage, image);
 			int idCreate = vaccineBO.insertVaccine(vaccine);
-			if (idCreate > 0) {
-				if (createVaccineDisease(idCreate, listDiseases) > 0) {
+			if (idCreate != 0) {
+				if (createVaccineDisease(idCreate, listDiseases) != 0) {
 					status = "success";
 				} else {
 					vaccineDiseaseBO.deleteVaccineDiseaseByVaccineId(idCreate);
@@ -185,7 +185,7 @@ public class CreateVaccineServlet extends HttpServlet {
 		VaccineDiseaseBO vaccineDiseaseBO = new VaccineDiseaseBO();
 		for (String idDisease : listDiseases) {
 			if (vaccineDiseaseBO
-					.insertVaccineDisease(new VaccineDisease(idVaccine, Integer.parseInt(idDisease), "")) < 1) {
+					.insertVaccineDisease(new VaccineDisease(idVaccine, Integer.parseInt(idDisease), "")) == 0) {
 				rs = 0;
 				break;
 			}
