@@ -20,7 +20,7 @@ public class SqlConnection {
 			}
 		
 			String connectionURL = "jdbc:mysql://127.0.0.1/vmv2db?useUnicode=true&characterEncoding=UTF-8";
-			con = DriverManager.getConnection(connectionURL, "root", "");
+			con = DriverManager.getConnection(connectionURL, "root", "123456");
 		
 		} catch (SQLException e) {
 			System.out.println("Error connect");
